@@ -5,7 +5,7 @@
 #ifndef __circular_queue_h__
 #define __circular_queue_h__
 
-#include "boolean.h"
+#include "../src/boolean.h"
 
 #define IDX_UNDEF -1
 #define IDX_MAX 99
