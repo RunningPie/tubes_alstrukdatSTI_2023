@@ -1,69 +1,69 @@
 #include <stdio.h>
 #include "circular_queue.h"
 
-boolean IsEmpty (Queue Q) {
-    return (IDX_HEAD(Q) == IDX_UNDEF) && (IDX_TAIL(Q) == IDX_UNDEF);
+boolean CQIsEmpty (CQueue Q) {
+    return (CQIDX_HEAD(Q) == IDX_UNDEF) && (CQIDX_TAIL(Q) == IDX_UNDEF);
 }
 
-boolean IsFull (Queue Q) {
-    if (IDX_HEAD(Q) > IDX_TAIL(Q)) {
-        return IDX_HEAD(Q) - IDX_TAIL(Q) == 1;
+boolean CQIsFull (CQueue Q) {
+    if (CQIDX_HEAD(Q) > CQIDX_TAIL(Q)) {
+        return CQIDX_HEAD(Q) - CQIDX_TAIL(Q) == 1;
     } else {
-        return IDX_HEAD(Q) == 0 && IDX_TAIL(Q) == IDX_MAX; 
+        return CQIDX_HEAD(Q) == 0 && CQIDX_TAIL(Q) == IDX_MAX; 
     }
 }
 
-int Length (Queue Q) {
-    if (IsEmpty(Q)) {
+int CQLength (CQueue Q) {
+    if (CQIsEmpty(Q)) {
         return 0;
-    } else if (IDX_HEAD(Q) > IDX_TAIL(Q)) {
-        return IDX_MAX - IDX_HEAD(Q) + IDX_TAIL(Q) + 2;
+    } else if (CQIDX_HEAD(Q) > CQIDX_TAIL(Q)) {
+        return IDX_MAX - CQIDX_HEAD(Q) + CQIDX_TAIL(Q) + 2;
     } else {
-        return IDX_TAIL(Q) - IDX_HEAD(Q) + 1;
+        return CQIDX_TAIL(Q) - CQIDX_HEAD(Q) + 1;
     }
 }
 
-void CreateQueue (Queue * Q) {
-    IDX_HEAD(*Q) = IDX_UNDEF;
-    IDX_TAIL(*Q) = IDX_UNDEF;
+void CreateCCQueue (CQueue * Q) {
+    CQIDX_HEAD(*Q) = IDX_UNDEF;
+    CQIDX_TAIL(*Q) = IDX_UNDEF;
 }
 
-void enqueue (Queue * Q, ElType X) {
-    if (IsEmpty(*Q)) {
-        IDX_HEAD(*Q) = 0;
-        IDX_TAIL(*Q) = 0;
+void CQenCqueue (CQueue * Q, ElType X) {
+    if (CQIsEmpty(*Q)) {
+        CQIDX_HEAD(*Q) = 0;
+        CQIDX_TAIL(*Q) = 0;
     } else {
-        if (IDX_TAIL(*Q) == IDX_MAX) {
-            IDX_TAIL(*Q) = 0;
+        if (CQIDX_TAIL(*Q) == IDX_MAX) {
+            CQIDX_TAIL(*Q) = 0;
         } else {
-            IDX_TAIL(*Q)++;
+            CQIDX_TAIL(*Q)++;
         }
     }
-    TAIL(*Q) = X;
+    CQTAIL(*Q) = X;
 }
 
-ElType dequeue (Queue * Q) {
-    ElType X = HEAD(*Q);
-    if (IDX_HEAD(*Q) == IDX_TAIL(*Q)) {
-        IDX_HEAD(*Q) = IDX_UNDEF;
-        IDX_TAIL(*Q) = IDX_UNDEF;
+ElType CQdeCqueue (CQueue * Q) {
+    ElType X = CQHEAD(*Q);
+    if (CQIDX_HEAD(*Q) == CQIDX_TAIL(*Q)) {
+        CQIDX_HEAD(*Q) = IDX_UNDEF;
+        CQIDX_TAIL(*Q) = IDX_UNDEF;
     } else {
-        if (IDX_HEAD(*Q) == IDX_MAX) {
-            IDX_HEAD(*Q) = 0;
+        if (CQIDX_HEAD(*Q) == IDX_MAX) {
+            CQIDX_HEAD(*Q) = 0;
         } else {
-            IDX_HEAD(*Q)++;
+            CQIDX_HEAD(*Q)++;
         }
     }
     return X;
 }
 
-void displayQueue (Queue Q) {
-    if (IsEmpty(Q)) {
+void displayCCQueue (CQueue Q) {
+    if (CQIsEmpty(Q)) {
         printf("[]\n");
     } else {
-        int i = IDX_HEAD(Q);
+        int i = CQIDX_HEAD(Q);
         printf("[");
-        while (i != IDX_TAIL(Q)) {
+        while (i != CQIDX_TAIL(Q)) {
             printf("%d,", Q.Tab[i]);
             if (i == IDX_MAX) {
                 i = 0;

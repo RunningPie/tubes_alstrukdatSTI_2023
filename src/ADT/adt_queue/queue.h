@@ -4,7 +4,7 @@
 #ifndef QUEUE_H
 #define QUEUE_H
 
-#include "boolean.h"
+#include "../boolean.h"
 
 #define IDX_UNDEF -1
 #define CAPACITY 100
@@ -34,13 +34,13 @@ void CreateQueue(Queue *q);
 /* Proses : Melakukan alokasi, membuat sebuah q kosong */
 
 /* ********* Prototype ********* */
-boolean isEmpty(Queue q);
+boolean QisEmpty(Queue q);
 /* Mengirim true jika q kosong: lihat definisi di atas */
-boolean isFull(Queue q);
+boolean QisFull(Queue q);
 /* Mengirim true jika tabel penampung elemen q sudah penuh */
 /* yaitu ketika IDX_HEAD=0 dan IDX_TAIL=CAPACITY-1 */
 
-int length(Queue q);
+int Qlength(Queue q);
 /* Mengirimkan banyaknya elemen queue. Mengirimkan 0 jika q kosong. */
 
 /* *** Primitif Add/Delete *** */
