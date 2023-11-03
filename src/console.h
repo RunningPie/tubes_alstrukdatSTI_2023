@@ -10,12 +10,12 @@
 #include "../src/ADT/adt_queue/queue.h"                    // ADT queue v2
 #include "../src/ADT/adt_stack/stack.h"                    // ADT stack dengan array
 
-#define maxString 128
+#include "../src/ADT/struct.h"
 
-typedef struct {
-    char content[maxString];    /* array penyimpan character string */
-    int length;                 /* menyimpan panjang array of char di atas */
-} String;
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <math.h>
 
 void START();
 /*
@@ -44,3 +44,17 @@ bisa dilihat pada Konfigurasi Aplikasi.
 //         Playlist dalam save file akan dimuat menjadi playlist-playlist dalam main
 //      Jika save file bernama <filename> tidak ditemukan
 //         Tuliskan pesan kegagalan pada layar. Program tidak memasuki sesi.
+
+void SAVE(String filename);
+/*
+SAVE merupakan command yang digunakan untuk menyimpan state aplikasi terbaru ke dalam suatu file.
+Command SAVE memiliki satu argumen yang merepresentasikan nama file yang akan disimpan.
+Penyimpanan dilakukan pada folder tertentu, misal folder save.
+*/
+// I.S. Sembarang dalam sesi
+// F.S. Terbentuk suatu file bernama <filename> di folder save.
+
+void QUIT();
+// QUIT merupakan command yang digunakan untuk keluar dari sesi aplikasi WayangWave.
+// I.S. Sembarang dalam sesi
+// F.S. Keluar dari sesi. Jika data sesi disimpan maka terbentuk suatu file bernama <filename> di folder save.
