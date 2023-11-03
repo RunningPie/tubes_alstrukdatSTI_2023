@@ -6,7 +6,7 @@
 /* ********* Prototype ********* */
 
 /* *** Konstruktor/Kreator *** */
-void CreateEmpty(HashMap *M)
+void HashCreateEmpty(HashMap *M)
 /* I.S. Sembarang */
 /* F.S. Membuat sebuah HashMap M kosong berkapasitas MaxEl */
 /* Ciri HashMap kosong : count bernilai Nil dengan seluruh isi key & value map Undefined */
@@ -28,7 +28,7 @@ address Hash(keytype K)
 }
 
 /* ********** Operator Dasar HashMap ********* */
-valuetype Value(HashMap M, keytype k)
+valuetype HashValue(HashMap M, keytype k)
 /* Mengembalikan nilai value dengan key k dari M */
 /* Jika tidak ada key k pada M, akan mengembalikan Undefined */
 /* Jika tidak ada key k pada M, akan mengembalikan Undefined */
@@ -49,7 +49,7 @@ valuetype Value(HashMap M, keytype k)
     }
 }
 
-void Insert(HashMap *M, keytype k, valuetype v)
+void HashInsert(HashMap *M, keytype k, valuetype v)
 /* Menambahkan Elmt sebagai elemen HashMap M. */
 /* I.S. M mungkin kosong, M tidak penuh
         M mungkin sudah beranggotakan v dengan key k */

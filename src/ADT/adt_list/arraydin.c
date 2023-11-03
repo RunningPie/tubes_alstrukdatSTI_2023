@@ -19,27 +19,27 @@ void DeallocateArrayDin(ArrayDin *array)
     (*array).Neff     = 0;
 }
 
-boolean IsEmpty(ArrayDin array)
+boolean IsEmptyArrDin(ArrayDin array)
 {
     return (array.Neff == 0);
 }
 
-int Length(ArrayDin array)
+int LengthArrDin(ArrayDin array)
 {
     return (array.Neff);
 }
 
-ElType Get(ArrayDin array, IdxType i)
+ElType GetArrDin(ArrayDin array, IdxType i)
 {
     return ((array.A)[i]);
 }
 
-int GetCapacity(ArrayDin array)
+int GetCapacityArrDin(ArrayDin array)
 {
     return array.Capacity;
 }
 
-void InsertAt(ArrayDin *array, ElType el, IdxType i)
+void InsertAtArrDin(ArrayDin *array, ElType el, IdxType i)
 {
     if((*array).Neff == (*array).Capacity)
     {
@@ -55,17 +55,17 @@ void InsertAt(ArrayDin *array, ElType el, IdxType i)
     (*array).Neff++;
 }
 
-void InsertLast(ArrayDin *array, ElType el)
+void InsertLastArrDin(ArrayDin *array, ElType el)
 {
-    InsertAt(array, el, (*array).Neff);
+    InsertAtArrDin(array, el, (*array).Neff);
 }
 
-void InsertFirst(ArrayDin *array, ElType el)
+void InsertFirstArrDin(ArrayDin *array, ElType el)
 {
-    InsertAt(array, el, 0);
+    InsertAtArrDin(array, el, 0);
 }
 
-void DeleteAt(ArrayDin *array, IdxType i)
+void DeleteAtArrDin(ArrayDin *array, IdxType i)
 {
     for(int j = i; j < (*array).Neff - 1; j++)
     {
@@ -74,14 +74,14 @@ void DeleteAt(ArrayDin *array, IdxType i)
     (*array).Neff--;
 }
 
-void DeleteLast(ArrayDin *array)
+void DeleteLastArrDin(ArrayDin *array)
 {
-    DeleteAt(array, (*array).Neff - 1);
+    DeleteAtArrDin(array, (*array).Neff - 1);
 }
 
-void DeleteFirst(ArrayDin *array)
+void DeleteFirstArrDin(ArrayDin *array)
 {
-    DeleteAt(array, 0);
+    DeleteAtArrDin(array, 0);
 }
 
 void PrintArrayDin(ArrayDin array)
