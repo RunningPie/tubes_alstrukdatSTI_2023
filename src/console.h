@@ -3,12 +3,12 @@
 /* Prototipe dan implementasi dari semua command dipisah dari main agar lebih rapi
    dan terstruktur. Sehingga main lebih efektif dan mudah dibaca */
 
-#include "adt_list/arraydin.h"                  // ADT list dinamis
-#include "adt_mesinkarakter/mesinkarakter.h"    // ADT mesinkarakter
-#include "adt_mesinkata/mesinkata.h"            // ADT mesinkata v1
-#include "adt_queue/circular_queue.h"           // ADT queue circular (queue v3)
-#include "adt_queue/queue.h"                    // ADT queue v2
-#include "adt_stack/stack.h"                    // ADT stack dengan array
+#include "../src/ADT/adt_list/arraydin.h"                  // ADT list dinamis
+#include "../src/ADT/adt_mesinkarakter/mesinkarakter.h"    // ADT mesinkarakter
+#include "../src/ADT/adt_mesinkata/mesinkata.h"            // ADT mesinkata v1
+#include "../src/ADT/adt_queue/circular_queue.h"           // ADT queue circular (queue v3)
+#include "../src/ADT/adt_queue/queue.h"                    // ADT queue v2
+#include "../src/ADT/adt_stack/stack.h"                    // ADT stack dengan array
 
 #define maxString 128
 

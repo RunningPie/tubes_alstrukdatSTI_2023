@@ -1,6 +1,6 @@
 /* File : queue.h */
 /* Definisi ADT Queue dengan representasi array secara eksplisit dan alokasi statik */
-#include "boolean.h"
+
 #include <stdio.h>
 #include "queue.h"
 

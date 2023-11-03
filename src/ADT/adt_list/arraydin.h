@@ -1,7 +1,7 @@
 #ifndef __ARRAY_DINAMIK__
 #define __ARRAY_DINAMIK__
 
-#include "../src/boolean.h"
+#include "../boolean.h"
 
 #define InitialSize 10
 

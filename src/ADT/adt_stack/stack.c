@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include "boolean.h"
 #include "stack.h"
 
 /* *** Konstruktor/Kreator *** */
