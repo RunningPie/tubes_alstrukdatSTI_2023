@@ -1,6 +1,6 @@
 # tubes_alstrukdatSTI_2023
 Repositori ini adalah untuk menyimpan semua file untuk program WayangWave,
-tugas besar dari Mata Kuliah IF2111 - Algoritma dan Struktur Data STI T.A. 2023/2024
+tugas besar dari Mata Kuliah IF2111 - Algoritma dan Struktur Data STI Semester Ganjil Tahun 2023
 
 Repositori ini disusun oleh:
 
