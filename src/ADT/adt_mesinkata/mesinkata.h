@@ -6,6 +6,7 @@
 
 #include "../boolean.h"
 #include "../adt_mesinkarakter/mesinkarakter.h"
+#include "../struct.h"
 
 #define NMax 50
 #define BLANK ' '
@@ -47,5 +48,19 @@ void CopyWord();
           Jika panjang kata melebihi NMax, maka sisa kata "dipotong" */
 
 boolean isEndWord();
+
+boolean isWordEq(Word Kata1, Word Kata2);
+/* Membandingkan antara kata1 dan kata2
+   I.S. : kata1, kata2 sembarang
+   F.S. : true jika kata1 = kata2 dan sebaliknya 
+          apabila kata1.length != kata2.length maka akan mengembalikan false */
+
+Word ToKata(char *string);
+/* Mengubah string inputan menjadi word
+   I.S. : string sembarang 
+   F.S. : string disimpan dalam tabword dan panjangnya dalam length */
+
+void DisplayKata(Word Kata);
+/* Menuliskan word kata */
 
 #endif

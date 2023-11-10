@@ -78,3 +78,36 @@ void CopyWord()
 boolean isEndWord() {
     return endWord;
 }
+
+boolean isWordEq(Word Kata1, Word Kata2) {
+    if (Kata1.Length != Kata2.Length) {
+        return false;
+    }
+    for (int i = 0; i < Kata1.Length; i++) {
+        if (Kata1.TabWord[i] != Kata2.TabWord[i]) {
+            return false;
+        }
+    }
+    return true;
+}
+
+Word ToKata(char *String) {
+    Word Kata;
+    int len = 0;
+    while (String[len] != '\0') {
+        len++;
+    }
+    Kata.Length = len;
+
+    for (int i = 0; i < Kata.Length; i++) {
+        Kata.TabWord[i] = String[i];
+    }
+    return Kata;
+}
+
+void DisplayKata(Word Kata) {
+    for (int i = 0; i < Kata.Length; i++) {
+        printf("%c", Kata.TabWord[i]);
+    }
+    printf("\n");
+}
