@@ -24,6 +24,7 @@ void START()
        // } else {
        //        pita = stdin;
        // }
+       printf("Masukkan command: ");
        pita = stdin;
        
        ADV();
@@ -40,9 +41,5 @@ void ADV()
 
        /* Algoritma */
        retval = fscanf(pita, "%c", &currentChar);
-       EOP = (currentChar == MARK);
-       if (EOP)
-       {
-              fclose(pita);
-       }
+       EOP = feof(pita);
 }

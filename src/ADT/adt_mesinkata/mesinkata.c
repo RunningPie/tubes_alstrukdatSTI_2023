@@ -9,7 +9,7 @@ void IgnoreBlanks()
     /* Mengabaikan satu atau beberapa BLANK
        I.S. : currentChar sembarang
        F.S. : currentChar ≠ BLANK atau currentChar = MARK */
-    while (currentChar == BLANK)
+    while (currentChar == BLANK || currentChar == '\n')
     {
         ADV();
     }
@@ -32,6 +32,7 @@ void STARTWORD()
         endWord = false;
         CopyWord();
     }
+    IgnoreBlanks();
 }
 
 void ADVWORD()
@@ -50,8 +51,8 @@ void ADVWORD()
     {
         endWord = false;
         CopyWord();
-        IgnoreBlanks();
     }
+    IgnoreBlanks();
 }
 
 void CopyWord()
