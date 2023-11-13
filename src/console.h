@@ -3,16 +3,17 @@
 /* Prototipe dan implementasi dari semua command dipisah dari main agar lebih rapi
    dan terstruktur. Sehingga main lebih efektif dan mudah dibaca */
 
+#include "../src/ADT/adt_map/map.h"                        // ADT Map dan Set
 #include "../src/ADT/adt_list/arraydin.h"                  // ADT list dinamis
 #include "../src/ADT/adt_mesinkarakter/mesinkarakter.h"    // ADT mesinkarakter
 #include "../src/ADT/adt_mesinkata/mesinkata.h"            // ADT mesinkata v1
 #include "../src/ADT/adt_queue/circular_queue.h"           // ADT queue circular (queue v3)
 #include "../src/ADT/adt_queue/queue.h"                    // ADT queue v2
 #include "../src/ADT/adt_stack/stack.h"                    // ADT stack dengan array
-#include "../src/ADT/adt_list/list.h"
-#include "../src/ADT/adt_map/map.h"
+#include "../src/ADT/adt_list/list.h"                      // ADT list statis
 
 #include "../src/ADT/struct.h"
+#include "../src/ADT/boolean.h"
 
 #include <stdio.h>
 #include <stdlib.h>

@@ -1,13 +1,14 @@
 #include "console.h"
 
 
-void STARTWAYANGWAVE(List *daftarPenyanyi, Map *PenyanyiAlbum, Map *AlbumLagu) {
+void STARTWAYANGWAVE(List *daftarPenyanyi, Map *penyanyiAlbum, Map *albumLagu) {
 
     int Npenyanyi, Nalbum, Nlagu;
     Word penyanyi, album, lagu;
     Set Salbum, Slagu;
     CreateEmptySet(&Salbum);
     CreateEmptySet(&Slagu);
+    MapCreateEmpty(penyanyiAlbum); MapCreateEmpty(albumLagu);
 
     STARTWORDFILE("data/config.txt");
 
@@ -34,10 +35,10 @@ void STARTWAYANGWAVE(List *daftarPenyanyi, Map *PenyanyiAlbum, Map *AlbumLagu) {
                 lagu = currentWord;
                 SetInsert(&Slagu, lagu);
             }
-            MapInsert(AlbumLagu, album, Slagu);
+            MapInsert(albumLagu, album, Slagu);
             CreateEmptySet(&Slagu);
         }
-        MapInsert(PenyanyiAlbum, penyanyi, Salbum);
+        MapInsert(penyanyiAlbum, penyanyi, Salbum);
         CreateEmptySet(&Salbum);
     }
 }
