@@ -8,7 +8,6 @@ void STARTWAYANGWAVE(List *daftarPenyanyi, Map *penyanyiAlbum, Map *albumLagu) {
     Set Salbum, Slagu;
     CreateEmptySet(&Salbum);
     CreateEmptySet(&Slagu);
-    MapCreateEmpty(penyanyiAlbum); MapCreateEmpty(albumLagu);
 
     STARTWORDFILE("data/config.txt");
 
