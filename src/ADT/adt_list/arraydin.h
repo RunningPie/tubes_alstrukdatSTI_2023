@@ -2,11 +2,12 @@
 #define __ARRAY_DINAMIK__
 
 #include "../boolean.h"
+#include "../adt_mesinkata/mesinkata.h"
 
 #define InitialSize 10
 
 typedef int IdxType;
-typedef int ElType;
+typedef Word ElType;
 typedef struct {
     ElType *A;
     int Capacity;

@@ -2,6 +2,7 @@
 #define set_H
 #include <stdio.h>
 #include "../boolean.h"
+#include "../adt_mesinkata/mesinkata.h"
 
 /* MODUL Set
 Deklarasi stack yang dengan implementasi array eksplisit-statik rata kiri
@@ -10,13 +11,12 @@ Deklarasi stack yang dengan implementasi array eksplisit-statik rata kiri
 #define Nil 0
 #define MaxEl 100
 
-typedef int infotype;
-typedef int address;
+typedef Word infotype;
 
 typedef struct
 {
     infotype Elements[MaxEl];
-    address Count;
+    int Count;
 } Set;
 
 /* Definisi Set S kosong : S.Count = Nil */
@@ -55,5 +55,8 @@ void SetDelete(Set *S, infotype Elmt);
 
 boolean IsSetMember(Set S, infotype Elmt);
 /* Mengembalikan true jika Elmt adalah member dari S */
+
+void DisplaySet(Set S);
+/* Menuliskan Set S */
 
 #endif

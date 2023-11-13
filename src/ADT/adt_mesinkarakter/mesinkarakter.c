@@ -24,9 +24,14 @@ void START()
        // } else {
        //        pita = stdin;
        // }
-       printf("Masukkan command: ");
+       printf(">> ");
        pita = stdin;
        
+       ADV();
+}
+
+void STARTFILE(char* filename) {
+       pita = fopen(filename, "r");
        ADV();
 }
 
@@ -42,4 +47,8 @@ void ADV()
        /* Algoritma */
        retval = fscanf(pita, "%c", &currentChar);
        EOP = feof(pita);
+}
+
+boolean isEOP() {
+       return feof(pita);
 }

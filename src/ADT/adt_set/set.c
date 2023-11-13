@@ -50,7 +50,7 @@ void SetDelete(Set *S, infotype Elmt)
 {
     int i;
     for (i=0; i < S->Count; i++){
-        if (S->Elements[i] == Elmt){
+        if (isWordEq(S->Elements[i], Elmt)) {
             break;
         }
     }
@@ -69,9 +69,23 @@ boolean IsSetMember(Set S, infotype Elmt)
 {
     int i;
     for (i=0; i < S.Count; i++){
-        if (S.Elements[i] == Elmt){
+        if (isWordEq(S.Elements[i], Elmt)){
             return true;
         }
     }
     return false;
 }
+
+void DisplaySet(Set S) {
+    if (IsEmptySet(S)) {
+        printf("Kosong\n");
+    } else {
+        int j = 1;
+        for (int i = 0; i < S.Count; i++) {
+            printf("%d. ", j);
+            DisplayKata(S.Elements[i]);
+            j++;
+        }
+    }
+}
+    

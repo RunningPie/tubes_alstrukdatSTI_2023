@@ -1,5 +1,48 @@
 #include "console.h"
 
+
+void STARTWAYANGWAVE(List *daftarPenyanyi, Map *PenyanyiAlbum, Map *AlbumLagu) {
+
+    int Npenyanyi, Nalbum, Nlagu;
+    Word penyanyi, album, lagu;
+    Set Salbum, Slagu;
+    CreateEmptySet(&Salbum);
+    CreateEmptySet(&Slagu);
+
+    STARTWORDFILE("data/config.txt");
+
+    Npenyanyi = WordToInt(currentWord);
+
+    for (int i = 0; i < Npenyanyi; i++) {
+        ADVWORD();
+        Nalbum = WordToInt(currentWord);
+
+        ADVSENTENCE();
+        penyanyi = currentWord;
+        ListInsertLast(daftarPenyanyi, penyanyi);
+
+        for (int j = 0; j < Nalbum; j++) {
+            ADVWORD();
+            Nlagu = WordToInt(currentWord);
+
+            ADVSENTENCE();
+            album = currentWord;
+            SetInsert(&Salbum, album);
+
+            for (int k = 0; k < Nlagu; k++) {
+                ADVSENTENCE();
+                lagu = currentWord;
+                SetInsert(&Slagu, lagu);
+            }
+            MapInsert(AlbumLagu, album, Slagu);
+            CreateEmptySet(&Slagu);
+        }
+        MapInsert(PenyanyiAlbum, penyanyi, Salbum);
+        CreateEmptySet(&Salbum);
+    }
+}
+
+
 void LOAD(String filename)
 /*
 LOAD merupakan salah satu command yang dimasukkan pertama kali dalam WayangWave.

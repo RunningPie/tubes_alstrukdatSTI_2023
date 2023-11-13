@@ -35,6 +35,21 @@ void STARTWORD()
     IgnoreBlanks();
 }
 
+void STARTWORDFILE(char* filename) {
+    STARTFILE(filename);
+    IgnoreBlanks();
+    if (currentChar == '\n')
+    {
+        endWord = true;
+    }
+    else
+    {
+        endWord = false;
+        CopySentence();
+    }
+    IgnoreBlanks();
+}
+
 void ADVWORD()
 {
     /* I.S. : currentChar adalah karakter pertama kata yang akan diakuisisi
@@ -55,6 +70,21 @@ void ADVWORD()
     IgnoreBlanks();
 }
 
+void ADVSENTENCE()
+{
+    IgnoreBlanks();
+    if (currentChar == '\n')
+    {
+        endWord = true;
+    }
+    else
+    {
+        endWord = false;
+        CopySentence();
+    }
+    IgnoreBlanks();
+}
+
 void CopyWord()
 {
     /* Mengakuisisi kata, menyimpan dalam currentWord
@@ -64,7 +94,22 @@ void CopyWord()
               currentChar adalah karakter sesudah karakter terakhir yang diakuisisi.
               Jika panjang kata melebihi CAPACITY, maka sisa kata terpotong */
     currentWord.Length = 0;
-    while (currentChar != BLANK && currentChar != MARK)
+    while (currentChar != BLANK && currentChar != MARK && !isEOP()) 
+    {
+        if (currentWord.Length < NMax)
+        { // jika lebih akan terpotong
+            currentWord.TabWord[currentWord.Length++] = currentChar;
+            ADV();
+        }
+        else
+            break;
+    }
+}
+
+void CopySentence()
+{
+    currentWord.Length = 0;
+    while (currentChar != MARK && currentChar != '\n' && !isEOP()) 
     {
         if (currentWord.Length < NMax)
         { // jika lebih akan terpotong
@@ -104,6 +149,23 @@ Word ToKata(char *String) {
         Kata.TabWord[i] = String[i];
     }
     return Kata;
+}
+
+int WordToInt(Word Kata) {
+    int hasil = 0;
+    for (int i = 0; i < Kata.Length; i++) {
+        if (Kata.TabWord[i] - '0' > 0) {
+            hasil = hasil * 10 + (Kata.TabWord[i] - '0');
+        }
+    }
+    return hasil;
+}
+
+void SalinKata(Word Kata1, Word* Kata2) {
+    Kata2->Length = Kata1.Length;
+    for (int i = 0; i < Kata2->Length; i++) {
+        Kata2->TabWord[i] = Kata1.TabWord[i];
+    }
 }
 
 void DisplayKata(Word Kata) {

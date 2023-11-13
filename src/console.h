@@ -9,6 +9,8 @@
 #include "../src/ADT/adt_queue/circular_queue.h"           // ADT queue circular (queue v3)
 #include "../src/ADT/adt_queue/queue.h"                    // ADT queue v2
 #include "../src/ADT/adt_stack/stack.h"                    // ADT stack dengan array
+#include "../src/ADT/adt_list/list.h"
+#include "../src/ADT/adt_map/map.h"
 
 #include "../src/ADT/struct.h"
 
@@ -17,7 +19,7 @@
 #include <string.h>
 #include <math.h>
 
-void START();
+void STARTWAYANGWAVE(List *daftarPenyanyi, Map *PenyanyiAlbum, Map *AlbumLagu);
 /*
 START merupakan salah satu command yang dimasukkan pertama kali dalam WayangWave.
 Setelah menekan Enter, dibaca file konfigurasi default yang berisi daftar penyanyi
