@@ -11,6 +11,8 @@
 #include "../src/ADT/adt_queue/queue.h"                    // ADT queue v2
 #include "../src/ADT/adt_stack/stack.h"                    // ADT stack dengan array
 #include "../src/ADT/adt_list/list.h"                      // ADT list statis
+#include "../src/ADT/adt_linkedlist/linkedlist_v2.h"
+#include "../src/ADT/adt_lagu/lagu.h"                      // ADT lagu
 
 #include "../src/ADT/struct.h"
 #include "../src/ADT/boolean.h"
@@ -29,6 +31,20 @@ serta album yang dimiliki.
 // I.S. Sembarang
 // F.S. Program memasuki sesi
 //      Daftar penyanyi default terinisialisasi beserta album yang dimiliki
+
+void PLAYLISTCREATE();
+
+void PLAYLISTADDSONG(List daftarPenyanyi,ArrayDin daftarPlaylist, Map *penyanyiAlbum, Map *albumLagu);
+
+void PLAYLISTADDALBUM(List daftarPenyanyi, Map *penyanyiAlbum, ArrayDin daftarPlaylist, Map *albumLagu);
+
+void PLAYLISTSWAP(List daftarPenyanyi, Map *penyanyiAlbum, ArrayDin daftarPlaylist, Map *albumLagu);
+
+void PLAYLISTREMOVE(List daftarPenyanyi, Map *penyanyiAlbum, ArrayDin daftarPlaylist, Map *albumLagu);
+
+void PLAYLISTDELETE(List daftarPenyanyi, Map *penyanyiAlbum, ArrayDin daftarPlaylist, Map *albumLagu);
+
+void STATUS();
 
 void LOAD(String filename);
 /*

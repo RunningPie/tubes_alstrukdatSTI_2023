@@ -3,21 +3,13 @@
 #include <stdio.h>
 #include "../boolean.h"
 #include "../adt_mesinkata/mesinkata.h"
+#include "../struct.h"
 
 /* MODUL Set
 Deklarasi stack yang dengan implementasi array eksplisit-statik rata kiri
 */
 
-#define Nil 0
-#define MaxEl 100
 
-typedef Word infotype;
-
-typedef struct
-{
-    infotype Elements[MaxEl];
-    int Count;
-} Set;
 
 /* Definisi Set S kosong : S.Count = Nil */
 /* S.Count = jumlah element Set */
@@ -52,6 +44,8 @@ void SetDelete(Set *S, infotype Elmt);
 /* I.S. S tidak kosong
         Elmt mungkin anggota / bukan anggota dari S */
 /* F.S. Elmt bukan anggota dari S */
+
+boolean IsIdxValidSet(Set s,int i);
 
 boolean IsSetMember(Set S, infotype Elmt);
 /* Mengembalikan true jika Elmt adalah member dari S */
