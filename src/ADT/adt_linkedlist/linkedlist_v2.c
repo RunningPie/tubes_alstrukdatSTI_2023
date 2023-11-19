@@ -230,20 +230,3 @@ void LinkedListInsertAt(LinkedList *l, LinkedListEl x, int i)
     }
 }
 
-void GetLinkedList(LinkedList *l,LinkedListEl *x,int i)
-{
-    int idx;
-    Address p;
-    idx=0;
-    p=FIRST(*s);
-
-    while (p!=NIL && idx !=i)
-    {
-        idx++;
-        p=NEXT(p);
-    }
-    if(i==idx)
-    {
-        InsertWord(info(p),x);
-    }
-}

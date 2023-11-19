@@ -87,6 +87,4 @@ void LinkedListDeleteLast(LinkedList *l, LinkedListEl *x);
 
 void LinkedListInsertAt(LinkedList *l, LinkedListEl x, int i);
 
-void LinkedListGet(LinkedList *l,LinkedListEl *x,int i);
-
 #endif
