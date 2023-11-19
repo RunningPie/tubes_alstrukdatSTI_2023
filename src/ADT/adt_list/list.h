@@ -6,15 +6,16 @@
 #define ADTList1
 
 #include "../boolean.h"
+#include "../adt_mesinkata/mesinkata.h"
 
 /* Kamus Umum */
 #define MaxEl 100
-#define Mark -9999  /* Nilai tak terdefinisi */
+#define MarkList -9999  /* Nilai tak terdefinisi */
 #define InvalidIdx -1  /* Indeks tak terdefinisi */
 
 /* Definisi elemen dan koleksi objek */
-#define IdxType int
-#define ElType int
+typedef int IdxType;
+typedef Word ElType;
 
 typedef struct {
 	ElType A[MaxEl];  /* Memori tempat penyimpanan elemen (container) */
@@ -111,4 +112,7 @@ List ListConcat(List L1, List L2);
 /* Mengirimkan sebuah List yang merupakan gabungan dari L1 dan L2 */
 /* Urutan elemen terisi dari L1, lalu L2 */
 /* Contoh : L1 : [1, 2]; L2 : [3, 4]; Mengembalikan [1, 2, 3, 4] */
+
+void DisplayList(List L);
+/* Menuliskan isi List L */
 #endif

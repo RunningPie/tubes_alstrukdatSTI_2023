@@ -36,15 +36,16 @@ valuetype MapValue(Map M, keytype k)
 /* Jika tidak ada key k pada M, akan mengembalikan Undefined */
 {
     int i;
+    Set S; CreateEmptySet(&S);
     for (i=0; i < M.Count; i++){
-        if (M.Elements[i].Key == k){
+        if (isWordEq(M.Elements[i].Key, k)){
             break;
         }
     }
     if (i!=M.Count){
         return M.Elements[i].Value;
     } else {
-        return Undefined;
+        return S;
     }
 }
 
@@ -69,7 +70,7 @@ void MapDelete(Map *M, keytype k)
 {
     int i;
     for (i=0; i < M->Count; i++){
-        if (M->Elements[i].Key == k){
+        if (isWordEq(M->Elements[i].Key, k)){
             break;
         }
     }
@@ -89,9 +90,28 @@ boolean MapIsMember(Map M, keytype k)
 {
     int i;
     for (i=0; i < M.Count; i++){
-        if (M.Elements[i].Key == k) {
+        if (isWordEq(M.Elements[i].Key, k)) {
             return true;
         }
     }
     return false;
+}
+
+void DisplayVMap(Map M, keytype k) {
+    if (MapIsMember(M, k)) {
+        DisplaySet(MapValue(M, k));
+    }
+}
+
+void DisplayMap(Map M) {
+    if (MapIsEmpty(M)) {
+        printf("Kosong\n");
+    }
+    else {
+        for (int i = 0; i < M.Count; i++) {
+            printf("Key %d: ", i+1);
+            DisplayKata(M.Elements[i].Key);
+            DisplaySet(M.Elements[i].Value);
+        }
+    }
 }

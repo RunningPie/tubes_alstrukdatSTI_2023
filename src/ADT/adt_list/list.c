@@ -14,7 +14,7 @@ List MakeList(){
     List L;
     int i;
     for (i=0; i<MaxEl; i++){
-        L.A[i] = Mark;
+        L.A[i] = ToKata("-9999");
     }
     return L;
 }
@@ -24,7 +24,7 @@ List MakeList(){
 /* ********** TEST KOSONG/PENUH ********** */
 /* *** Test list kosong *** */
 boolean IsEmpty(List L){
-    return (L.A[0] == Mark);
+    return (isWordEq(L.A[0], ToKata("-9999")));
 }
 /* Mengirimkan true jika list L kosong, mengirimkan false jika tidak */
 
@@ -46,7 +46,7 @@ void ListSet(List *L, IdxType i, ElType v){
 /* *** Banyaknya elemen *** */
 int ListLength(List L){
     int i=0;
-    while (L.A[i] != Mark){
+    while (!isWordEq(L.A[i], ToKata("-9999"))){
         i++;
     }
     return i;
@@ -57,7 +57,7 @@ int ListLength(List L){
 /* *** Selektor INDEKS *** */
 IdxType ListFirstIdx(List L){
     IdxType i=0;
-    while (L.A[i] == Mark){
+    while (isWordEq(L.A[i], ToKata("-9999"))){
         i++;
     }
     if (IsEmpty(L)){
@@ -98,7 +98,7 @@ boolean ListIsIdxEff (List L, IdxType i){
 boolean ListSearch(List L, ElType X){
     int i;
     for (i=0; i<=ListLastIdx(L); i++){
-        if (ListGet(L, i) == X){
+        if (isWordEq(ListGet(L, i), X)){
             return true;
         }
     }
@@ -142,7 +142,7 @@ void ListDeleteAt(List *L, IdxType i){
     for (j=i; j<ListLastIdx(*L); j++){
         ListSet(L, j, ListGet(*L, j+1));
     }
-    ListSet(L, ListLastIdx(*L), Mark);
+    ListSet(L, ListLastIdx(*L), ToKata("-9999"));
 }
 /* I.S. L terdefinisi, tidak kosong, i merupakan indeks lojik yang valid di L. */
 /* F.S. Elemen L pada indeks ke-i dihapus dari L. */
@@ -173,6 +173,19 @@ List ListConcat(List L1, List L2){
     }
     return L3;
 }
+
+void DisplayList(List L) {
+    int j = 1;
+    if (IsEmpty(L)) {
+        printf("List Kosong\n");
+    } else {
+        for (int i = ListFirstIdx(L); i <= ListLastIdx(L); i++) {
+            printf("%d. ", j); DisplayKata(L.A[i]);
+            j++;
+        }
+    }
+}
+
 /* Prekondisi : L1 dan L2 tidak kosong */
 /* Mengirimkan sebuah List yang merupakan gabungan dari L1 dan L2 */
 /* Urutan elemen terisi dari L1, lalu L2 */

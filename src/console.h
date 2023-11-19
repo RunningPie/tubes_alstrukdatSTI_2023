@@ -3,21 +3,26 @@
 /* Prototipe dan implementasi dari semua command dipisah dari main agar lebih rapi
    dan terstruktur. Sehingga main lebih efektif dan mudah dibaca */
 
+#include "../src/ADT/adt_map/map.h"                        // ADT Map dan Set
 #include "../src/ADT/adt_list/arraydin.h"                  // ADT list dinamis
 #include "../src/ADT/adt_mesinkarakter/mesinkarakter.h"    // ADT mesinkarakter
 #include "../src/ADT/adt_mesinkata/mesinkata.h"            // ADT mesinkata v1
 #include "../src/ADT/adt_queue/circular_queue.h"           // ADT queue circular (queue v3)
 #include "../src/ADT/adt_queue/queue.h"                    // ADT queue v2
 #include "../src/ADT/adt_stack/stack.h"                    // ADT stack dengan array
+#include "../src/ADT/adt_list/list.h"                      // ADT list statis
+#include "../src/ADT/adt_linkedlist/linkedlist_v2.h"
+#include "../src/ADT/adt_lagu/lagu.h"                      // ADT lagu
 
 #include "../src/ADT/struct.h"
+#include "../src/ADT/boolean.h"
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <math.h>
 
-void START();
+void STARTWAYANGWAVE(List *daftarPenyanyi, Map *PenyanyiAlbum, Map *AlbumLagu);
 /*
 START merupakan salah satu command yang dimasukkan pertama kali dalam WayangWave.
 Setelah menekan Enter, dibaca file konfigurasi default yang berisi daftar penyanyi
@@ -26,6 +31,20 @@ serta album yang dimiliki.
 // I.S. Sembarang
 // F.S. Program memasuki sesi
 //      Daftar penyanyi default terinisialisasi beserta album yang dimiliki
+
+void PLAYLISTCREATE();
+
+void PLAYLISTADDSONG(List daftarPenyanyi,ArrayDin daftarPlaylist, Map *penyanyiAlbum, Map *albumLagu);
+
+void PLAYLISTADDALBUM(List daftarPenyanyi, Map *penyanyiAlbum, ArrayDin daftarPlaylist, Map *albumLagu);
+
+void PLAYLISTSWAP(List daftarPenyanyi, Map *penyanyiAlbum, ArrayDin daftarPlaylist, Map *albumLagu);
+
+void PLAYLISTREMOVE(List daftarPenyanyi, Map *penyanyiAlbum, ArrayDin daftarPlaylist, Map *albumLagu);
+
+void PLAYLISTDELETE(List daftarPenyanyi, Map *penyanyiAlbum, ArrayDin daftarPlaylist, Map *albumLagu);
+
+void STATUS();
 
 void LOAD(String filename);
 /*

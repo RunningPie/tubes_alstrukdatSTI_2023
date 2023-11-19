@@ -6,12 +6,13 @@
 #define __circular_Cqueue_h__
 
 #include "../boolean.h"
+#include "../adt_mesinkata/mesinkata.h"
 
 #define IDX_UNDEF -1
 #define IDX_MAX 99
 
 /* Definisi tipe elemen dan indeks pada CQueue */
-typedef int ElType;
+typedef Word ElType;
 typedef int IdxType;
 
 typedef struct {

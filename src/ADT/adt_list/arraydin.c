@@ -114,8 +114,12 @@ IdxType SearchArrayDin(ArrayDin array, ElType el)
 {
     for(int i = 0; i < array.Neff; i++)
     {
-        if(array.A[i] == el) return i;
+        if(isWordEq(array.A[i], el)) return i;
     }
     return -1;
 }
 
+boolean IsIdxValidArrDin(ArrayDin array,IdxType i)
+{
+    return i<array.Neff && i>=0;
+}
