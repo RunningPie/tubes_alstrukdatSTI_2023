@@ -93,20 +93,6 @@ beserta Queue song yang ada dan dari playlist mana lagu itu diputar
 // I.S.
 // F.S.
 
-void LISTDEFAULT(List daftarPenyanyi, Map *penyanyiAlbum, Map *albumLagu);
-/*
-LISTPLAYLIST merupakan command yang digunakan untuk menampilkan daftar playlist yang tersedia
-*/
-// I.S. 
-// F.S. 
-
-void LISTPLAYLIST(ArrayDin daftarPlaylist);
-/*
-LISTPLAYLIST merupakan command yang digunakan untuk menampilkan daftar playlist yang tersedia
-*/
-// I.S. 
-// F.S. 
-
 void LOAD(String filename);
 /*
 LOAD merupakan salah satu command yang dimasukkan pertama kali dalam WayangWave.
