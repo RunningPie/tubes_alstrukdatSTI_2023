@@ -179,48 +179,6 @@ void PLAYSONG(List daftarPenyanyi, Map *penyanyiAlbum, Map *albumLagu, Queue *Qu
     }
 }
 
-void PLAYPLAYLIST(ArrayDin daftarPlaylist, Queue *QueueL, Stack *historyL) {
-    printf("Daftar playlist yang kamu miliki:\n");
-    PrintArrayDin(daftarPlaylist);
-
-    printf("\nMasukkan ID Playlist yang dipilih : ");
-    STARTWORD();
-    printf("\n");
-
-    int idPlaylist = WordToInt(currentWord) - 1;
-    if (IsIdxValidArrDin(daftarPlaylist, idPlaylist)) {
-        LinkedList playlist;
-        CreateLinkedList(&playlist);
-
-        // Salin lagu-lagu dari playlist ke dalam queue
-        Word lagu;
-        for (int i = 0; i < LinkedListLength(daftarPlaylist.TabWord[idPlaylist]); i++) {
-            SalinKata(GetLinkedListEl(daftarPlaylist.TabWord[idPlaylist], i)->Lagu, &lagu);
-
-            // Memasukkan lagu ke queue
-            Desc currentDesc;
-            SalinKata(GetLinkedListEl(daftarPlaylist.TabWord[idPlaylist], i)->Penyanyi, &(currentDesc.Penyanyi));
-            SalinKata(GetLinkedListEl(daftarPlaylist.TabWord[idPlaylist], i)->Album, &(currentDesc.Album));
-            SalinKata(lagu, &(currentDesc.Lagu));
-
-            enqueue(QueueL, currentDesc);
-
-            // Menambahkan lagu ke dalam history (stack)
-            push(historyL, currentDesc);
-        }
-
-        // Membalik urutan lagu di queue
-        reverseQueue(QueueL);
-
-        printf("\nMemutar playlist “");
-        DisplayKata(daftarPlaylist.A[idPlaylist]);
-        printf("”.\n");
-
-    } else {
-        printf("ID Playlist %d tidak ada dalam daftar. Silakan coba lagi.\n", idPlaylist + 1);
-    }
-}
-
 void LOAD(String filename)
 /*
 LOAD merupakan salah satu command yang dimasukkan pertama kali dalam WayangWave.
