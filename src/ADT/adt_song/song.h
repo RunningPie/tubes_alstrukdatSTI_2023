@@ -7,14 +7,13 @@
 /* Definisi elemen dan address */
 typedef Word ElType;
 
-typedef int IDSong;
+// typedef int IDSong;
 
 // STRUCT SONG (1)
 typedef struct{
     Word titleSong;
     Word album;
     Word singer;
-    int IDSong;
 } Song;
 
 Song createSong(Word titleSong, Word album, Word singer);

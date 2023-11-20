@@ -93,11 +93,10 @@ void displayQueue(Queue q)
     if (QisEmpty(q)){
         printf("[]\n");
     } else {
-        printf("[");
-        for (i = IDX_HEAD(q); i < (IDX_HEAD(q)+Qlength(q))-1; i++){
-            printf("%d,", q.buffer[i]);
+        for (i = IDX_HEAD(q); i < (IDX_HEAD(q)+Qlength(q))-1; i++) {
+            displaySongInfo(q.buffer[i]);
+            printf("\n");
         }
-        printf("%d]\n", q.buffer[i]);
     }
 }
 
