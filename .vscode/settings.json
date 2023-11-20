@@ -4,6 +4,7 @@
         "queue.h": "c",
         "stack.h": "c",
         "song.h": "c",
-        "stdio.h": "c"
+        "stdio.h": "c",
+        "mesinkata.h": "c"
     }
 }

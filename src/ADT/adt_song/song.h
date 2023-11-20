@@ -10,10 +10,18 @@ typedef int IDSong;
 
 // STRUCT SONG (1)
 typedef struct{
-     Word titleSong;
-     Word album;
-     Word singer;
-     int IDSong;
+    Word titleSong;
+    Word album;
+    Word singer;
+    int IDSong;
 } Song;
+
+// Song song
+// song.titleSong = ...
+// ...
+// Print(song.titleSong)
+// Print(song.album)
+// Print(song.singer)
+// Print(song.IDSong)
 
 #endif

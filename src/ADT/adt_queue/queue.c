@@ -101,7 +101,6 @@ void displayQueue(Queue q)
     }
 }
 
-
 void enqueueFirst(Queue *q, Song val){
     int i;
     for (i = IDX_TAIL(*q); i > IDX_HEAD(*q); i--) {
@@ -109,6 +108,8 @@ void enqueueFirst(Queue *q, Song val){
     }
     HEAD(*q) = val;
 }
+
+// (f) Songs 
 
 void songNext (Queue *queueSong, Stack *previousSong, Song *onPlaySong){
 /*
@@ -195,6 +196,70 @@ Riwayat kosong, memutar kembali lagu
 
         }
     }
+}
+
+/*
+void queuePlaylist(Queue *queueSong, Playlist playlist) {
+
+    if (QisFull(*queueSong)) {
+        printf("Queue is full\n");
+        return;
+    }
+
+    for (int i = 0; i < length(playlist); i++) {
+        enqueue(playlist.buffer[i]);
+    }
+}
+
+*/
+
+void queueSwap(Queue *queueSong, int x, int y) {
+    // Check if x or y is out of bounds
+    if (x + IDX_HEAD(*queueSong) > IDX_TAIL(*queueSong) || y + IDX_HEAD(*queueSong) > IDX_TAIL(*queueSong) || x < 0 || y < 0) {
+        printf("Invalid");
+        return;
+    }
+
+    // Begin the swap
+    Song temp;
+    temp = queueSong->buffer[x];
+    queueSong->buffer[x] = queueSong->buffer[y];
+    queueSong->buffer[y] = temp;
+
+    return;
+}
+
+void queueRemove(Queue *queueSong, int id) {
+
+    if (id > Qlength(*queueSong) || id < 0) {
+        printf("Lagu dengan urutan ke %d tidak ada\n", id);
+    }
+
+    int ctr = 1;
+    for (int i = IDX_HEAD(*queueSong); i <= IDX_TAIL(*queueSong); i++) {
+        if (ctr == id) {
+            Song foundSong = queueSong->buffer[i];
+            for (int j = i; j < IDX_TAIL(*queueSong); j++) {
+                queueSong->buffer[j] = queueSong->buffer[j+1];
+            }
+
+            queueSong->idxTail = queueSong->idxTail - 1;
+
+            // Print message nya lah pokoknya
+            // Example:
+            // Lagu “Kokoro wo Komete” oleh “Aoi Teshima” telah dihapus dari queue!
+            return;
+        }
+        ctr++;
+    }
+}
+
+void queueClear(Queue *queueSong) {
+    Song temp;
+    while (!QisEmpty(*queueSong)){
+        dequeue(queueSong, &temp);
+    }
+    printf("Queue berhasil dikosongkan.\n");
 }
 
 // int main(){

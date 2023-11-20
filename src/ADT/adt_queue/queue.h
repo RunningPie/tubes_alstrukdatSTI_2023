@@ -75,7 +75,6 @@ void displayQueue(Queue q);
 void enqueueFirst(Queue *q, Song val);
 
 // Songs
-
 void songNext (Queue *queueSong, Stack *previousSong);
 /*
 Saat procedure songNext dijalankan, program WayangWave akan melakukan:
@@ -112,5 +111,14 @@ Contoh: Kondisi Riwaya Kosong
 Queue kosong, memutar kembali lagu
 “Mirror” oleh “Yasuda Rei”
 */
+
+// Queue Playlist
+// void queuePlaylist(Queue *queueSong, Playlist playlist);
+
+void queueSwap(Queue *queueSong, int x, int y);
+
+void queueRemove(Queue *queueSong, int id);
+
+void queueClear(Queue *queue);
 
 #endif
