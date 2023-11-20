@@ -106,6 +106,121 @@ void LISTPLAYLIST(ArrayDin daftarPlaylist) {
     }
 }
 
+void PLAYSONG(List daftarPenyanyi, Map *penyanyiAlbum, Map *albumLagu, Queue *QueueL, Stack *historyL){
+    printf("Daftar Penyanyi :\n");
+    DisplayList(daftarPenyanyi);
+    printf("\n");
+
+    printf("Masukkan Nama Penyanyi yang dipilih : ");
+    STARTWORD();
+    printf("\n");
+    Word penyanyi = currentWord;
+
+    if (ListSearch(daftarPenyanyi, penyanyi)) {
+        printf("Daftar Album oleh ");
+        DisplayKata(penyanyi);
+        printf(" :\n");
+        DisplayVMap(*penyanyiAlbum, penyanyi);
+        printf("\n");
+
+        printf("Masukkan Nama Album yang dipilih : ");
+        STARTWORD();
+        printf("\n");
+        Word album = currentWord;
+
+        if (IsSetMember(MapValue(*penyanyiAlbum, penyanyi), album)) {
+            printf("Daftar Lagu Album ");
+            DisplayKata(album);
+            printf(" oleh ");
+            DisplayKata(penyanyi);
+            printf(" :\n");
+            DisplayVMap(*albumLagu, album);
+            printf("\n");
+
+            printf("Masukkan ID Lagu yang dipilih : ");
+            STARTWORD();
+            printf("\n");
+
+            int idLagu = WordToInt(currentWord) - 1;
+            if (IsIdxValidSet(MapValue(*albumLagu, album), idLagu)) {
+                Word lagu;
+                SalinKata(MapValue(*albumLagu, album).Elements[idLagu], &lagu);
+                
+                // Memutar lagu
+                Desc currentDesc;
+                SalinKata(penyanyi, &(currentDesc.Penyanyi));
+                SalinKata(album, &(currentDesc.Album));
+                SalinKata(lagu, &(currentDesc.Lagu));
+
+                // Memasukkan lagu ke queue
+                enqueue(QueueL, currentDesc);
+
+                // Menambahkan lagu ke dalam history (stack)
+                push(historyL, currentDesc);
+
+                printf("Memutar lagu “");
+                DisplayKata(lagu);
+                printf("” oleh “");
+                DisplayKata(penyanyi);
+                printf("”.\n");
+
+            } else {
+                printf("ID Lagu %d tidak ada dalam daftar. Silakan coba lagi.\n", idLagu + 1);
+            }
+        } else {
+            printf("Album ");
+            DisplayKata(album);
+            printf(" tidak ada dalam daftar. Silakan coba lagi.\n");
+        }
+    } else {
+        printf("Penyanyi ");
+        DisplayKata(penyanyi);
+        printf(" tidak ada dalam daftar. Silakan coba lagi.\n");
+    }
+}
+
+void PLAYPLAYLIST(ArrayDin daftarPlaylist, Queue *QueueL, Stack *historyL) {
+    printf("Daftar playlist yang kamu miliki:\n");
+    PrintArrayDin(daftarPlaylist);
+
+    printf("\nMasukkan ID Playlist yang dipilih : ");
+    STARTWORD();
+    printf("\n");
+
+    int idPlaylist = WordToInt(currentWord) - 1;
+    if (IsIdxValidArrDin(daftarPlaylist, idPlaylist)) {
+        LinkedList playlist;
+        CreateLinkedList(&playlist);
+
+        // Salin lagu-lagu dari playlist ke dalam queue
+        Word lagu;
+        for (int i = 0; i < LinkedListLength(daftarPlaylist.TabWord[idPlaylist]); i++) {
+            SalinKata(GetLinkedListEl(daftarPlaylist.TabWord[idPlaylist], i)->Lagu, &lagu);
+
+            // Memasukkan lagu ke queue
+            Desc currentDesc;
+            SalinKata(GetLinkedListEl(daftarPlaylist.TabWord[idPlaylist], i)->Penyanyi, &(currentDesc.Penyanyi));
+            SalinKata(GetLinkedListEl(daftarPlaylist.TabWord[idPlaylist], i)->Album, &(currentDesc.Album));
+            SalinKata(lagu, &(currentDesc.Lagu));
+
+            enqueue(QueueL, currentDesc);
+
+            // Menambahkan lagu ke dalam history (stack)
+            push(historyL, currentDesc);
+        }
+
+        // Membalik urutan lagu di queue
+        reverseQueue(QueueL);
+
+        printf("\nMemutar playlist “");
+        DisplayKata(daftarPlaylist.A[idPlaylist]);
+        printf("”.\n");
+
+    } else {
+        printf("ID Playlist %d tidak ada dalam daftar. Silakan coba lagi.\n", idPlaylist + 1);
+    }
+}
+
 void LOAD(String filename)
 /*
 LOAD merupakan salah satu command yang dimasukkan pertama kali dalam WayangWave.
