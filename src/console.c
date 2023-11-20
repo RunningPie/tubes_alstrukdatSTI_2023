@@ -99,7 +99,7 @@ F.S.: Head dari queueSong dimainkan, Heed berganti ke lagu yang diantrikan selan
 */
     if ((Qlength(*queueSong)) >= 1){ // Isi queueSong 1 atau lebih lagu yang telah di-Queue
         dequeue(queueSong, onPlaySong);
-        PushStac(&previousSong, *onPlaySong);
+        PushStack(&previousSong, *onPlaySong);
         
         printf("\nMemutar lagu selanjutnya\n");
         printf("\"");
