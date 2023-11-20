@@ -7,7 +7,7 @@
 #include "../boolean.h"
 #include "../adt_mesinkata/mesinkata.h"
 #include "../adt_song/song.h"
-#include "../adt_stack/stack.h"
+// #include "../adt_stack/stack.h"
 
 #define IDX_UNDEF -1
 #define CAPACITY 100

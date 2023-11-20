@@ -9,7 +9,7 @@ int main() {
     char* albumChar = "25";
     Word albumSong = ToKata(albumChar);
 
-    char* singerChar = "thalita cantik";
+    char* singerChar = "singer";
     Word singerSong = ToKata(singerChar);
 
     Song newSong = createSong(titleSong, albumSong, singerSong);

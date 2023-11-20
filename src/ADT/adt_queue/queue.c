@@ -108,25 +108,3 @@ void enqueueFirst(Queue *q, Song val){
     }
     HEAD(*q) = val;
 }
-
-
-// int main(){
-
-//     Queue q1, q2;
-//     ElType val1;
-//     CreateQueue(&q1);
-//     displayQueue(q1);
-//     printf("Is Q1 empty? %u\n", isEmpty(q1));
-//     enqueue(&q1, 1);
-//     enqueue(&q1, 2);
-//     displayQueue(q1);
-//     printf("Is Q1 full? %u\n", isFull(q1));
-//     dequeue(&q1, &val1);
-//     displayQueue(q1);
-//     dequeue(&q1, &val1);
-//     printf("Length of Q1: %d", length(q1));
-//     displayQueue(q1);
-//     printf("%d\n", val1);
-
-//     return 0;
-// }

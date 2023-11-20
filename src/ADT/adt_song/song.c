@@ -10,7 +10,10 @@ Song createSong(Word titleSong, Word album, Word singer) {
 }
 
 void displaySongInfo(Song song) {
+    DisplayKata(ToKata("Title: "));
     DisplayKata(song.titleSong);
+    DisplayKata(ToKata("Album: "));
     DisplayKata(song.album);
+    DisplayKata(ToKata("Singer: "));
     DisplayKata(song.singer);
 }
