@@ -57,49 +57,13 @@ Contoh: Kondisi Riwayat Tidak Kosong
 Memutar lagu sebelumnya 
 “Hype Boy” oleh “New Jeans”
 
-Contoh: Kondisi Riwaya Kosong
-Queue kosong, memutar kembali lagu
+Contoh: Kondisi Riwayat Kosong
+Riwayat kosong, memutar kembali lagu
 “Mirror” oleh “Yasuda Rei”
 */
     Song onPlaySong;
-
-    // If stack is empty, then return nothing (terminate early)
-    // Else:
-
-    // At this point, stack udah pasti ada isinya (minimal element nya ada satu)
-    // Ambil elemen teratas dari stack (tanpa nge-pop
-    Stack onQueuePrevious;
-    if ((LengthStack(*previousSong)) >= 1){
-        PopStack(previousSong, &onPlaySong);
-        // enqueue dengan posisi Head
-        // // kasus apabila queueSong kosong, maka
-        // if (QisEmpty(*queueSong)){
-        //     IDX_HEAD(*queueSong) = 0;
-        //     IDX_TAIL(*queueSong) = 0;
-        // } 
-        // else {
-        // if (IDX_TAIL(*queueSong)==CAPACITY-1) {
-        //     int i;
-        //     for (i=IDX_HEAD(*queueSong); i<=CAPACITY-1; i++){
-        //         (*queueSong).buffer[i+1-IDX_HEAD(*queueSong)] = (*queueSong).buffer[i];
-        //     }
-        //     IDX_TAIL(*queueSong) -= (IDX_HEAD(*queueSong)-1);
-        //     IDX_HEAD(*queueSong)=0;
-        //     }
-        //     IDX_TAIL(*queueSong)++;
-        // }
-        // // Masukan onPlaySong bukan ke TAIL tetapi ke HEAD
-        // HEAD(*queueSong) = onPlaySong;
-        
-        printf("\nMemutar lagu sebelumnya\n");
-        printf("\"");
-        DisplayKata(onPlaySong.titleSong);
-        printf("\" oleh \"");
-        DisplayKata(onPlaySong.singer);
-        printf("\"");
-    }
-    else {
-        onPlaySong = InfoTop(*previousSong);
+    Song tempSong;
+    if (IsEmptyStack(*previousSong)){
         printf("\nRiwayat lagu kosong, memutar kembali lagu\n");
         printf("\"");
         DisplayKata(onPlaySong.titleSong);
@@ -107,4 +71,30 @@ Queue kosong, memutar kembali lagu
         DisplayKata(onPlaySong.singer);
         printf("\"");
     }
+    else{
+        if(QisFull(*queueSong)){
+            printf("\nDaftar lagu pada Queue sudah penuh!\n");
+        }
+        else{
+            PopStack(previousSong, &tempSong); // Menyimpan Song Previous di posisi temporary
+            enqueueFirst(&queueSong, onPlaySong); // Menyimpan Song yang sedang dimainkan menjadi HEAD DARI QUEUE SONG
+            // Mengubah tempSong sebagai onPlaySong
+            onPlaySong = tempSong;
+
+            printf("\nMemutar lagu sebelumnya\n");
+            printf("\"");
+            DisplayKata(onPlaySong.titleSong);
+            printf("\" oleh \"");
+            DisplayKata(onPlaySong.singer);
+            printf("\"");
+
+        }
+    }
+
+    // 1. Check if stack is empty -> do nothing (return)
+    // 2. Check if queue is full -> print "Queue is full" (return)
+    // 3. Set Queue head as current song that is playing
+    // 4. Set onPlaySong as previous song from stack pop
+    // Done :)
+
 }

@@ -100,6 +100,31 @@ void displayQueue(Queue q)
         printf("%d]\n", q.buffer[i]);
     }
 }
+ // enqueue dengan posisi Head
+        // // kasus apabila queueSong kosong, maka
+        // if (QisEmpty(*queueSong)){
+        //     IDX_HEAD(*queueSong) = 0;
+        //     IDX_TAIL(*queueSong) = 0;
+        // } 
+        // else {
+        // if (IDX_TAIL(*queueSong)==CAPACITY-1) {
+        //     int i;
+        //     for (i=IDX_HEAD(*queueSong); i<=CAPACITY-1; i++){
+        //         (*queueSong).buffer[i+1-IDX_HEAD(*queueSong)] = (*queueSong).buffer[i];
+        //     }
+        //     IDX_TAIL(*queueSong) -= (IDX_HEAD(*queueSong)-1);
+        //     IDX_HEAD(*queueSong)=0;
+        //     }
+        //     IDX_TAIL(*queueSong)++;
+        // }
+
+void enqueueFirst(Queue *q, Song val){
+    int i;
+    for (i = IDX_TAIL(*q); i > IDX_HEAD(*q); i--) {
+        (*q).buffer[i] = (*q).buffer[i-1];
+    }
+    HEAD(*q) = val;
+}
 
 // int main(){
 
