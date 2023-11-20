@@ -6,18 +6,22 @@
 
 #include "../boolean.h"
 #include "../adt_mesinkata/mesinkata.h"
+#include "../adt_song/song.h"
 
 #define IDX_UNDEF -1
 #define CAPACITY 100
 
 /* Definisi elemen dan address */
 typedef Word ElType;
+
+
+// ADT QUEUE
+typedef Song QueueEltype;
 typedef struct {
-	ElType buffer[CAPACITY]; 
+	QueueEltype buffer[CAPACITY]; 
 	int idxHead;
 	int idxTail;
 } Queue;
-
 
 /* ********* AKSES (Selektor) ********* */
 /* Jika q adalah Queue, maka akses elemen : */
@@ -67,6 +71,5 @@ void displayQueue(Queue q);
 /* F.S. Jika q tidak kosong: [e1,e2,...,en] */
 /* Contoh : jika ada tiga elemen bernilai 1, 20, 30 akan dicetak: [1,20,30] */
 /* Jika Queue kosong : menulis [] */
-
 
 #endif

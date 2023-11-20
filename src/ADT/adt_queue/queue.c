@@ -39,7 +39,7 @@ int Qlength(Queue q){
 /* Mengirimkan banyaknya elemen queue. Mengirimkan 0 jika q kosong. */
 
 /* *** Primitif Add/Delete *** */
-void enqueue(Queue *q, ElType val)
+void enqueue(Queue *q, Song val)
 /* Proses: Menambahkan val pada q dengan aturan FIFO */
 /* I.S. q mungkin kosong, tabel penampung elemen q TIDAK penuh */
 /* F.S. val menjadi TAIL yang baru, IDX_TAIL "mundur".
@@ -63,7 +63,7 @@ void enqueue(Queue *q, ElType val)
     TAIL(*q) = val;
 }
 
-void dequeue(Queue *q, ElType *val)
+void dequeue(Queue *q, Song *val)
 /* Proses: Menghapus val pada q dengan aturan FIFO */
 /* I.S. q tidak mungkin kosong */
 /* F.S. val = nilai elemen HEAD pd I.S., IDX_HEAD "mundur";
@@ -121,3 +121,23 @@ void displayQueue(Queue q)
 
 //     return 0;
 // }
+
+
+// PROTOTYPE TAMBAHAN UNTUK QUEUE
+// QUEUE SONG 
+
+
+
+// QUEUE PLAYLIST
+
+
+
+// QUEUE SWAP 
+
+
+
+// QUEUE REMOVE 
+
+
+
+// QUEUE CLEAR

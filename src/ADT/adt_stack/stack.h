@@ -7,6 +7,7 @@
 
 #include "../boolean.h"
 #include "../adt_mesinkata/mesinkata.h"
+#include "../adt_queue/queue.h"
 
 #define Undef -1
 #define MaxEl 100
@@ -17,6 +18,7 @@ typedef int address;   /* indeks tabel */
 
 /* Contoh deklarasi variabel bertype stack dengan ciri TOP : */
 /* Versi I : dengan menyimpan tabel dan alamat top secara eksplisit*/
+typedef Song infotypeS;
 typedef struct { 
   infotypeS T[MaxEl]; /* tabel penyimpan elemen */
   address TOP;  /* alamat TOP: elemen puncak */
@@ -56,5 +58,8 @@ void PopStack(Stack * S, infotypeS* X);
 /* Menghapus X dari Stack S. */
 /* I.S. S  tidak mungkin kosong */
 /* F.S. X adalah nilai elemen TOP yang lama, TOP berkurang 1 */
+
+int LengthStack(Stack S);
+
 
 #endif
