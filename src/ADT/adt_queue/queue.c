@@ -39,7 +39,7 @@ int Qlength(Queue q){
 /* Mengirimkan banyaknya elemen queue. Mengirimkan 0 jika q kosong. */
 
 /* *** Primitif Add/Delete *** */
-void enqueue(Queue *q, ElType val)
+void enqueue(Queue *q, QueueEl val)
 /* Proses: Menambahkan val pada q dengan aturan FIFO */
 /* I.S. q mungkin kosong, tabel penampung elemen q TIDAK penuh */
 /* F.S. val menjadi TAIL yang baru, IDX_TAIL "mundur".
@@ -63,7 +63,7 @@ void enqueue(Queue *q, ElType val)
     TAIL(*q) = val;
 }
 
-void dequeue(Queue *q, ElType *val)
+void dequeue(Queue *q, QueueEl *val)
 /* Proses: Menghapus val pada q dengan aturan FIFO */
 /* I.S. q tidak mungkin kosong */
 /* F.S. val = nilai elemen HEAD pd I.S., IDX_HEAD "mundur";
@@ -104,7 +104,7 @@ void displayQueue(Queue q)
 // int main(){
 
 //     Queue q1, q2;
-//     ElType val1;
+//     QueueEl val1;
 //     CreateQueue(&q1);
 //     displayQueue(q1);
 //     printf("Is Q1 empty? %u\n", isEmpty(q1));

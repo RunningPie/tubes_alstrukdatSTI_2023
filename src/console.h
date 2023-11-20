@@ -32,7 +32,7 @@ serta album yang dimiliki.
 // F.S. Program memasuki sesi
 //      Daftar penyanyi default terinisialisasi beserta album yang dimiliki
 
-void PLAYLISTCREATE();
+void PLAYLISTCREATE(ArrayDin daftarPlaylist);
 /*
 Command PLAYLISTCREATE digunakan untuk membuat playlist baru dan ditambahkan pada 
 daftar playlist pengguna. Keadaan awal playlist adalah kosong. Nama playlist dapat 

@@ -300,7 +300,7 @@ void PLAYLISTDELETE(List daftarPenyanyi, Map *penyanyiAlbum, ArrayDin daftarPlay
     }
 }
 
-void STATUS()
+void STATUS(Desc currentL, Queue QueueL)
 {
     Desc tempL = currentL;
     if(IsEmptyDesc(currentL))
@@ -309,7 +309,7 @@ void STATUS()
     }
     else 
     {
-        printf("Now Playing :\n%s - %s - %s\n\n", tempL.Penyanyi.TabWord, tempL.Lagu.TabWord, tempL.Album.TabWord);
+        printf("Now Playing :\n%s - %s - %s\n", tempL.Penyanyi.TabWord, tempL.Lagu.TabWord, tempL.Album.TabWord);
     }
 
     int index=1;
