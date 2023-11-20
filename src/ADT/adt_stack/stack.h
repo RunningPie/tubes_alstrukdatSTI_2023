@@ -7,7 +7,7 @@
 
 #include "../boolean.h"
 #include "../adt_mesinkata/mesinkata.h"
-#include "../adt_queue/queue.h"
+#include "../adt_song/song.h"
 
 #define Undef -1
 #define MaxEl 100
