@@ -57,7 +57,87 @@ Penyimpanan dilakukan pada folder tertentu, misal folder save.
 // I.S. Sembarang dalam sesi
 // F.S. Terbentuk suatu file bernama <filename> di folder save.
 
+// BAGIAN SONG: (1) songNext, (2) songPrev
+void songNext (Queue *queueSong, Stack *previousSong);
+/*
+Saat procedure songNext dijalankan, program WayangWave akan melakukan:
+1. Terdapat kumpulan song yang sudah diantrikan pada queueSong yang bertipe Queue
+2. Setiap Song yang di-Queue, diantrikan dari belakang (Tail)
+3. Setiap Next Song, akan menjalankan Song dengan antrian terdepan (Head)
+Contoh: Kondisi Queue Tidak Kosong
+
+Memutar lagu selanjutnya 
+“Hype Boy” oleh “New Jeans”
+
+Contoh: Kondisi Queue Kosong
+
+'Queue kosong, memutar kembali lagu
+“Mirror” oleh “Yasuda Rei”'
+
+I.S.: queueSong berisi Song yang telah di-Queue
+F.S.: Head dari queueSong dimainkan, Heed berganti ke lagu yang diantrikan selanjutnya pada queueSong
+*/
+
+void songPrev (Queue *queueSong, Stack *previousSong);
+/*
+Saat procedure songPrev dijalankan, program WayangWave akan melakukan:
+1. Terdapat kumpulan song yang telah dimainkan dan dimasukkan ke previousSong yang bertipe Stack
+2. Setiap Song yang selesai dimainkan, akan disimpan dalam Stack previousSong dan akan menjadi Top dari Stack tersebut
+3. Setiap Song Prev, akan menjalankan Song dengan posisi Top dari Stack previousSong
+
+Contoh: Kondisi Riwayat Tidak Kosong
+
+Memutar lagu sebelumnya 
+“Hype Boy” oleh “New Jeans”
+
+Contoh: Kondisi Riwaya Kosong
+Queue kosong, memutar kembali lagu
+“Mirror” oleh “Yasuda Rei”
+*/
+
+// BAGIAN QUEUE: (1) Queue Song, (2) Queue Playlist, (3) Queue Swap, (4) Queue Remove, (5) Queue Clear
+
+void enqueueSong (Queue *queueSong, Song val);
+/*
+
+
+
+
+
+
+*/
+// void enqueuePlaylist(Queue *queueSong, Playlist playlist);
+
+void queueSwap(Queue *queueSong, int x, int y);
+/*
+
+
+
+
+
+
+*/
+void queueRemove(Queue *queueSong, int id);
+/*
+
+
+
+
+
+
+*/
+void queueClear(Queue *queue);
+/*
+
+
+
+
+
+
+*/
+
+
 void QUIT();
 // QUIT merupakan command yang digunakan untuk keluar dari sesi aplikasi WayangWave.
 // I.S. Sembarang dalam sesi
-// F.S. Keluar dari sesi. Jika data sesi disimpan maka terbentuk suatu file bernama <filename> di folder save.
+// F.S. Keluar dari sesi. Jika data sesi disimpan maka terbentuk suatu file bernama <filename> di folder save.rty

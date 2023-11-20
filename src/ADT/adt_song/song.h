@@ -1,11 +1,12 @@
 #ifndef SONG_CMD
 #define SONG_CMD
 
-#include "../ADT/adt_mesinkata/mesinkata.h"
-#include "../ADT/boolean.h"
+#include "../adt_mesinkata/mesinkata.h"
+#include "../boolean.h"
 
 /* Definisi elemen dan address */
 typedef Word ElType;
+
 typedef int IDSong;
 
 // STRUCT SONG (1)
@@ -16,12 +17,8 @@ typedef struct{
     int IDSong;
 } Song;
 
-// Song song
-// song.titleSong = ...
-// ...
-// Print(song.titleSong)
-// Print(song.album)
-// Print(song.singer)
-// Print(song.IDSong)
+Song createSong(Word titleSong, Word album, Word singer);
+
+void displaySongInfo(Song song);
 
 #endif

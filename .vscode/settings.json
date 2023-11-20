@@ -5,6 +5,8 @@
         "stack.h": "c",
         "song.h": "c",
         "stdio.h": "c",
-        "mesinkata.h": "c"
+        "mesinkata.h": "c",
+        "arraydin.h": "c",
+        "boolean.h": "c"
     }
 }
