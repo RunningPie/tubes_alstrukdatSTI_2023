@@ -32,70 +32,12 @@ serta album yang dimiliki.
 // F.S. Program memasuki sesi
 //      Daftar penyanyi default terinisialisasi beserta album yang dimiliki
 
-void PLAYLISTCREATE();
-/*
-Command PLAYLISTCREATE digunakan untuk membuat playlist baru dan ditambahkan pada 
-daftar playlist pengguna. Keadaan awal playlist adalah kosong. Nama playlist dapat 
-sama dengan playlist yang sudah ada
-*/
-// I.S. Playlist belum ada
-// F.S. Playlist berhasil dibuat jika input pengguna valid
-
-void PLAYLISTADDSONG(List daftarPenyanyi,ArrayDin daftarPlaylist, Map *penyanyiAlbum, Map *albumLagu);
-/*
-Command PLAYLISTADDSONG digunakan untuk menambahkan lagu pada suatu playlist yang telah 
-ada sebelumnya pada daftar playlist pengguna.Pada defaultnya,command ini hanya dapat
-menambahkan satu spesifik lagu kepada suatu playlist. Apabila lagu yang ingin ditambahkan sudah ada didalam 
-suatu playlist pengguna, maka lagu-lagu yang ditambahkan adalah yang belum ada di playlist pengguna.
-*/
-// I.S. Lagu di playlist terdefinisi
-// F.S. Lagu baru berhasil ditambahkan ke playlist jika input user valid
-
-void PLAYLISTADDALBUM(List daftarPenyanyi, Map *penyanyiAlbum, ArrayDin daftarPlaylist, Map *albumLagu);
-/*
-Command PLAYLISTADDALBUM digunakan untuk menambahkan album pada suatu playlist yang telah 
-ada sebelumnya pada daftar playlist pengguna.Pada defaultnya,command ini hanya dapat
-menambahkan semua lagu yang ada pada album kepada suatu playlist. 
-*/
-// I.S. Lagu di playlist terdefinisi
-// F.S. Album baru berhasil ditambahkan ke playlist jika input user valid
-
-void PLAYLISTSWAP(List daftarPenyanyi, Map *penyanyiAlbum, ArrayDin daftarPlaylist, Map *albumLagu);
-/*
-Command PLAYLISTSWAP digunakan untuk menukar lagu pada urutan ke x dan juga urutan ke y 
-di playlist dengan urutan ke id
-*/
-// I.S. Lagu di playlist terdefinisi
-// F.S. Lagu dengan urutan x dan urutan y berhasil ditukar jika input user valid
-
-void PLAYLISTREMOVE(List daftarPenyanyi, Map *penyanyiAlbum, ArrayDin daftarPlaylist, Map *albumLagu);
-/*
-Command PLAYLISTREMOVE digunakan untuk menghapus lagu dengan urutan n pada playlist
-dengan index id.
-*/
-// I.S. Lagu di playlist terdefinisi
-// F.S. Lagu pada urutan n berhasil dihapus jika input user valid
-
-void PLAYLISTDELETE(List daftarPenyanyi, Map *penyanyiAlbum, ArrayDin daftarPlaylist, Map *albumLagu);
-/*
-Command PLAYLISTDELETE digunakan untuk melakukan penghapusan suatu existing playlist 
-dalam daftar playlist pengguna.Tampilkan pesan error apabila masukkan pengguna
-tidak valid pada setiap permintaan masukkan.
-*/
-// I.S. Lagu di playlist terdefinisi
-// F.S. Playlist berhasil dihapus jika input user valid
-
-void STATUS();
-/*
-STATUS merupakan command yang digunakan untuk menampilkan lagu yang sedang dimainkan 
-beserta Queue song yang ada dan dari playlist mana lagu itu diputar
-*/
-// I.S.
-// F.S.
-
 void LISTDEFAULT(List daftarPenyanyi, Map *penyanyiAlbum, Map *albumLagu);
 /*
-LISTPLAYLIST merupakan command yang digunakan untuk menampilkan daftar playlist yang tersedia
+LISTDEFAUTL  digunakan untuk 
+melihat list penyanyi yang ada. S
+elanjutnya dapat memilih untuk melihat album dari penyanyi yang dipilih. Kemudian melihat lagu yang ada dari album yang dipilih. 
+Terdapat konfirmasi apakah ingin melihat album/lagu.
 */
 // I.S. 
 // F.S. 
