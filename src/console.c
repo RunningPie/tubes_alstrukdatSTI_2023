@@ -179,6 +179,48 @@ void PLAYSONG(List daftarPenyanyi, Map *penyanyiAlbum, Map *albumLagu, Queue *Qu
     }
 }
 
+void PLAYPLAYLIST(ArrayDin daftarPlaylist, Map *playlistSongs, Queue *QueueL, Stack *historyL) {
+    printf("Daftar playlist yang kamu miliki:\n");
+
+    if (ArrayDinIsEmpty(daftarPlaylist)) {
+        printf("Kamu tidak memiliki playlist.\n");
+    } else {
+        PrintArrayDin(daftarPlaylist);
+
+        printf("Masukkan ID Playlist yang dipilih : ");
+        STARTWORD();
+        printf("\n");
+
+        int idPlaylist = WordToInt(currentWord) - 1;
+        if (IsIdxValidArr(daftarPlaylist, idPlaylist)) {
+            // Memutar lagu-lagu dalam playlist
+            for (int i = 0; i < ArrayDinNbElmt(MapValue(*playlistSongs, daftarPlaylist.A[idPlaylist])); i++) {
+                Desc currentDesc;
+                SalinKata(MapValue(*playlistSongs, daftarPlaylist.A[idPlaylist]).Elements[i], &(currentDesc.Penyanyi));
+                SalinKata(MapValue(*playlistSongs, daftarPlaylist.A[idPlaylist]).Elements[i+1], &(currentDesc.Album));
+                SalinKata(MapValue(*playlistSongs, daftarPlaylist.A[idPlaylist]).Elements[i+2], &(currentDesc.Lagu));
+
+                // Memasukkan lagu ke queue
+                enqueue(QueueL, currentDesc);
+
+                // Menambahkan lagu ke dalam history (stack)
+                push(historyL, currentDesc);
+
+                printf("Memutar lagu “");
+                DisplayKata(currentDesc.Lagu);
+                printf("” oleh “");
+                DisplayKata(currentDesc.Penyanyi);
+                printf("”.\n");
+
+                // Skip dua indeks berikutnya karena lagu sudah diambil
+                i += 2;
+            }
+        } else {
+            printf("ID Playlist %d tidak ada dalam daftar. Silakan coba lagi.\n", idPlaylist + 1);
+        }
+    }
+}
+
 void LOAD(String filename)
 /*
 LOAD merupakan salah satu command yang dimasukkan pertama kali dalam WayangWave.
