@@ -1,6 +1,12 @@
 {
     "files.associations": {
         "*.rmd": "markdown",
-        "queue.h": "c"
+        "queue.h": "c",
+        "stack.h": "c",
+        "song.h": "c",
+        "stdio.h": "c",
+        "mesinkata.h": "c",
+        "arraydin.h": "c",
+        "boolean.h": "c"
     }
 }

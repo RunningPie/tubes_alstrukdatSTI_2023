@@ -43,3 +43,15 @@ void PopStack (Stack * S, infotypeS* X)
     *X = InfoTop(*S);
     Top(*S) -= 1;
 }
+
+int LengthStack(Stack S) {
+    int length = 0;
+    address idx = Top(S);
+
+    while (idx != Undef) {
+        length++;
+        idx--;
+    }
+
+    return length;
+}

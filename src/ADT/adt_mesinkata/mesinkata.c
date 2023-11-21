@@ -172,5 +172,5 @@ void DisplayKata(Word Kata) {
     for (int i = 0; i < Kata.Length; i++) {
         printf("%c", Kata.TabWord[i]);
     }
-    printf("\n");
+    // printf("\n");
 }
