@@ -32,6 +32,39 @@ serta album yang dimiliki.
 // F.S. Program memasuki sesi
 //      Daftar penyanyi default terinisialisasi beserta album yang dimiliki
 
+void LISTDEFAULT(List daftarPenyanyi, Map *penyanyiAlbum, Map *albumLagu);
+/*
+LISTDEFAUTL  digunakan untuk 
+melihat list penyanyi yang ada. S
+elanjutnya dapat memilih untuk melihat album dari penyanyi yang dipilih. Kemudian melihat lagu yang ada dari album yang dipilih. 
+Terdapat konfirmasi apakah ingin melihat album/lagu.
+*/
+// I.S. Daftar penyanyi, daftar album, daftar lagu dalam album sudah terdefinisi
+// F.S. Menampilkan daftar penyanyi, daftar album, daftar lagu dalam album ke layar
+
+void LISTPLAYLIST(ArrayDin daftarPlaylist);
+/*
+LISTPLAYLIST merupakan command yang digunakan untuk menampilkan daftar playlist yang tersedia
+*/
+// I.S. Daftar playlist terdefinisi
+// F.S. Menampilkan daftar playlist ke layar
+
+void PLAYSONG(List daftarPenyanyi, Map *penyanyiAlbum, Map *albumLagu, Queue *QueueL, Stack *historyL);
+/*
+PLAYSONG merupakan command yang digunakan untuk memainkan lagu berdasarkan masukan nama penyanyi, nama album, dan id lagu.
+*/
+// I.S. Daftar penyanyi, daftar album, daftar lagu dalam album sudah terdefinisi
+// F.S. queue dan riwayat lagu akan menjadi kosong.
+
+void PLAYPLAYLIST(ArrayDin daftarPlaylist, Queue *QueueL, Stack *historyL);
+/*
+PLAYPLAYLIST merupakan command yang digunakan untuk memainkan lagu berdasarkan id playlist
+
+// I.S. Daftar penyanyi, daftar album, daftar lagu dalam album sudah terdefinisi
+// F.S. current song akan menjadi lagu pada urutan pertama playlist dan queue akan berisi semua lagu yang ada dalam playlist 
+yang akan dimainkan dan isi riwayat lagu sama dengan queue, tetapi dengan urutan yang di-reverse.
+*/
+
 void PLAYLISTCREATE();
 
 void PLAYLISTADDSONG(List daftarPenyanyi,ArrayDin daftarPlaylist, Map *penyanyiAlbum, Map *albumLagu);
