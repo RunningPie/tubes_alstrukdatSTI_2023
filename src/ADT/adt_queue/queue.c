@@ -39,7 +39,7 @@ int Qlength(Queue q){
 /* Mengirimkan banyaknya elemen queue. Mengirimkan 0 jika q kosong. */
 
 /* *** Primitif Add/Delete *** */
-void enqueue(Queue *q, ElType val)
+void enqueue(Queue *q, Song val)
 /* Proses: Menambahkan val pada q dengan aturan FIFO */
 /* I.S. q mungkin kosong, tabel penampung elemen q TIDAK penuh */
 /* F.S. val menjadi TAIL yang baru, IDX_TAIL "mundur".
@@ -63,7 +63,7 @@ void enqueue(Queue *q, ElType val)
     TAIL(*q) = val;
 }
 
-void dequeue(Queue *q, ElType *val)
+void dequeue(Queue *q, Song *val)
 /* Proses: Menghapus val pada q dengan aturan FIFO */
 /* I.S. q tidak mungkin kosong */
 /* F.S. val = nilai elemen HEAD pd I.S., IDX_HEAD "mundur";
@@ -93,31 +93,17 @@ void displayQueue(Queue q)
     if (QisEmpty(q)){
         printf("[]\n");
     } else {
-        printf("[");
-        for (i = IDX_HEAD(q); i < (IDX_HEAD(q)+Qlength(q))-1; i++){
-            printf("%d,", q.buffer[i]);
+        for (i = IDX_HEAD(q); i < (IDX_HEAD(q)+Qlength(q))-1; i++) {
+            displaySongInfo(q.buffer[i]);
+            printf("\n");
         }
-        printf("%d]\n", q.buffer[i]);
     }
 }
 
-// int main(){
-
-//     Queue q1, q2;
-//     ElType val1;
-//     CreateQueue(&q1);
-//     displayQueue(q1);
-//     printf("Is Q1 empty? %u\n", isEmpty(q1));
-//     enqueue(&q1, 1);
-//     enqueue(&q1, 2);
-//     displayQueue(q1);
-//     printf("Is Q1 full? %u\n", isFull(q1));
-//     dequeue(&q1, &val1);
-//     displayQueue(q1);
-//     dequeue(&q1, &val1);
-//     printf("Length of Q1: %d", length(q1));
-//     displayQueue(q1);
-//     printf("%d\n", val1);
-
-//     return 0;
-// }
+void enqueueFirst(Queue *q, Song val){
+    int i;
+    for (i = IDX_TAIL(*q); i > IDX_HEAD(*q); i--) {
+        (*q).buffer[i] = (*q).buffer[i-1];
+    }
+    HEAD(*q) = val;
+}

@@ -241,6 +241,233 @@ Penyimpanan dilakukan pada folder tertentu, misal folder save.
 
 }
 
+// BAGIAN SONG: (1) songNext, (2) songPrev
+
+void songNext (Queue *queueSong, Stack *previousSong, Song *onPlaySong){
+/*
+Saat procedure songNext dijalankan, program WayangWave akan melakukan:
+1. Terdapat kumpulan song yang sudah diantrikan pada queueSong yang bertipe Queue
+2. Setiap Song yang di-Queue, diantrikan dari belakang (Tail)
+3. Setiap Next Song, akan menjalankan Song dengan antrian terdepan (Head)
+Contoh: Kondisi Queue Tidak Kosong
+
+Memutar lagu selanjutnya 
+“Hype Boy” oleh “New Jeans”
+
+Contoh: Kondisi Queue Kosong
+
+'Queue kosong, memutar kembali lagu
+“Mirror” oleh “Yasuda Rei”'
+
+I.S.: queueSong berisi Song yang telah di-Queue
+F.S.: Head dari queueSong dimainkan, Heed berganti ke lagu yang diantrikan selanjutnya pada queueSong
+*/
+    if ((Qlength(*queueSong)) >= 1){ // Isi queueSong 1 atau lebih lagu yang telah di-Queue
+        dequeue(queueSong, onPlaySong);
+        PushStack(&previousSong, *onPlaySong);
+        
+        printf("\nMemutar lagu selanjutnya\n");
+        printf("\"");
+        DisplayKata(onPlaySong->titleSong);
+        printf("\" oleh \"");
+        DisplayKata(onPlaySong->singer);
+        printf("\"\n");
+    }
+    else {
+        *onPlaySong = InfoTop(*previousSong);
+        printf("\nQueue kosong, memutar kembali lagu\n");
+        printf("\"");
+        DisplayKata(onPlaySong->titleSong);
+        printf("\" oleh \"");
+        DisplayKata(onPlaySong->singer);
+        printf("\"\n");
+    }
+}
+
+void songPrev (Queue *queueSong, Stack *previousSong, Song *onPlaySong){
+/*
+Saat procedure songPrev dijalankan, program WayangWave akan melakukan:
+1. Terdapat kumpulan song yang telah dimainkan dan dimasukkan ke previousSong yang bertipe Stack
+2. Setiap Song yang selesai dimainkan, akan disimpan dalam Stack previousSong dan akan menjadi Top dari Stack tersebut
+3. Setiap Song Prev, akan menjalankan Song dengan posisi Top dari Stack previousSong
+
+Contoh: Kondisi Riwayat Tidak Kosong
+
+Memutar lagu sebelumnya 
+“Hype Boy” oleh “New Jeans”
+
+Contoh: Kondisi Riwayat Kosong
+Riwayat kosong, memutar kembali lagu
+“Mirror” oleh “Yasuda Rei”
+*/
+    Song tempSong;
+    if (IsEmptyStack(*previousSong)){
+        printf("\nRiwayat lagu kosong, memutar kembali lagu\n");
+        printf("\"");
+        DisplayKata(onPlaySong->titleSong);
+        printf("\" oleh \"");
+        DisplayKata(onPlaySong->singer);
+        printf("\"\n");
+    }
+    else{
+        if(QisFull(*queueSong)){
+            printf("\nDaftar lagu pada Queue sudah penuh!\n");
+        }
+        else{
+            PopStack(previousSong, &tempSong); // Menyimpan Song Previous di posisi temporary
+            enqueueFirst(&queueSong, *onPlaySong); // Menyimpan Song yang sedang dimainkan menjadi HEAD DARI QUEUE SONG
+            // Mengubah tempSong sebagai onPlaySong
+            *onPlaySong = tempSong;
+
+            printf("\nMemutar lagu sebelumnya\n");
+            printf("\"");
+            DisplayKata(onPlaySong->titleSong);
+            printf("\" oleh \"");
+            DisplayKata(onPlaySong->singer);
+            printf("\"\n");
+
+        }
+    }
+}
+
+// BAGIAN QUEUE: (1) Queue Song, (2) Queue Playlist, (3) Queue Swap, (4) Queue Remove, (5) Queue Clear
+
+void enqueueSong(List daftarPenyanyi, Map *penyanyiAlbum, Map *albumLagu, Queue *queueSong) {
+    printf("Daftar Penyanyi :\n");
+    DisplayList(daftarPenyanyi);
+    printf("\n");
+
+    printf("Masukkan Nama Penyanyi yang dipilih : ");
+    STARTWORD();
+    printf("\n");
+    Word penyanyi = currentWord;
+
+    if (ListSearch(daftarPenyanyi,penyanyi))
+    {
+        printf("Daftar Album oleh ");DisplayKata(penyanyi);printf(" :\n");
+        DisplayVMap(*penyanyiAlbum,penyanyi);printf("\n");
+
+        printf("Masukkan Nama Album yang dipilih : ");
+        STARTWORD();
+        printf("\n");
+        Word album = currentWord;
+        if(IsSetMember(MapValue(*penyanyiAlbum, penyanyi), album))
+        {
+            printf("Daftar Lagu Album ");DisplayKata(album);printf(" oleh ");DisplayKata(penyanyi);printf(" :\n");
+            DisplayVMap(*penyanyiAlbum, album);printf("\n");
+
+            printf("Masukkan ID Lagu yang dipilih : ");
+            STARTWORD();
+            printf("\n");
+
+            int idLagu =WordToInt(currentWord)-1;
+            if (IsIdxValidSet(MapValue(*albumLagu, album), idLagu))
+            {
+                Word namaLagu = MapValue(*albumLagu, album).Elements[idLagu];
+                Song lagu = createSong(namaLagu, album, penyanyi);
+                enqueue(queueSong, lagu);
+
+                printf("Berhasil menambahkan lagu \"");
+                DisplayKata(namaLagu);
+                printf("\" oleh \"");
+                DisplayKata(penyanyi);
+                printf("\" ke queue.\n");
+            }
+            else 
+            {
+                printf("ID Lagu %d tidak ada dalam daftar. Silakan coba lagi.\n", idLagu + 1);
+            }
+        }
+        else
+        {
+            printf("Album ");DisplayKata(album);printf(" tidak ada dalam daftar. Silakan coba lagi.\n");
+        }
+    }
+    else
+    {
+        printf("Penyanyi ");DisplayKata(penyanyi);printf(" tidak ada dalam daftar. Silakan coba lagi.\n");
+    }
+}
+
+void queuePlaylist(Queue *queueSong, ArrayDin daftarPlaylist) {
+
+    if (QisFull(*queueSong)) {
+        printf("\nQueue penuh! Lagu dapat di-queue ketika tidak melalui maksimal queue.\n");
+        return;
+    }
+    
+    // for (int i = 0; i < LengthArrDin(daftarPlaylist); i++) {
+    //     enqueue(daftarPlaylist.A[i]);
+    // }
+
+}
+
+void queueSwap(Queue *queueSong, int x, int y) {
+    // Cek  if x or y is out of bounds
+    if (x + IDX_HEAD(*queueSong) > IDX_TAIL(*queueSong) || y + IDX_HEAD(*queueSong) > IDX_TAIL(*queueSong) || x < 0 || y < 0) {
+        if  (x + IDX_HEAD(*queueSong) > IDX_TAIL(*queueSong) || x < 0){
+            printf("\nLagu dengan urutan ke %d tidak terdapat dalam queue!\n", x);
+        }
+        else{
+            printf("\nLagu dengan urutan ke %d tidak terdapat dalam queue!\n", y);
+        }
+        return;
+    }
+    // Begin the swap
+    Song temp;
+    temp = queueSong->buffer[x];
+    queueSong->buffer[x] = queueSong->buffer[y];
+    queueSong->buffer[y] = temp;
+
+    printf("\nLagu ");
+    printf("\"");
+    DisplayKata(queueSong->buffer[x].titleSong);
+    printf("\" ");
+    printf("berhasil ditukar dengan ");
+    printf("\" ");
+    DisplayKata(queueSong->buffer[y].titleSong);
+    printf("\"\n");
+    return;
+}
+
+void queueRemove(Queue *queueSong, int id) {
+
+    if (id > Qlength(*queueSong) || id < 0) {
+        printf("\nLagu dengan urutan ke %d tidak ada\n", id);
+    }
+
+    int ctr = 1;
+    for (int i = IDX_HEAD(*queueSong); i <= IDX_TAIL(*queueSong); i++) {
+        if (ctr == id) {
+            Song foundSong = queueSong->buffer[i];
+            for (int j = i; j < IDX_TAIL(*queueSong); j++) {
+                queueSong->buffer[j] = queueSong->buffer[j+1];
+            }
+
+            queueSong->idxTail = queueSong->idxTail - 1;
+
+            printf("\nLagu ");
+            printf("\"");
+            DisplayKata(queueSong->buffer[id].titleSong);
+            printf("\" ");
+            printf("oleh ");
+            printf("\" ");
+            DisplayKata(queueSong->buffer[id].singer);
+            printf("\" telah dihapus dari queue!\n");
+            return;
+        }
+        ctr++;
+    }
+}
+
+void queueClear(Queue *queueSong) {
+    Song temp;
+    while (!QisEmpty(*queueSong)){
+        dequeue(queueSong, &temp);
+    }
+    printf("\nQueue berhasil dikosongkan.\n");
+}
+
 void QUIT()
 // QUIT merupakan command yang digunakan untuk keluar dari sesi aplikasi WayangWave.
 // I.S. Sembarang dalam sesi
