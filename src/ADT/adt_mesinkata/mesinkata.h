@@ -94,7 +94,7 @@ void SalinKata(Word Kata1, Word* Kata2 );
 void DisplayKata(Word Kata);
 /* Menuliskan word kata */
 
-void CreateKata(Word *Kata);
-// Membuat kata kosong
+String WordToString(Word Kata);
+// Mengubah Word menjadi bentukan string
 
 #endif

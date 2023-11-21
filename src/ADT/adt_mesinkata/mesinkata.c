@@ -211,3 +211,14 @@ void DisplayKata(Word Kata) {
     }
     printf("\n");
 }
+
+String WordToString(Word Kata) {
+    String str;
+    str.length = Kata.Length;
+
+    int i;
+    for (i=0; i<Kata.Length; i++){
+        str.content[i] = Kata.TabWord[i];
+    }
+    return str;
+}

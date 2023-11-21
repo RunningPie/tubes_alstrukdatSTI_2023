@@ -1,13 +1,13 @@
 #include "help.h"
 
-int help1(){
+void help1(){
 // Fungsi mengeluarkan COMMAND yang dapat diakses sebelum memasuki sesi
 
 printf("=====[ Menu Help WayangWave ]=====");
 printf("1. START -> Untuk masuk sesi baru");
 printf("2. LOAD -> Untuk memulai sesi berdasarkan file konfigurasi");
 }
-int help2(){
+void help2(){
 // Fungsi mengeluarkan COMMAND yang dapat diakses setelah memasuki sesi
 
 printf("=====[ Menu Help WayangWave ]=====");
