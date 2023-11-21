@@ -20,7 +20,10 @@ extern Song SongKosong;
 
 typedef Song LinkedListEl;
 typedef struct node* Address;
-typedef struct node { LinkedListEl info; Address next; } Node;
+typedef struct node { 
+    LinkedListEl info; 
+    Address next; 
+} Node;
 
 Address newNode(LinkedListEl val);
 

@@ -24,7 +24,7 @@ void START()
        // } else {
        //        pita = stdin;
        // }
-       printf(">> ");
+       printf("\n>> ");
        pita = stdin;
        
        ADV();

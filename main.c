@@ -9,6 +9,7 @@ int main() {
     Queue queue; CreateQueue(&queue);
     Stack history; CreateEmptyStack(&history);
     Map penyanyiAlbum, albumLagu; MapCreateEmpty(&penyanyiAlbum); MapCreateEmpty(&albumLagu);
+    Song currentSong;
 
     while(end) {
         STARTSENTENCE();
@@ -44,14 +45,14 @@ int main() {
         } else if (isWordEq(SenToWord(currentWord, 0), ToKata("PLAY")) && isWordEq(SenToWord(currentWord, 1), ToKata("SONG"))) {
             if (state) {
                 // PLAY SONG
-                PLAYSONG(daftarPenyanyi, &penyanyiAlbum, &albumLagu, &queue, &history);
+                PLAYSONG(daftarPenyanyi, &penyanyiAlbum, &albumLagu, &queue, &history, &currentSong);
             } else {
                 InvalidSession();
             }
         } else if (isWordEq(SenToWord(currentWord, 0), ToKata("PLAY")) && isWordEq(SenToWord(currentWord, 1), ToKata("PLAYLIST"))) {
             if (state) {
                 // PLAY PLAYLIST
-                PLAYPLAYLIST(daftarPlaylist, &albumLagu, &queue, &history);
+                PLAYPLAYLIST(daftarPlaylist, &albumLagu, &queue, &history, &currentSong);
             } else {
                 InvalidSession();
             }
@@ -93,14 +94,14 @@ int main() {
         } else if (isWordEq(SenToWord(currentWord, 0), ToKata("SONG")) && isWordEq(SenToWord(currentWord, 1), ToKata("NEXT"))) {
             if (state) {
                 // SONG NEXT
-                songNext(&queue, &history);
+                songNext(&queue, &history, &currentSong);
             } else {
                 InvalidSession();
             }
         } else if (isWordEq(SenToWord(currentWord, 0), ToKata("SONG")) && isWordEq(SenToWord(currentWord, 1), ToKata("PREVIOUS"))) {
             if (state) {
                 // SONG PREVIOUS
-                songPrev(&queue, &history);
+                songPrev(&queue, &history, &currentSong);
             } else {
                 InvalidSession();
             }

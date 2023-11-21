@@ -11,8 +11,9 @@
 #include "../src/ADT/adt_queue/queue.h"                    // ADT queue v2
 #include "../src/ADT/adt_stack/stack.h"                    // ADT stack dengan array
 #include "../src/ADT/adt_list/list.h"                      // ADT list statis
-#include "../src/ADT/adt_linkedlist/linkedlist_v2.h"
+#include "../src/ADT/adt_linkedlist/linkedlist_v2.h"       // ADT linked list
 #include "../src/ADT/adt_lagu/lagu.h"                      // ADT lagu
+#include "../src/ADT/adt_help/help.h"                      // ADT help
 
 #include "../src/ADT/struct.h"
 #include "../src/ADT/boolean.h"
@@ -50,14 +51,14 @@ LISTPLAYLIST merupakan command yang digunakan untuk menampilkan daftar playlist 
 // I.S. Daftar playlist terdefinisi
 // F.S. Menampilkan daftar playlist ke layar
 
-void PLAYSONG(List daftarPenyanyi, Map *penyanyiAlbum, Map *albumLagu, Queue *QueueL, Stack *historyL);
+void PLAYSONG(List daftarPenyanyi, Map *penyanyiAlbum, Map *albumLagu, Queue *QueueL, Stack *historyL, Song *currentSong);
 /*
 PLAYSONG merupakan command yang digunakan untuk memainkan lagu berdasarkan masukan nama penyanyi, nama album, dan id lagu.
 */
 // I.S. Daftar penyanyi, daftar album, daftar lagu dalam album sudah terdefinisi
 // F.S. queue dan riwayat lagu akan menjadi kosong.
 
-void PLAYPLAYLIST(ArrayDin daftarPlaylist, Queue *QueueL, Stack *historyL);
+void PLAYPLAYLIST(ArrayDin daftarPlaylist, Map *playlistSongs, Queue *QueueL, Stack *historyL, Song *onPlaySong);
 /*
 PLAYPLAYLIST merupakan command yang digunakan untuk memainkan lagu berdasarkan id playlist
 
@@ -94,7 +95,7 @@ menambahkan semua lagu yang ada pada album kepada suatu playlist.
 // I.S. Lagu di playlist terdefinisi
 // F.S. Album baru berhasil ditambahkan ke playlist jika input user valid
 
-void PLAYLISTSWAP(List daftarPenyanyi, Map *penyanyiAlbum, ArrayDin daftarPlaylist, Map *albumLagu);
+void PLAYLISTSWAP(List daftarPenyanyi, Map *penyanyiAlbum, ArrayDin daftarPlaylist, Map *albumLagu, int id, int x, int y);
 /*
 Command PLAYLISTSWAP digunakan untuk menukar lagu pada urutan ke x dan juga urutan ke y 
 di playlist dengan urutan ke id
@@ -155,7 +156,7 @@ Penyimpanan dilakukan pada folder tertentu, misal folder save.
 // F.S. Terbentuk suatu file bernama <filename> di folder save.
 
 // BAGIAN SONG: (1) songNext, (2) songPrev
-void songNext (Queue *queueSong, Stack *previousSong);
+void songNext (Queue *queueSong, Stack *previousSong, Song *onPlaySong);
 /*
 Saat procedure songNext dijalankan, program WayangWave akan melakukan:
 1. Terdapat kumpulan song yang sudah diantrikan pada queueSong yang bertipe Queue
@@ -175,7 +176,7 @@ I.S.: queueSong berisi Song yang telah di-Queue
 F.S.: Head dari queueSong dimainkan, Heed berganti ke lagu yang diantrikan selanjutnya pada queueSong
 */
 
-void songPrev (Queue *queueSong, Stack *previousSong);
+void songPrev (Queue *queueSong, Stack *previousSong, Song *onPlaySong);
 /*
 Saat procedure songPrev dijalankan, program WayangWave akan melakukan:
 1. Terdapat kumpulan song yang telah dimainkan dan dimasukkan ke previousSong yang bertipe Stack
@@ -194,14 +195,14 @@ Queue kosong, memutar kembali lagu
 
 // BAGIAN QUEUE: (1) Queue Song, (2) Queue Playlist, (3) Queue Swap, (4) Queue Remove, (5) Queue Clear
 
-void enqueueSong (Queue *queueSong, Song val);
+void enqueueSong (List daftarPenyanyi, Map *penyanyiAlbum, Map *albumLagu, Queue *queueSong);
 /*
 Proses: Procedure yang digunakan untuk menambahkan lagu ke dalam queue. Procedure ini akan menerima tiga input, pertama Nama dari Penyanyi, kedua Nama dari Album yang dipilih, dan ketiga ID Lagu yang dipilih. ID Lagu tersebut sebagai key dari lagu yang akan di queue.  
 I.S.: Queue kosong atau queue berisi lagu yang sebelumnya telah di queue
 F.S.: Queue berisi satu lagu atau queue telah ditambahkan dengan masukan lagu yang baru (Isi queue minimal satu lagu) pada posisi TAIL queue
 */
 
-// void enqueuePlaylist(Queue *queueSong, Playlist playlist);
+void queuePlaylist(Queue *queueSong, ArrayDin daftarPlaylist);
 /*
 Proses: Procedure yang digunakan untuk menambahkan seluruh lagu yang ada dalam playlist yang dimasukkan ke dalam queue. Procedure ini akan menetima satu input, yaitu ID dari playlist. 
 I.S.: Queue kosong atau queue berisi lagu yang sebelumnya telah di queue
