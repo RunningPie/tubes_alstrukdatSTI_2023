@@ -9,15 +9,6 @@
 #include "../adt_mesinkarakter/mesinkarakter.h"
 #include "../struct.h"
 
-#define NMax 50
-#define BLANK ' '
-
-typedef struct
-{
-   char TabWord[NMax]; /* container penyimpan kata, indeks yang dipakai [0..NMax-1] */
-   int Length;
-} Word;
-
 /* State Mesin Kata */
 extern boolean EndWord;
 extern Word currentWord;

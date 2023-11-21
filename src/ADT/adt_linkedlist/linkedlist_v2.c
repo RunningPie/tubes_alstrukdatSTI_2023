@@ -1,4 +1,17 @@
 #include "linkedlist_v2.h"
+// #include "node.h"
+
+Address newNode(LinkedListEl val) {
+    Address p = (Address)
+
+    malloc(sizeof(Node));
+
+    if (p!=NULL) {
+    INFO(p) = val;
+    NEXT(p) = NULL;
+    }
+    return p;
+}
 
 /* Selektor */
 #define INFO(P) (P)->info
@@ -25,7 +38,7 @@ void CreateLinkedList(LinkedList *l)
 }
 
 /****************** SEARCHING ******************/
-int indexOf(LinkedList l, ElType x)
+int indexOf(LinkedList l, LinkedListEl x)
 /* Mengembalikan indeks node list dengan nilai X, atau IDX_UNDEF jika tidak ada */
 {
     Address p;
@@ -65,7 +78,7 @@ int LinkedListLength(LinkedList l)
     return count;
 }
 
-ElType getElmt(LinkedList l, int idx)
+LinkedListEl getElmt(LinkedList l, int idx)
 /* Mengirimkan nilai elemen l pada indeks idx. */
 {
     int count=0;
@@ -83,7 +96,7 @@ ElType getElmt(LinkedList l, int idx)
     }
 }
 
-void setElmt(LinkedList *l, int idx, ElType x)
+void setElmt(LinkedList *l, LinkedListEl x, int idx)
 /* I.S. List l terdefinisi */
 /* F.S. Jika idx valid maka elemen l pada indeks ke-idx diganti nilainya menjadi val */
 {
@@ -99,7 +112,7 @@ void setElmt(LinkedList *l, int idx, ElType x)
     }
 }
 
-void LinkedListInsertFirst(LinkedList *l, ElType x)
+void LinkedListInsertFirst(LinkedList *l, LinkedListEl x)
 /* I.S. List l terdefinisi */
 /* F.S. Menambahkan elemen x sebagai elemen pertama List l */
 {
@@ -114,7 +127,7 @@ void LinkedListInsertFirst(LinkedList *l, ElType x)
     }
 }
 
-void LinkedListInsertLast(LinkedList *l, ElType x)
+void LinkedListInsertLast(LinkedList *l, LinkedListEl x)
 /* I.S. List l terdefinisi */
 /* F.S. x ditambahkan sebagai elemen terakhir l yang baru, */
 /* yaitu menjadi elemen yang ditunjuk oleh LAST(L) */
@@ -129,7 +142,7 @@ void LinkedListInsertLast(LinkedList *l, ElType x)
     }
 }
 
-void LinkedListDeleteFirst(LinkedList *l, ElType *x)
+void LinkedListDeleteFirst(LinkedList *l, LinkedListEl *x)
 /* I.S. List l tidak kosong */
 /* F.S. x adalah nilai elemen pertama list l sebelum penghapusan */
 /* Elemen list berkurang satu (mungkin menjadi kosong) */
@@ -144,7 +157,7 @@ void LinkedListDeleteFirst(LinkedList *l, ElType *x)
     }
 }
 
-void LinkedListDeleteAt(LinkedList *l, int idx, ElType *x)
+void LinkedListDeleteAt(LinkedList *l, LinkedListEl *x, int idx)
 /* I.S. l terdefinisi tidak kosong */
 /* F.S. x diset dengan elemen l pada indeks ke-idx.
         Elemen l pada indeks ke-idx dihapus dari l. */
@@ -170,7 +183,7 @@ void LinkedListDeleteAt(LinkedList *l, int idx, ElType *x)
     }
 }
 
-void LinkedListDeleteLast(LinkedList *l, ElType *x)
+void LinkedListDeleteLast(LinkedList *l, LinkedListEl *x)
 /* I.S. List l tidak kosong */
 /* F.S. x adalah terakhir pada list (yang ditunjuk loleh LAST(*l) sebelum penghapusan */
 /* Elemen list berkurang satu (mungkin menjadi kosong) */
@@ -189,5 +202,48 @@ void LinkedListDeleteLast(LinkedList *l, ElType *x)
         LAST(*l) = NULL;
     }
     free(p);
+}
 
+void LinkedListInsertAt(LinkedList *l, LinkedListEl x, int i)
+{
+    Address p;
+    p=newNode(x);
+    if(p!=null)
+    {
+        if(i==0)
+        {
+            NEXT(P)=FIRST(*l);
+            FIRST(*l)=p;
+        }
+        else
+        {
+            int ctr=0;
+            Address loc = FIRST(*l);
+            while (ctr<i-1)
+            {
+                ctr++;
+                loc=NEXT(loc);
+            }
+            NEXT(p)=NEXT(loc);
+            NEXT(loc)=p;
+        }
+    }
+}
+
+void GetLinkedList(LinkedList *l,LinkedListEl *x,int i)
+{
+    int idx;
+    Address p;
+    idx=0;
+    p=FIRST(*s);
+
+    while (p!=NIL && idx !=i)
+    {
+        idx++;
+        p=NEXT(p);
+    }
+    if(i==idx)
+    {
+        InsertWord(info(p),x);
+    }
 }

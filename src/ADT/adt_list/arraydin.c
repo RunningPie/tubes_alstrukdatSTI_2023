@@ -119,3 +119,7 @@ IdxType SearchArrayDin(ArrayDin array, ElType el)
     return -1;
 }
 
+boolean IsIdxValidArrDin(ArrayDin array,IdxType i)
+{
+    return i<array.Neff && i>=0;
+}

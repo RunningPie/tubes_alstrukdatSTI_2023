@@ -64,6 +64,11 @@ void SetDelete(Set *S, infotype Elmt)
     }
 }
 
+boolean IsIdxValidSet(Set s,int i)
+{
+    return (i<s.Count && i>=0);
+}
+
 boolean IsSetMember(Set S, infotype Elmt)
 /* Mengembalikan true jika Elmt adalah member dari S */
 {
