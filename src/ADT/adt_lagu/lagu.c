@@ -17,7 +17,7 @@ void PasteDesc(Desc source, Desc *dest) {
 }
 
 void DisplayDesc(Desc d) {
-    if (IsEmptyD(d)) {
+    if (IsEmptyDesc(d)) {
         printf("Kosong\n");
     }
     else {

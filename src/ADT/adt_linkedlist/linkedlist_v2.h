@@ -5,11 +5,18 @@
 
 #include "../boolean.h"
 #include "../struct.h"
+#include "../adt_mesinkata/mesinkata.h"
 #include <stdlib.h>
+
+extern Desc DescKosong;
+
+// Word kataKosong = {{'\0'}, 0};
+// // Desc descKosong;
+// // CreateDesc(&descKosong, kataKosong, kataKosong, kataKosong);
 
 #define NIL NULL
 #define IDX_UNDEF -1
-#define UNDEF_VAL -1
+#define UNDEF_VAL DescKosong;
 
 typedef Desc LinkedListEl;
 typedef struct node* Address;
@@ -75,7 +82,7 @@ void LinkedListDeleteFirst(LinkedList *l, LinkedListEl *x);
 /* Elemen list berkurang satu (mungkin menjadi kosong) */
 /* First element yg baru adalah suksesor elemen pertama yang lama */
 
-void LinkedListDeleteAt(LinkedList *l, int idx, LinkedListEl *x);
+void LinkedListDeleteAt(LinkedList *l, LinkedListEl *x, int idx);
 /* I.S. l terdefinisi tidak kosong */
 /* F.S. x diset dengan elemen l pada indeks ke-idx.
         Elemen l pada indeks ke-idx dihapus dari l. */

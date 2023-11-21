@@ -144,10 +144,12 @@ Word ToKata(char *String) {
         len++;
     }
     Kata.Length = len;
+    // printf("Panjang kata: %d\n", Kata.Length);
 
     for (int i = 0; i < Kata.Length; i++) {
         Kata.TabWord[i] = String[i];
     }
+    Kata.TabWord[len] = '\0';
     return Kata;
 }
 
@@ -173,4 +175,8 @@ void DisplayKata(Word Kata) {
         printf("%c", Kata.TabWord[i]);
     }
     printf("\n");
+}
+
+void CreateKata(Word *Kata){
+    WORDLENGTH(*Kata) = 0;
 }
