@@ -41,6 +41,7 @@ void STARTWAYANGWAVE(List *daftarPenyanyi, Map *penyanyiAlbum, Map *albumLagu) {
     }
 }
 
+<<<<<<< Updated upstream
 void LISTDEFAULT(List daftarPenyanyi, Map *penyanyiAlbum, Map *albumLagu) {
     printf("Daftar Penyanyi :\n");
     DisplayList(daftarPenyanyi);
@@ -219,6 +220,31 @@ void PLAYPLAYLIST(ArrayDin daftarPlaylist, Map *playlistSongs, Queue *QueueL, St
             printf("ID Playlist %d tidak ada dalam daftar. Silakan coba lagi.\n", idPlaylist + 1);
         }
     }
+=======
+void LOAD(List *daftarPenyanyi, Map *penyanyiAlbum, Map *albumLagu)
+/*
+LOAD merupakan salah satu command yang dimasukkan pertama kali dalam WayangWave.
+Command ini memiliki satu argumen yaitu filename yang merepresentasikan suatu
+save file yang ingin dibuka. Setelah menekan Enter, akan dibaca save file <filename>
+yang berisi list penyanyi, album, dan lagu yang bisa diputar. Lebih detailnya
+bisa dilihat pada Konfigurasi Aplikasi.
+*/
+// I.S. Sembarang
+// F.S. Jika save file bernama <filename> ditemukan
+//         Program memasuki sesi
+//         Daftar penyanyi, album, dan lagu dari save file terinisialisasi
+//         Queue yang tersimpan dalam save file akan dimuat ke queue dalam main
+//         Riwayat lagu yang tersimpan akan dimuat ke stack di main
+//         Playlist dalam save file akan dimuat menjadi playlist-playlist dalam main
+//         Jika save file bernama <filename> tidak ditemukan
+//         Tuliskan pesan kegagalan pada layar. Program tidak memasuki sesi.
+{
+    STARTWAYANGWAVE(daftarPenyanyi, penyanyiAlbum, albumLagu);
+    ADV();
+    Word currentPenyanyi = currentWord;
+    
+
+>>>>>>> Stashed changes
 }
 
 void PLAYLISTCREATE(ArrayDin daftarPlaylist)
@@ -506,26 +532,6 @@ void STATUS(Desc currentL, Queue QueueL)
     START();
 }
 
-void LOAD(String filename)
-/*
-LOAD merupakan salah satu command yang dimasukkan pertama kali dalam WayangWave.
-Command ini memiliki satu argumen yaitu filename yang merepresentasikan suatu
-save file yang ingin dibuka. Setelah menekan Enter, akan dibaca save file <filename>
-yang berisi list penyanyi, album, dan lagu yang bisa diputar. Lebih detailnya
-bisa dilihat pada Konfigurasi Aplikasi.
-*/
-// I.S. Sembarang
-// F.S. Jika save file bernama <filename> ditemukan
-//         Program memasuki sesi
-//         Daftar penyanyi, album, dan lagu dari save file terinisialisasi
-//         Queue yang tersimpan dalam save file akan dimuat ke queue dalam main
-//         Riwayat lagu yang tersimpan akan dimuat ke stack di main
-//         Playlist dalam save file akan dimuat menjadi playlist-playlist dalam main
-//         Jika save file bernama <filename> tidak ditemukan
-//         Tuliskan pesan kegagalan pada layar. Program tidak memasuki sesi.
-{
-
-}
 
 void SAVE(String filename)
 /*

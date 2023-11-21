@@ -1,5 +1,5 @@
 #include "hashmap.h"
-/* Definisi HashMap M kosong : M.Count = Nil */
+/* Definisi HashMap M kosong : M.Count = HashNil */
 /* M.Count = jumlah element HashMap */
 /* M.Elements = tempat penyimpanan element HashMap */
 
@@ -8,35 +8,35 @@
 /* *** Konstruktor/Kreator *** */
 void HashCreateEmpty(HashMap *M)
 /* I.S. Sembarang */
-/* F.S. Membuat sebuah HashMap M kosong berkapasitas MaxEl */
-/* Ciri HashMap kosong : count bernilai Nil dengan seluruh isi key & value map Undefined */
+/* F.S. Membuat sebuah HashMap M kosong berkapasitas HashMaxEl */
+/* Ciri HashMap kosong : count berHashNilai HashNil dengan seluruh isi key & value map HashUndefined */
 {
-    M->Count = Nil;
+    M->Count = HashNil;
     
     int i;
-    for (i=0; i < MaxEl; i++){
-        M->Elements[i].Key = Undefined;
-        M->Elements[i].Value = Undefined;
+    for (i=0; i < HashMaxEl; i++){
+        M->Elements[i].Key = HashUndefined;
+        M->Elements[i].Value = HashUndefined;
     }
 }
 
 /* *** Index Penyimpanan dengan modulo *** */
-address Hash(keytype K)
-/* Menghasilkan indeks penyimpanan dengan operasi modulo ke MaxEl */
+hashaddress Hash(hashkeytype K)
+/* Menghasilkan indeks penyimpanan dengan operasi modulo ke HashMaxEl */
 {
-    return (K%MaxEl);
+    return (K%HashMaxEl);
 }
 
 /* ********** Operator Dasar HashMap ********* */
-valuetype HashValue(HashMap M, keytype k)
-/* Mengembalikan nilai value dengan key k dari M */
-/* Jika tidak ada key k pada M, akan mengembalikan Undefined */
-/* Jika tidak ada key k pada M, akan mengembalikan Undefined */
+hashvaluetype HashValue(HashMap M, hashkeytype k)
+/* Mengembalikan HashNilai value dengan key k dari M */
+/* Jika tidak ada key k pada M, akan mengembalikan HashUndefined */
+/* Jika tidak ada key k pada M, akan mengembalikan HashUndefined */
 {
 
     int i = Hash(k);
     while (M.Elements[i].Key != k) {
-        if (M.Elements[i].Key == Undefined){
+        if (M.Elements[i].Key == HashUndefined){
             break;
         } else {
             i = i + 1;
@@ -45,27 +45,27 @@ valuetype HashValue(HashMap M, keytype k)
     if (M.Elements[i].Key == k) {
         return M.Elements[i].Value;
     } else {
-        return Undefined;
+        return HashUndefined;
     }
 }
 
-void HashInsert(HashMap *M, keytype k, valuetype v)
+void HashInsert(HashMap *M, hashkeytype k, hashvaluetype v)
 /* Menambahkan Elmt sebagai elemen HashMap M. */
 /* I.S. M mungkin kosong, M tidak penuh
         M mungkin sudah beranggotakan v dengan key k */
 /* F.S. v menjadi anggota dari M dengan key k. Jika k sudah ada, operasi tidak dilakukan 
         index yang digunakan untuk menyimpan v adalah hash dari k
-        gunakan open addressing linear probing dengan interval 1 jika index sudah terisi    */
+        gunakan open hashaddressing linear probing dengan interval 1 jika index sudah terisi    */
 {
     int i=Hash(k);
-    while (M->Elements[i].Key != Undefined){
+    while (M->Elements[i].Key != HashUndefined){
         if (M->Elements[i].Key == k){
             break;
         } else {
-            i = (i+1)%MaxEl;
+            i = (i+1)%HashMaxEl;
         }
     }
-    if (M->Elements[i].Key == Undefined){
+    if (M->Elements[i].Key == HashUndefined){
         M->Elements[i].Key = k;
         M->Elements[i].Value = v;
         M->Count++;

@@ -20,13 +20,13 @@ typedef struct
 } Word;
 
 // ADT SET
-#define Nil 0
-#define MaxEl 100
+#define SetNil 0
+#define SetMaxEl 100
 
 typedef Word infotype;
 typedef struct
 {
-    infotype Elements[MaxEl];
+    infotype Elements[SetMaxEl];
     int Count;
 } Set;
 
@@ -39,7 +39,28 @@ typedef struct {
     Word Penyanyi;
     Word Album;
     Word Lagu;
-} Desc;
+} Song;
+
+// HashMap
+#define HashNil 0
+#define HashMaxEl 16
+#define HashUndefined -9999
+
+typedef int hashkeytype;
+typedef int hashvaluetype;
+typedef int hashaddress;
+
+typedef struct
+{
+	hashkeytype Key;
+	hashvaluetype Value;
+} HashInfotype;
+
+typedef struct
+{
+    HashInfotype Elements[HashMaxEl];
+	hashaddress Count;
+} HashMap;
 
 
 #endif

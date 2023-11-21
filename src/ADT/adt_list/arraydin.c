@@ -89,9 +89,9 @@ void PrintArrayDin(ArrayDin array)
     printf("[");
     for(int i = 0; i < array.Neff-1; i++)
     {
-        printf("%d, ", array.A[i]);
+        printf("%s, ", array.A[i].TabWord);
     }
-    if(array.Neff) printf("%d]\n", array.A[array.Neff-1]);
+    if(array.Neff) printf("%s]\n", array.A[array.Neff-1].TabWord);
     else printf("]\n");
 }
 

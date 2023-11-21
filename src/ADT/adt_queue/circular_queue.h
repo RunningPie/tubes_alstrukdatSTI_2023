@@ -7,6 +7,8 @@
 
 #include "../boolean.h"
 #include "../adt_mesinkata/mesinkata.h"
+#include "../struct.h"
+#include "../adt_lagu/lagu.h"
 
 #define IDX_UNDEF -1
 #define IDX_MAX 99

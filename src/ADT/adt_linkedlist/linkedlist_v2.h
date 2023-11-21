@@ -8,17 +8,17 @@
 #include "../adt_mesinkata/mesinkata.h"
 #include <stdlib.h>
 
-extern Desc DescKosong;
+extern Song SongKosong;
 
 // Word kataKosong = {{'\0'}, 0};
-// // Desc descKosong;
-// // CreateDesc(&descKosong, kataKosong, kataKosong, kataKosong);
+// // Song SongKosong;
+// // CreateSong(&SongKosong, kataKosong, kataKosong, kataKosong);
 
 #define NIL NULL
 #define IDX_UNDEF -1
-#define UNDEF_VAL DescKosong;
+#define UNDEF_VAL SongKosong;
 
-typedef Desc LinkedListEl;
+typedef Song LinkedListEl;
 typedef struct node* Address;
 typedef struct node { LinkedListEl info; Address next; } Node;
 

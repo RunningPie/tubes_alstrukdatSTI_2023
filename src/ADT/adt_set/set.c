@@ -1,6 +1,6 @@
 #include "set.h"
 
-/* Definisi Set S kosong : S.Count = Nil */
+/* Definisi Set S kosong : S.Count = SetNil */
 /* S.Count = jumlah element Set */
 /* S.Elements = tempat penyimpanan element Set */
 
@@ -9,25 +9,25 @@
 /* *** Konstruktor/Kreator *** */
 void CreateEmptySet(Set *S)
 /* I.S. Sembarang */
-/* F.S. Membuat sebuah Set S kosong berkapasitas MaxEl */
-/* Ciri Set kosong : count bernilai Nil */
+/* F.S. Membuat sebuah Set S kosong berkapasitas SetMaxEl */
+/* Ciri Set kosong : count berSetNilai SetNil */
 {
-    (*S).Count = Nil;
+    (*S).Count = SetNil;
 }
 
 /* ********* Predikat Untuk test keadaan KOLEKSI ********* */
 boolean IsEmptySet(Set S)
 /* Mengirim true jika Set S kosong*/
-/* Ciri Set kosong : count bernilai Nil */
+/* Ciri Set kosong : count berSetNilai SetNil */
 {
-    return (S.Count == Nil);
+    return (S.Count == SetNil);
 }
 
 boolean IsFullSet(Set S)
 /* Mengirim true jika Set S penuh */
-/* Ciri Set penuh : count bernilai MaxEl */
+/* Ciri Set penuh : count berSetNilai SetMaxEl */
 {
-    return (S.Count == MaxEl);
+    return (S.Count == SetMaxEl);
 }
 
 /* ********** Operator Dasar Set ********* */
