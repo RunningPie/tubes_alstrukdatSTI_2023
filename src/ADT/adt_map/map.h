@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include "../boolean.h"
 #include "../adt_set/set.h"
+#include "../struct.h"
 
 /* MODUL Map
 Deklarasi stack yang dengan implementasi array eksplisit-statik rata kiri

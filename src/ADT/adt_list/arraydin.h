@@ -3,13 +3,14 @@
 
 #include "../boolean.h"
 #include "../adt_mesinkata/mesinkata.h"
+#include "../struct.h"
 
 #define InitialSize 10
 
 typedef int IdxType;
 typedef Word ElType;
 typedef struct {
-    ElType *A;
+    ElType * A;
     int Capacity;
     int Neff;
 } ArrayDin;
@@ -115,5 +116,7 @@ ArrayDin CopyArrayDin(ArrayDin array);
  * Prekondisi: array terdefinisi
  */
 IdxType SearchArrayDin(ArrayDin array, ElType el);
+
+boolean IsIdxValidArrDin(ArrayDin array,IdxType i);
 
 #endif
