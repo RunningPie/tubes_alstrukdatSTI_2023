@@ -28,6 +28,6 @@ int main() {
         }
     }
     while (stateWAYANG) {
-        menuLIST(&stateWAYANG);
+        menuLIST();
     }  
 }

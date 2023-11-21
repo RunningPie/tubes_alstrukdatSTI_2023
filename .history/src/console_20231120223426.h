@@ -62,5 +62,5 @@ void QUIT();
 // I.S. Sembarang dalam sesi
 // F.S. Keluar dari sesi. Jika data sesi disimpan maka terbentuk suatu file bernama <filename> di folder save.
 
-void menuLIST(boolean *stateWayang);
+void menuLIST();
 // fungsi untuk main

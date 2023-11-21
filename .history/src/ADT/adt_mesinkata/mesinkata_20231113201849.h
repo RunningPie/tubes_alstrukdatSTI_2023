@@ -87,11 +87,6 @@ int WordToInt(Word Kata);
    I.S. : word.TabWord merupakan digit
    F.S. : mengembalikan dalam bentuk integer */
 
-Word SenToWord(Word sentence, int idxKata);
-/* Mengambil word dalam sentence dari ADVSENTENCE
-   I.S. : currentWord dari ADVSENTENCE
-   F.S. : mengembalikan kata sesuai urutan yang diinginkan */
-
 void SalinKata(Word Kata1, Word* Kata2 );
 /* Menyalin Kata1 ke Kata2
    I.S. : Kata1 sembarang, Kata2 kosong

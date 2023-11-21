@@ -161,26 +161,6 @@ int WordToInt(Word Kata) {
     return hasil;
 }
 
-Word SenToWord(Word sentence, int idxKata) {
-    int count = 0; 
-    Word Kata; Kata.Length = 0;
-
-    int i = 0;
-    while (i < sentence.Length && count <= idxKata) {
-        Kata.TabWord[Kata.Length] = sentence.TabWord[i];
-        if (sentence.TabWord[i] == ' ') {
-            if (count < idxKata) {
-                Kata.Length = 0;
-            } count++;
-        }
-        if (sentence.TabWord[i] != ' ') {
-            Kata.Length++;
-        }
-        i++;
-    }
-    return Kata;    
-}
-
 void SalinKata(Word Kata1, Word* Kata2) {
     Kata2->Length = Kata1.Length;
     for (int i = 0; i < Kata2->Length; i++) {

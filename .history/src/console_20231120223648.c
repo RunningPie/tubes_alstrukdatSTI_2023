@@ -103,7 +103,7 @@ void QUIT()
     }
 }
 
-void menuLIST(boolean *stateWayang) {
+void menuLIST() {
     STARTWORD();
     if (isWordEq(currentWord, ToKata("LIST"))) {
         ADVWORD();
@@ -156,15 +156,13 @@ void menuLIST(boolean *stateWayang) {
 
     } else if (isWordEq(currentWord, ToKata("SAVE"))) {
         ADVSENTENCE();
+        SAVE(currentWord);
     } else if (isWordEq(currentWord, ToKata("QUIT"))) {
         QUIT();
-        *stateWayang = false;
     } else if (isWordEq(currentWord, ToKata("HELP"))) {
 
     } else if (isWordEq(currentWord, ToKata("START")) || isWordEq(currentWord, ToKata("LOAD"))) {
         printf("Command tidak bisa dieksekusi!\n");
-    } else {
-        printf("Command tidak diketahui!\n");
     }
 }
 // fungsi untuk main

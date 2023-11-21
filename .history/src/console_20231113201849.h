@@ -61,6 +61,3 @@ void QUIT();
 // QUIT merupakan command yang digunakan untuk keluar dari sesi aplikasi WayangWave.
 // I.S. Sembarang dalam sesi
 // F.S. Keluar dari sesi. Jika data sesi disimpan maka terbentuk suatu file bernama <filename> di folder save.
-
-void menuLIST(boolean *stateWayang);
-// fungsi untuk main

@@ -27,7 +27,9 @@ int main() {
             // HELP
         }
     }
-    while (stateWAYANG) {
-        menuLIST(&stateWAYANG);
-    }  
+    DisplayList(daftarPenyanyi);
+/*  while (stateWAYANG) {
+        STARTWORD();
+        ...
+    }  */
 }

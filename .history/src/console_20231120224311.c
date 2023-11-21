@@ -158,7 +158,7 @@ void menuLIST(boolean *stateWayang) {
         ADVSENTENCE();
     } else if (isWordEq(currentWord, ToKata("QUIT"))) {
         QUIT();
-        *stateWayang = false;
+        stateWayang = false;
     } else if (isWordEq(currentWord, ToKata("HELP"))) {
 
     } else if (isWordEq(currentWord, ToKata("START")) || isWordEq(currentWord, ToKata("LOAD"))) {

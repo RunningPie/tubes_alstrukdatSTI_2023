@@ -27,7 +27,8 @@ int main() {
             // HELP
         }
     }
-    while (stateWAYANG) {
-        menuLIST(&stateWAYANG);
-    }  
+/*  while (stateWAYANG) {
+        STARTWORD();
+        ...
+    }  */
 }
