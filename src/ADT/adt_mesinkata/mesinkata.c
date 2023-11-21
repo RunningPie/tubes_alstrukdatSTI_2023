@@ -176,7 +176,3 @@ void DisplayKata(Word Kata) {
     }
     printf("\n");
 }
-
-void CreateKata(Word *Kata){
-    WORDLENGTH(*Kata) = 0;
-}

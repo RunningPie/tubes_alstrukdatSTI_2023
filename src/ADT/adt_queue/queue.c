@@ -93,15 +93,12 @@ void displayQueue(Queue q)
     if (QisEmpty(q)){
         printf("[]\n");
     } else {
-        printf("[");
-        for (i = IDX_HEAD(q); i < (IDX_HEAD(q)+Qlength(q))-1; i++){
-            printf("%d,", q.buffer[i]);
+        for (i = IDX_HEAD(q); i < (IDX_HEAD(q)+Qlength(q))-1; i++) {
+            displaySongInfo(q.buffer[i]);
+            printf("\n");
         }
-        printf("%d]\n", q.buffer[i]);
     }
 }
-
-// int main(){
 
 //     Queue q1, q2;
 //     QueueEl val1;
@@ -121,3 +118,16 @@ void displayQueue(Queue q)
 
 //     return 0;
 // }
+
+/* *** Tambahan Procedure *** */
+/* Proses: Menambahkan lagu pada queue dengan urutan pertama*/
+/*I.S.: Queue kosong atau berisi lagu yang telah di-queue sebelumnya 
+/*F.S.: Queue telah ditambahkan dengan lagu yang ingin dimasukkan pada posisi HEAD */
+void enqueueFirst(Queue *q, Song val){
+    int i;
+    for (i = IDX_TAIL(*q); i > IDX_HEAD(*q); i--) {
+        (*q).buffer[i] = (*q).buffer[i-1];
+    }
+    HEAD(*q) = val;
+}
+

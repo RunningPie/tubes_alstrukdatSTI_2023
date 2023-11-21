@@ -6,18 +6,20 @@
 
 #include "../boolean.h"
 #include "../adt_mesinkata/mesinkata.h"
+#include "../adt_song/song.h"
+// #include "../adt_stack/stack.h"
 
 #define IDX_UNDEF -1
 #define CAPACITY 100
 
 /* Definisi elemen dan address */
-typedef Desc QueueEl;
+// ADT QUEUE
+typedef Song QueueEl;
 typedef struct {
 	QueueEl buffer[CAPACITY]; 
 	int idxHead;
 	int idxTail;
 } Queue;
-
 
 /* ********* AKSES (Selektor) ********* */
 /* Jika q adalah Queue, maka akses elemen : */
@@ -45,6 +47,7 @@ int Qlength(Queue q);
 /* Mengirimkan banyaknya elemen queue. Mengirimkan 0 jika q kosong. */
 
 /* *** Primitif Add/Delete *** */
+
 void enqueue(Queue *q, QueueEl val);
 /* Proses: Menambahkan val pada q dengan aturan FIFO */
 /* I.S. q mungkin kosong, tabel penampung elemen q TIDAK penuh */
@@ -68,5 +71,10 @@ void displayQueue(Queue q);
 /* Contoh : jika ada tiga elemen bernilai 1, 20, 30 akan dicetak: [1,20,30] */
 /* Jika Queue kosong : menulis [] */
 
+/* *** Tambahan Procedure *** */
+/* Proses: Menambahkan lagu pada queue dengan urutan pertama*/
+/*I.S.: Queue kosong atau berisi lagu yang telah di-queue sebelumnya 
+/*F.S.: Queue telah ditambahkan dengan lagu yang ingin dimasukkan pada posisi HEAD */
+void enqueueFirst(Queue *q, Song val);
 
 #endif
