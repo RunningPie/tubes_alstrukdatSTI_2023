@@ -17,7 +17,11 @@ typedef struct{
 } Song;
 
 Song createSong(Word titleSong, Word album, Word singer);
+/*Function createSong digunakan untuk membuat instance dari ADT Song*/
 
 void displaySongInfo(Song song);
+/* Proses: Mencetak title, album, dan singer pada layar sesuai dengan struct Song */
+/* I.S.: Song terdefinisi */
+/* F.S.: Atribut song tercetak di layar */
 
 #endif
