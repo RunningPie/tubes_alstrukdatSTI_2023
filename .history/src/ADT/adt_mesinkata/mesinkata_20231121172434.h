@@ -34,7 +34,6 @@ void STARTWORD();
           currentChar karakter pertama sesudah karakter terakhir kata */
 
 void STARTSENTENCE();
-/* Start sentence */
 
 void STARTWORDFILE(char* filename);
 /* I.S. : currentChar sembarang

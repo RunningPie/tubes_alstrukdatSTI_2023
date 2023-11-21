@@ -2,5 +2,6 @@
     "files.associations": {
         "*.rmd": "markdown",
         "queue.h": "c"
-    }
+    },
+    "C_Cpp.errorSquiggles": "disabled"
 }

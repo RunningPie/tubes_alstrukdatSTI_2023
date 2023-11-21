@@ -104,6 +104,68 @@ void QUIT()
     }
 }
 
-void InvalidSession() {
-    printf("\nCommand tidak bisa dieksekusi!\n");
+void menuLIST(boolean *stateWayang) {
+    STARTWORD();
+    if (isWordEq(currentWord, ToKata("LIST"))) {
+        ADVWORD();
+        if (isWordEq(currentWord, ToKata("DEFAULT"))) {
+
+        } else if (isWordEq(currentWord, ToKata("PLAYLIST"))) {
+
+        }
+    } else if (isWordEq(currentWord, ToKata("PLAY"))) {
+        ADVWORD();
+        if (isWordEq(currentWord, ToKata("SONG"))) {
+
+        } else if (isWordEq(currentWord, ToKata("PLAYLIST"))) {
+
+        }
+    } else if (isWordEq(currentWord, ToKata("QUEUE"))) {
+        ADVWORD();
+        if (isWordEq(currentWord, ToKata("SONG"))) {
+
+        } else if (isWordEq(currentWord, ToKata("PLAYLIST"))) {
+
+        } else if (isWordEq(currentWord, ToKata("SWAP"))) {
+
+        } else if (isWordEq(currentWord, ToKata("REMOVE"))) {
+
+        } else if (isWordEq(currentWord, ToKata("CLEAR"))) {
+
+        }
+    } else if (isWordEq(currentWord, ToKata("SONG"))) {
+        ADVWORD();
+        if (isWordEq(currentWord, ToKata("NEXT"))) {
+
+        } else if (isWordEq(currentWord, ToKata("PREVIOUS"))) {
+
+        }
+    } else if (isWordEq(currentWord, ToKata("PLAYLIST"))) {
+        ADVWORD();
+        if (isWordEq(currentWord, ToKata("CREATE"))) {
+
+        } else if (isWordEq(currentWord, ToKata("ADD"))) {
+
+        } else if (isWordEq(currentWord, ToKata("SWAP"))) {
+
+        } else if (isWordEq(currentWord, ToKata("REMOVE"))) {
+
+        } else if (isWordEq(currentWord, ToKata("DELETE"))) {
+
+        }
+    } else if (isWordEq(currentWord, ToKata("STATUS"))) {
+
+    } else if (isWordEq(currentWord, ToKata("SAVE"))) {
+        ADVSENTENCE();
+    } else if (isWordEq(currentWord, ToKata("QUIT"))) {
+        QUIT();
+        *stateWayang = false;
+    } else if (isWordEq(currentWord, ToKata("HELP"))) {
+
+    } else if (isWordEq(currentWord, ToKata("START")) || isWordEq(currentWord, ToKata("LOAD"))) {
+        printf("\nCommand tidak bisa dieksekusi!\n");
+    } else {
+        printf("\nCommand tidak diketahui!\n");
+    }
 }
+// fungsi untuk main

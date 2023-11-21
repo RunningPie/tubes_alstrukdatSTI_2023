@@ -104,6 +104,53 @@ void QUIT()
     }
 }
 
-void InvalidSession() {
-    printf("\nCommand tidak bisa dieksekusi!\n");
+void menuLIST(boolean *stateWayang) {
+    STARTSENTENCE();
+    if (isWordEq(SenToWord(currentWord, 0), ToKata("LIST")) && isWordEq(SenToWord(currentWord, 1), ToKata("DEFAULT"))) {
+
+    } else if (isWordEq(currentWord, ToKata("LIST")) && isWordEq(SenToWord(currentWord, 1), ToKata("PLAYLIST"))) {
+
+    } else if (isWordEq(currentWord, ToKata("PLAY")) && isWordEq(SenToWord(currentWord, 1), ToKata("SONG"))) {
+        
+    } else if (isWordEq(currentWord, ToKata("PLAY")) && isWordEq(SenToWord(currentWord, 1), ToKata("PLAYLIST"))) {
+
+    } else if (isWordEq(currentWord, ToKata("QUEUE")) && isWordEq(SenToWord(currentWord, 1), ToKata("SONG"))) {
+
+    } else if (isWordEq(currentWord, ToKata("QUEUE")) && isWordEq(SenToWord(currentWord, 1), ToKata("PLAYLIST"))) {
+
+    } else if (isWordEq(currentWord, ToKata("QUEUE")) && isWordEq(SenToWord(currentWord, 1), ToKata("SWAP"))) {
+
+    } else if (isWordEq(currentWord, ToKata("QUEUE")) && isWordEq(SenToWord(currentWord, 1), ToKata("REMOVE"))) {
+
+    } else if (isWordEq(currentWord, ToKata("QUEUE")) && isWordEq(SenToWord(currentWord, 1), ToKata("CLEAR"))) {
+
+    } else if (isWordEq(currentWord, ToKata("SONG")) && isWordEq(SenToWord(currentWord, 1), ToKata("NEXT"))) {
+       
+    } else if (isWordEq(currentWord, ToKata("SONG")) && isWordEq(SenToWord(currentWord, 1), ToKata("PREVIOUS"))) {
+
+    } else if (isWordEq(currentWord, ToKata("PLAYLIST")) && isWordEq(SenToWord(currentWord, 1), ToKata("CREATE"))) {
+
+    } else if (isWordEq(currentWord, ToKata("PLAYLIST")) && isWordEq(SenToWord(currentWord, 1), ToKata("ADD"))) {
+
+    } else if (isWordEq(currentWord, ToKata("PLAYLIST")) && isWordEq(SenToWord(currentWord, 1), ToKata("SWAP"))) {
+
+    } else if (isWordEq(currentWord, ToKata("PLAYLIST")) && isWordEq(SenToWord(currentWord, 1), ToKata("REMOVE"))) {
+
+    } else if (isWordEq(currentWord, ToKata("PLAYLIST")) && isWordEq(SenToWord(currentWord, 1), ToKata("DELETE"))) {
+
+    } else if (isWordEq(currentWord, ToKata("STATUS"))) {
+
+    } else if (isWordEq(currentWord, ToKata("SAVE"))) {
+
+    } else if (isWordEq(currentWord, ToKata("QUIT"))) {
+        QUIT();
+        *stateWayang = false;
+    } else if (isWordEq(currentWord, ToKata("HELP"))) {
+
+    } else if (isWordEq(currentWord, ToKata("START")) || isWordEq(currentWord, ToKata("LOAD"))) {
+        printf("\nCommand tidak bisa dieksekusi!\n");
+    } else {
+        printf("\nCommand tidak diketahui!\n");
+    }
 }
+// fungsi untuk main

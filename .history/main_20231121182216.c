@@ -3,14 +3,14 @@
 
 int main() {
 
-    boolean state = false, end = true;
+    boolean state = false, end = false;
     List daftarPenyanyi = MakeList();
     ArrayDin daftarPlaylist = MakeArrayDin();
     Queue queue; CreateQueue(&queue);
     Stack history; CreateEmptyStack(&history);
     Map penyanyiAlbum, albumLagu; MapCreateEmpty(&penyanyiAlbum); MapCreateEmpty(&albumLagu);
 
-    while(end) {
+    while(!end) {
         STARTSENTENCE();
         if (isWordEq(SenToWord(currentWord, 0), ToKata("START"))) {
             if (!state) {

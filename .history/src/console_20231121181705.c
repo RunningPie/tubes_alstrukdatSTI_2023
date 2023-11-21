@@ -105,5 +105,5 @@ void QUIT()
 }
 
 void InvalidSession() {
-    printf("\nCommand tidak bisa dieksekusi!\n");
+    printf("\nCommand tidak bisa dieksekusi!\n")
 }
