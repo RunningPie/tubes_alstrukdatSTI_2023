@@ -389,13 +389,13 @@ void PLAYLISTADDALBUM(List daftarPenyanyi, Map *penyanyiAlbum, ArrayDin daftarPl
 
 void PLAYLISTSWAP(List daftarPenyanyi, Map *penyanyiAlbum, ArrayDin daftarPlaylist, Map *albumLagu)
 {
-    int id,a,b;
+    int id,x,y;
     ADVWORD();
     id=WordToInt(currentWord)-1;
     ADVWORD();
-    a=WordToInt(currentWord)-1;
+    x=WordToInt(currentWord)-1;
     ADVWORD();
-    b=WordToInt(currentWord)-1;
+    y=WordToInt(currentWord)-1;
 
     if (id<0 || id>=daftarPlaylist.Neff)
     {
@@ -405,19 +405,19 @@ void PLAYLISTSWAP(List daftarPenyanyi, Map *penyanyiAlbum, ArrayDin daftarPlayli
     else
     {
         LinkedList playlist; //= (daftarPlaylist.A[id])->TabWord;
-        if (a<0 || a>=LinkedListLength(playlist) || b<0 || b>=LinkedListLength(playlist))
+        if (x<0 || x>=LinkedListLength(playlist) || y<0 || y>=LinkedListLength(playlist))
         {
-            printf("Tidak ada lagu dengan urutan %d atau %d di playlist\n", a+1, b+1);
+            printf("Tidak ada lagu dengan urutan %d atau %d di playlist\n", x+1, y+1);
         }
         else 
         {
-            LinkedListEl tempa,tempb;
-            tempa = getElmt(playlist,a);  // RAGU GETELMT
-            tempb = getElmt(playlist,b);
-            setElmt(&playlist,tempb,a);
-            setElmt(&playlist,tempa,b);
+            LinkedListEl tempx,tempy;
+            tempx = getElmt(playlist,x);  
+            tempy = getElmt(playlist,y);
+            setElmt(&playlist,tempy,x);
+            setElmt(&playlist,tempx,y);
 
-            printf("Berhasil menukar lagu dengan nama “");DisplayKata(tempa.Lagu);printf("” dengan “");DisplayKata(tempb.Lagu);
+            printf("Berhasil menukar lagu dengan nama “");DisplayKata(tempx.Lagu);printf("” dengan “");DisplayKata(tempy.Lagu);
             printf("” di playlist “");DisplayKata((daftarPlaylist.A[id]));
         }
     }
@@ -478,7 +478,33 @@ void PLAYLISTDELETE(List daftarPenyanyi, Map *penyanyiAlbum, ArrayDin daftarPlay
     }
 }
 
-void STATUS();
+void STATUS(Desc currentL, Queue QueueL)
+{
+    Desc tempL = currentL;
+    if(IsEmptyDesc(currentL))
+    {
+        printf("Now Playing :\nNo songs have been played yet. Please search for a song to begin playback.\n");
+    }
+    else 
+    {
+        printf("Now Playing :\n%s - %s - %s\n", tempL.Penyanyi.TabWord, tempL.Lagu.TabWord, tempL.Album.TabWord);
+    }
+
+    int index=1;
+    printf("Queue : \n");
+    Queue newL = QueueL;
+    while(!QisEmpty(newL) && !QisEmpty(QueueL))
+    {
+        dequeue(&newL,&tempL);
+        printf("%d. %s - %s - %s\n",index, tempL.Penyanyi.TabWord, tempL.Lagu.TabWord, tempL.Album.TabWord);
+        index++;
+    }
+    if (QisEmpty(QueueL))
+    {
+        printf("Your queue is empty.\n");
+    }
+    START();
+}
 
 void LOAD(String filename)
 /*

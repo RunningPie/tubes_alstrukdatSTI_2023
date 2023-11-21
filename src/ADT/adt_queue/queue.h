@@ -12,10 +12,11 @@
 #define IDX_UNDEF -1
 #define CAPACITY 100
 
+/* Definisi elemen dan address */
 // ADT QUEUE
-typedef Song QueueEltype;
+typedef Song QueueEl;
 typedef struct {
-	QueueEltype buffer[CAPACITY]; 
+	QueueEl buffer[CAPACITY]; 
 	int idxHead;
 	int idxTail;
 } Queue;
@@ -46,14 +47,15 @@ int Qlength(Queue q);
 /* Mengirimkan banyaknya elemen queue. Mengirimkan 0 jika q kosong. */
 
 /* *** Primitif Add/Delete *** */
-void enqueue(Queue *q, Song val);
+
+void enqueue(Queue *q, QueueEl val);
 /* Proses: Menambahkan val pada q dengan aturan FIFO */
 /* I.S. q mungkin kosong, tabel penampung elemen q TIDAK penuh */
 /* F.S. val menjadi TAIL yang baru, IDX_TAIL "mundur".
         Jika q penuh semu, maka perlu dilakukan aksi penggeseran "maju" elemen-elemen q
         menjadi rata kiri untuk membuat ruang kosong bagi TAIL baru  */
 
-void dequeue(Queue *q, Song *val);
+void dequeue(Queue *q, QueueEl *val);
 /* Proses: Menghapus val pada q dengan aturan FIFO */
 /* I.S. q tidak mungkin kosong */
 /* F.S. val = nilai elemen HEAD pd I.S., IDX_HEAD "mundur";

@@ -39,7 +39,7 @@ int Qlength(Queue q){
 /* Mengirimkan banyaknya elemen queue. Mengirimkan 0 jika q kosong. */
 
 /* *** Primitif Add/Delete *** */
-void enqueue(Queue *q, Song val)
+void enqueue(Queue *q, QueueEl val)
 /* Proses: Menambahkan val pada q dengan aturan FIFO */
 /* I.S. q mungkin kosong, tabel penampung elemen q TIDAK penuh */
 /* F.S. val menjadi TAIL yang baru, IDX_TAIL "mundur".
@@ -63,7 +63,7 @@ void enqueue(Queue *q, Song val)
     TAIL(*q) = val;
 }
 
-void dequeue(Queue *q, Song *val)
+void dequeue(Queue *q, QueueEl *val)
 /* Proses: Menghapus val pada q dengan aturan FIFO */
 /* I.S. q tidak mungkin kosong */
 /* F.S. val = nilai elemen HEAD pd I.S., IDX_HEAD "mundur";
@@ -100,6 +100,24 @@ void displayQueue(Queue q)
     }
 }
 
+//     Queue q1, q2;
+//     QueueEl val1;
+//     CreateQueue(&q1);
+//     displayQueue(q1);
+//     printf("Is Q1 empty? %u\n", isEmpty(q1));
+//     enqueue(&q1, 1);
+//     enqueue(&q1, 2);
+//     displayQueue(q1);
+//     printf("Is Q1 full? %u\n", isFull(q1));
+//     dequeue(&q1, &val1);
+//     displayQueue(q1);
+//     dequeue(&q1, &val1);
+//     printf("Length of Q1: %d", length(q1));
+//     displayQueue(q1);
+//     printf("%d\n", val1);
+
+//     return 0;
+// }
 
 /* *** Tambahan Procedure *** */
 /* Proses: Menambahkan lagu pada queue dengan urutan pertama*/
@@ -112,3 +130,4 @@ void enqueueFirst(Queue *q, Song val){
     }
     HEAD(*q) = val;
 }
+

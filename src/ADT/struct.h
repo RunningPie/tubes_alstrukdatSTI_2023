@@ -12,6 +12,7 @@ Struct.h adalah header untuk semua custom structure yang dibutuhkan tiap ADT
 // Untuk ADT MesinKata
 #define NMax 50
 #define BLANK ' '
+#define WORDLENGTH(w) (w).Length
 typedef struct
 {
    char TabWord[NMax]; /* container penyimpan kata, indeks yang dipakai [0..NMax-1] */
@@ -39,5 +40,6 @@ typedef struct {
     Word Album;
     Word Lagu;
 } Desc;
+
 
 #endif
