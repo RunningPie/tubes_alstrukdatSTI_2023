@@ -106,7 +106,7 @@ void LISTPLAYLIST(ArrayDin daftarPlaylist) {
     }
 }
 
-void PLAYSONG(List daftarPenyanyi, Map *penyanyiAlbum, Map *albumLagu, Queue *QueueL, Stack *historyL){
+void PLAYSONG(List daftarPenyanyi, Map *penyanyiAlbum, Map *albumLagu, Queue *queueSong, Stack *historySong) {
     printf("Daftar Penyanyi :\n");
     DisplayList(daftarPenyanyi);
     printf("\n");
@@ -127,14 +127,13 @@ void PLAYSONG(List daftarPenyanyi, Map *penyanyiAlbum, Map *albumLagu, Queue *Qu
         STARTWORD();
         printf("\n");
         Word album = currentWord;
-
         if (IsSetMember(MapValue(*penyanyiAlbum, penyanyi), album)) {
             printf("Daftar Lagu Album ");
             DisplayKata(album);
             printf(" oleh ");
             DisplayKata(penyanyi);
             printf(" :\n");
-            DisplayVMap(*albumLagu, album);
+            DisplayVMap(*penyanyiAlbum, album);
             printf("\n");
 
             printf("Masukkan ID Lagu yang dipilih : ");
@@ -143,27 +142,17 @@ void PLAYSONG(List daftarPenyanyi, Map *penyanyiAlbum, Map *albumLagu, Queue *Qu
 
             int idLagu = WordToInt(currentWord) - 1;
             if (IsIdxValidSet(MapValue(*albumLagu, album), idLagu)) {
-                Word lagu;
-                SalinKata(MapValue(*albumLagu, album).Elements[idLagu], &lagu);
-                
-                // Memutar lagu
-                Desc currentDesc;
-                SalinKata(penyanyi, &(currentDesc.Penyanyi));
-                SalinKata(album, &(currentDesc.Album));
-                SalinKata(lagu, &(currentDesc.Lagu));
+                Song lagu = createSong(MapValue(*albumLagu, album).Elements[idLagu], album, penyanyi);
 
-                // Memasukkan lagu ke queue
-                enqueue(QueueL, currentDesc);
+                // Clear queue dan history
+                QueueClear(queueSong);
+                StackClear(historySong);
 
-                // Menambahkan lagu ke dalam history (stack)
-                push(historyL, currentDesc);
-
-                printf("Memutar lagu “");
-                DisplayKata(lagu);
-                printf("” oleh “");
-                DisplayKata(penyanyi);
-                printf("”.\n");
-
+                printf("Memutar lagu \"");
+                DisplayKata(lagu.titleSong);
+                printf("\" oleh \"");
+                DisplayKata(lagu.singer);
+                printf("\".\n");
             } else {
                 printf("ID Lagu %d tidak ada dalam daftar. Silakan coba lagi.\n", idLagu + 1);
             }
@@ -179,47 +168,45 @@ void PLAYSONG(List daftarPenyanyi, Map *penyanyiAlbum, Map *albumLagu, Queue *Qu
     }
 }
 
-void PLAYPLAYLIST(ArrayDin daftarPlaylist, Queue *QueueL, Stack *historyL) {
-    printf("Daftar playlist yang kamu miliki:\n");
+void PLAYPLAYLIST(ArrayDin daftarPlaylist, Queue *queueSong, Stack *historySong) {
+    printf("Daftar Playlist Pengguna :\n");
     PrintArrayDin(daftarPlaylist);
+    printf("\n");
 
-    printf("\nMasukkan ID Playlist yang dipilih : ");
+    printf("Masukkan ID Playlist yang dipilih : ");
     STARTWORD();
     printf("\n");
 
     int idPlaylist = WordToInt(currentWord) - 1;
     if (IsIdxValidArrDin(daftarPlaylist, idPlaylist)) {
         LinkedList playlist;
-        CreateLinkedList(&playlist);
 
-        // Salin lagu-lagu dari playlist ke dalam queue
-        Word lagu;
-        for (int i = 0; i < LinkedListLength(daftarPlaylist.TabWord[idPlaylist]); i++) {
-            SalinKata(GetLinkedListEl(daftarPlaylist.TabWord[idPlaylist], i)->Lagu, &lagu);
+        // LinkedList = daftarPlaylist.TabWord[idPlaylist]
 
-            // Memasukkan lagu ke queue
-            Desc currentDesc;
-            SalinKata(GetLinkedListEl(daftarPlaylist.TabWord[idPlaylist], i)->Penyanyi, &(currentDesc.Penyanyi));
-            SalinKata(GetLinkedListEl(daftarPlaylist.TabWord[idPlaylist], i)->Album, &(currentDesc.Album));
-            SalinKata(lagu, &(currentDesc.Lagu));
+        if (!LinkedListIsEmpty(playlist)) {
+            // Clear queue dan history
+            QueueClear(queueSong);
+            StackClear(historySong);
 
-            enqueue(QueueL, currentDesc);
+            // Enqueue semua lagu dari playlist yang dipilih
+            LinkedListEl currentSong = playlist.First;
+            while (currentSong != NULL) {
+                enqueue(queueSong, currentSong.Value);
+                PushStack(historySong, currentSong.Value);
+                currentSong = currentSong.Next;
+            }
 
-            // Menambahkan lagu ke dalam history (stack)
-            push(historyL, currentDesc);
+            printf("Memutar playlist \"");
+            DisplayKata(daftarPlaylist.A[idPlaylist]);
+            printf("\".\n");
+        } else {
+            printf("Playlist kosong. Tidak ada lagu yang dapat diputar.\n");
         }
-
-        // Membalik urutan lagu di queue
-        reverseQueue(QueueL);
-
-        printf("\nMemutar playlist “");
-        DisplayKata(daftarPlaylist.A[idPlaylist]);
-        printf("”.\n");
-
     } else {
         printf("ID Playlist %d tidak ada dalam daftar. Silakan coba lagi.\n", idPlaylist + 1);
     }
 }
+
 
 void LOAD(String filename)
 /*
