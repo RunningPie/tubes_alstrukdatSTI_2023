@@ -100,6 +100,11 @@ void displayQueue(Queue q)
     }
 }
 
+
+/* *** Tambahan Procedure *** */
+/* Proses: Menambahkan lagu pada queue dengan urutan pertama*/
+/*I.S.: Queue kosong atau berisi lagu yang telah di-queue sebelumnya 
+/*F.S.: Queue telah ditambahkan dengan lagu yang ingin dimasukkan pada posisi HEAD */
 void enqueueFirst(Queue *q, Song val){
     int i;
     for (i = IDX_TAIL(*q); i > IDX_HEAD(*q); i--) {

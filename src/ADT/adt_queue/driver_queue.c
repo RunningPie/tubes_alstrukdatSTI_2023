@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include "queue.h"
 
+// Test ADT QUEUE
 int main(){
 
     Queue q;

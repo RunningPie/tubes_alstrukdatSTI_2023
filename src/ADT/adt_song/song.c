@@ -2,6 +2,7 @@
 #include "song.h"
 
 Song createSong(Word titleSong, Word album, Word singer) {
+/*Function createSong digunakan untuk membuat instance dari ADT Song*/ 
     Song newSong;
 
     newSong.titleSong = titleSong;
@@ -12,6 +13,9 @@ Song createSong(Word titleSong, Word album, Word singer) {
 }
 
 void displaySongInfo(Song song) {
+/* Proses: Mencetak title, album, dan singer pada layar sesuai dengan struct Song */
+/* I.S.: Song terdefinisi */
+/* F.S.: Atribut song tercetak di layar */
     DisplayKata(ToKata("Title: "));
     DisplayKata(song.titleSong);
     printf("\n");

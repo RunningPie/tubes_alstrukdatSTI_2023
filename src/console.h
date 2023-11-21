@@ -99,43 +99,36 @@ Queue kosong, memutar kembali lagu
 
 void enqueueSong (Queue *queueSong, Song val);
 /*
-
-
-
-
-
-
+Proses: Procedure yang digunakan untuk menambahkan lagu ke dalam queue. Procedure ini akan menerima tiga input, pertama Nama dari Penyanyi, kedua Nama dari Album yang dipilih, dan ketiga ID Lagu yang dipilih. ID Lagu tersebut sebagai key dari lagu yang akan di queue.  
+I.S.: Queue kosong atau queue berisi lagu yang sebelumnya telah di queue
+F.S.: Queue berisi satu lagu atau queue telah ditambahkan dengan masukan lagu yang baru (Isi queue minimal satu lagu) pada posisi TAIL queue
 */
+
 // void enqueuePlaylist(Queue *queueSong, Playlist playlist);
+/*
+Proses: Procedure yang digunakan untuk menambahkan seluruh lagu yang ada dalam playlist yang dimasukkan ke dalam queue. Procedure ini akan menetima satu input, yaitu ID dari playlist. 
+I.S.: Queue kosong atau queue berisi lagu yang sebelumnya telah di queue
+F.S.: Queue berisi satu atau lebih lagu yang di queue dari suatu playlist yang dimasukkan. Proses memasukkan lagu dimulai dari lagu pertama dari PLAYLIST dan dimasukkan pada posisi TAIL queue
+*/
 
 void queueSwap(Queue *queueSong, int x, int y);
 /*
-
-
-
-
-
-
+Proses: Procedure yang digunakan untuk menukar lagu pada urutan ke-x dan urutan ke-y. Input pada Command ini adalah dua id lagu (x, y). 
+I.S.: Posisi lagu dengan id x dan posisi lagu dengan id y tetap berdasarkan urutan queue sebelumnya atau salah satu dari x atau y tidak terdefinisi 
+F.S.: Posisi lagu dengan id x berada di posisi lagu dengan id y, serta posisi lagu dengan id y berada di posisi lagu dengan id x (Swapping telah dilakukan) apabila x dan y terdefinisi 
 */
 void queueRemove(Queue *queueSong, int id);
 /*
-
-
-
-
-
-
+Proses: Procedure yang digunakan untuk menghapus lagu dari queue berdasarkan id yang dimasukkan. Input pada Command ini adalah id lagu (id) yang ingin dihapus dari queue
+I.S.: Terdapat lagu (berdasarkan id yang dimasukkan) pada queue atau id yang dimasukkan tidak terdefinisi 
+F.S.: Lagu (id) dihapus dari queue apabila id terdefinisi   
 */
 void queueClear(Queue *queue);
 /*
-
-
-
-
-
-
+Proses: Procedure yang digunakan untuk mengosongkan queue.
+I.S.: Queue berisi lagu yang telah di-queue sebelumnya
+F.S.: Queue kosong atau tidak berisi lagu 
 */
-
 
 void QUIT();
 // QUIT merupakan command yang digunakan untuk keluar dari sesi aplikasi WayangWave.
