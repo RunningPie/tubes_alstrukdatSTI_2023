@@ -195,6 +195,7 @@ Word SenToWord(Word sentence, int idxKata) {
         }
         i++;
     }
+    Kata.TabWord[Kata.Length] = '\0';
     return Kata;    
 }
 
@@ -203,6 +204,7 @@ void SalinKata(Word Kata1, Word* Kata2) {
     for (int i = 0; i < Kata2->Length; i++) {
         Kata2->TabWord[i] = Kata1.TabWord[i];
     }
+    Kata2->TabWord[Kata2->Length] = '\0';
 }
 
 void DisplayKata(Word Kata) {

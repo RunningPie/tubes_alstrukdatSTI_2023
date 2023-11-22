@@ -42,6 +42,26 @@ void STARTWAYANGWAVE(List *daftarPenyanyi, Map *penyanyiAlbum, Map *albumLagu) {
     printf("\nFile konfigurasi aplikasi berhasil dibaca. WayangWave berhasil dijalankan.\n");
 }
 
+void LOAD(Word filename)
+/*
+LOAD merupakan salah satu command yang dimasukkan pertama kali dalam WayangWave.
+Command ini memiliki satu argumen yaitu filename yang merepresentasikan suatu
+save file yang ingin dibuka. Setelah menekan Enter, akan dibaca save file <filename>
+yang berisi list penyanyi, album, dan lagu yang bisa diputar. Lebih detailnya
+bisa dilihat pada Konfigurasi Aplikasi.
+*/
+// I.S. Sembarang
+// F.S. Jika save file bernama <filename> ditemukan
+//         Program memasuki sesi
+//         Daftar penyanyi, album, dan lagu dari save file terinisialisasi
+//         Queue yang tersimpan dalam save file akan dimuat ke queue dalam main
+//         Riwayat lagu yang tersimpan akan dimuat ke stack di main
+//         Playlist dalam save file akan dimuat menjadi playlist-playlist dalam main
+//         Jika save file bernama <filename> tidak ditemukan
+//         Tuliskan pesan kegagalan pada layar. Program tidak memasuki sesi.
+{
+}
+
 void LISTDEFAULT(List daftarPenyanyi, Map *penyanyiAlbum, Map *albumLagu) {
     printf("Daftar Penyanyi :\n");
     DisplayList(daftarPenyanyi);
@@ -56,6 +76,13 @@ void LISTDEFAULT(List daftarPenyanyi, Map *penyanyiAlbum, Map *albumLagu) {
         STARTSENTENCE();
         printf("\n");
         Word penyanyi = currentWord;
+
+        // DisplayList(daftarPenyanyi);
+        // // printf("List Last Idx: %d\n", ListLastIdx(daftarPenyanyi));
+        // DisplayKata(daftarPenyanyi.A[0]);
+        // DisplayKata(penyanyi);
+        
+        // printf("%s == %s? %u (LINE 81)\n", daftarPenyanyi.A[0].TabWord[0], penyanyi.TabWord[0], isWordEq(daftarPenyanyi.A[0], penyanyi));
 
         if (ListSearch(daftarPenyanyi, penyanyi)) {
             printf("Daftar Album oleh ");
@@ -161,9 +188,9 @@ void PLAYSONG(List daftarPenyanyi, Map *penyanyiAlbum, Map *albumLagu, Queue *Qu
                 CreateEmptyStack(historyL);
 
                 printf("Memutar lagu “");
-                DisplayKata(lagu);
+                DisplayKata(currentSong->Lagu);
                 printf("” oleh “");
-                DisplayKata(penyanyi);
+                DisplayKata(currentSong->Penyanyi);
                 printf("”.\n");
 
             } else {
@@ -221,25 +248,6 @@ void PLAYPLAYLIST(ArrayDin daftarPlaylist, Map *playlistSongs, Queue *QueueL, St
     }
 }
 
-void LOAD(String filename)
-/*
-LOAD merupakan salah satu command yang dimasukkan pertama kali dalam WayangWave.
-Command ini memiliki satu argumen yaitu filename yang merepresentasikan suatu
-save file yang ingin dibuka. Setelah menekan Enter, akan dibaca save file <filename>
-yang berisi list penyanyi, album, dan lagu yang bisa diputar. Lebih detailnya
-bisa dilihat pada Konfigurasi Aplikasi.
-*/
-// I.S. Sembarang
-// F.S. Jika save file bernama <filename> ditemukan
-//         Program memasuki sesi
-//         Daftar penyanyi, album, dan lagu dari save file terinisialisasi
-//         Queue yang tersimpan dalam save file akan dimuat ke queue dalam main
-//         Riwayat lagu yang tersimpan akan dimuat ke stack di main
-//         Playlist dalam save file akan dimuat menjadi playlist-playlist dalam main
-//         Jika save file bernama <filename> tidak ditemukan
-//         Tuliskan pesan kegagalan pada layar. Program tidak memasuki sesi.
-{
-}
 
 void PLAYLISTCREATE(ArrayDin *daftarPlaylist)
 {
@@ -519,17 +527,6 @@ void STATUS(Song currentL, Queue QueueL)
 }
 
 
-void SAVE(String filename)
-/*
-SAVE merupakan command yang digunakan untuk menyimpan state aplikasi terbaru ke dalam suatu file.
-Command SAVE memiliki satu argumen yang merepresentasikan nama file yang akan disimpan.
-Penyimpanan dilakukan pada folder tertentu, misal folder save.
-*/
-// I.S. Sembarang dalam sesi
-// F.S. Terbentuk suatu file bernama <filename> di folder save.
-{
-
-}
 
 // BAGIAN SONG: (1) songNext, (2) songPrev
 
@@ -782,7 +779,61 @@ F.S.: Queue kosong atau tidak berisi lagu
     printf("\nQueue berhasil dikosongkan.\n");
 }
 
-void QUIT()
+void SAVE(Word filename, List daftarPenyanyi, Map penyanyiAlbum, Map albumLagu)
+/*
+SAVE merupakan command yang digunakan untuk menyimpan state aplikasi terbaru ke dalam suatu file.
+Command SAVE memiliki satu argumen yang merepresentasikan nama file yang akan disimpan.
+Penyimpanan dilakukan pada folder tertentu, misal folder save.
+*/
+// I.S. Sembarang dalam sesi
+// F.S. Terbentuk suatu file bernama <filename> di folder save.
+{
+    FILE *fp;
+    printf("filename: %s\n", filename.TabWord);
+    fp = fopen(filename.TabWord, "w");
+    if (fp == NULL) {
+        printf("Error opening file\n");
+    } 
+
+    fprintf(fp, "%s\n", filename.TabWord);
+
+    fprintf(fp, "%d\n", ListLength(daftarPenyanyi));
+
+
+    int i;
+    Word currentPenyanyi;
+    Set albumCurrentPenyanyi;
+    for (i = 0; i < ListLength(daftarPenyanyi); i++){
+        SalinKata(daftarPenyanyi.A[i], &currentPenyanyi);
+        albumCurrentPenyanyi = MapValue(penyanyiAlbum, currentPenyanyi);
+        // printf("Jumlah album %s: %d\n", currentPenyanyi.TabWord, albumCurrentPenyanyi.Count);
+        fprintf(fp, "%d %s\n", albumCurrentPenyanyi.Count, currentPenyanyi.TabWord);
+        
+        int j;
+        Set laguCurrentAlbum;
+        Word currentAlbum;
+        for (j=0; j < albumCurrentPenyanyi.Count; j++){
+            SalinKata(albumCurrentPenyanyi.Elements[j], &currentAlbum);
+            laguCurrentAlbum = MapValue(albumLagu, currentAlbum);
+            fprintf(fp, "%d %s\n", laguCurrentAlbum.Count, currentAlbum.TabWord);
+            
+            int k;
+            Word currentLagu;
+            for (k = 0; k < laguCurrentAlbum.Count; k++){
+                SalinKata(laguCurrentAlbum.Elements[k], &currentLagu);
+                fprintf(fp, "%s\n", currentLagu.TabWord);
+            }
+            // printf("ini oke, i:%d\n", i);
+        }
+    }
+
+
+    fclose(fp);
+
+    return;
+}
+
+void QUIT(List daftarPenyanyi, Map penyanyiAlbum, Map albumLagu)
 // QUIT merupakan command yang digunakan untuk keluar dari sesi aplikasi WayangWave.
 // I.S. Sembarang dalam sesi
 // F.S. Keluar dari sesi. Jika data sesi disimpan maka terbentuk suatu file bernama <filename> di folder save.
@@ -792,17 +843,9 @@ void QUIT()
     STARTWORD();
     if (currentWord.TabWord[0] == 'Y') {
         printf("Masukkan nama file untuk penyimpanan: ");
-        STARTWORD();
+        ADVWORD();
 
-        String file;
-        file.length = currentWord.Length;
-
-        int i;
-        for (i=0; i<currentWord.Length; i++){
-            file.content[i] = currentWord.TabWord[i];
-        }
-
-        SAVE(file);
+        SAVE(currentWord, daftarPenyanyi, penyanyiAlbum, albumLagu);
     } else {
         printf("Kamu keluar dari WayangWave.\n");
         printf("Dadah ^_^/\n");

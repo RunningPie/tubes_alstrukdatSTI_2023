@@ -24,7 +24,7 @@ int main() {
         } else if (isWordEq(SenToWord(currentWord, 0), ToKata("LOAD"))) {
             if (!state) {
                 // LOAD
-                LOAD(WordToString(SenToWord(currentWord, 1)));
+                LOAD(SenToWord(currentWord, 1));
                 state = true;
             } else {
                 InvalidSession();
@@ -158,13 +158,13 @@ int main() {
         } else if (isWordEq(SenToWord(currentWord, 0), ToKata("SAVE"))) {
             if (state) {
                 // SAVE
-                SAVE(WordToString(SenToWord(currentWord, 1)));
+                SAVE(SenToWord(currentWord, 1), daftarPenyanyi, penyanyiAlbum, albumLagu);
             } else {
                 InvalidSession();
             }
         } else if (isWordEq(SenToWord(currentWord, 0), ToKata("QUIT"))) {
             if (state) {
-                QUIT();
+                QUIT(daftarPenyanyi, penyanyiAlbum, albumLagu);
                 end = false; state = false;
             } else {
                 InvalidSession();

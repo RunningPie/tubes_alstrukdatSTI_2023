@@ -20,7 +20,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
+// #include <Word.h>
 #include <math.h>
 
 void STARTWAYANGWAVE(List *daftarPenyanyi, Map *PenyanyiAlbum, Map *AlbumLagu);
@@ -128,7 +128,7 @@ beserta Queue song yang ada dan dari playlist mana lagu itu diputar
 // I.S.
 // F.S.
 
-void LOAD(String filename);
+void LOAD(Word filename);
 /*
 LOAD merupakan salah satu command yang dimasukkan pertama kali dalam WayangWave.
 Command ini memiliki satu argumen yaitu filename yang merepresentasikan suatu
@@ -146,14 +146,6 @@ bisa dilihat pada Konfigurasi Aplikasi.
 //      Jika save file bernama <filename> tidak ditemukan
 //         Tuliskan pesan kegagalan pada layar. Program tidak memasuki sesi.
 
-void SAVE(String filename);
-/*
-SAVE merupakan command yang digunakan untuk menyimpan state aplikasi terbaru ke dalam suatu file.
-Command SAVE memiliki satu argumen yang merepresentasikan nama file yang akan disimpan.
-Penyimpanan dilakukan pada folder tertentu, misal folder save.
-*/
-// I.S. Sembarang dalam sesi
-// F.S. Terbentuk suatu file bernama <filename> di folder save.
 
 // BAGIAN SONG: (1) songNext, (2) songPrev
 void songNext (Queue *queueSong, Stack *previousSong, Song *onPlaySong);
@@ -228,7 +220,16 @@ I.S.: Queue berisi lagu yang telah di-queue sebelumnya
 F.S.: Queue kosong atau tidak berisi lagu 
 */
 
-void QUIT();
+void SAVE(Word filename, List daftarPenyanyi, Map penyanyiAlbum, Map albumLagu);
+/*
+SAVE merupakan command yang digunakan untuk menyimpan state aplikasi terbaru ke dalam suatu file.
+Command SAVE memiliki satu argumen yang merepresentasikan nama file yang akan disimpan.
+Penyimpanan dilakukan pada folder tertentu, misal folder save.
+*/
+// I.S. Sembarang dalam sesi
+// F.S. Terbentuk suatu file bernama <filename> di folder save.
+
+void QUIT(List daftarPenyanyi, Map penyanyiAlbum, Map albumLagu);
 // QUIT merupakan command yang digunakan untuk keluar dari sesi aplikasi WayangWave.
 // I.S. Sembarang dalam sesi
 // F.S. Keluar dari sesi. Jika data sesi disimpan maka terbentuk suatu file bernama <filename> di folder save.
