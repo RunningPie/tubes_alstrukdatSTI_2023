@@ -746,7 +746,7 @@ F.S.: Lagu (id) dihapus dari queue apabila id terdefinisi
 
     int ctr = 0;
     for (int i = IDX_HEAD(*queueSong); i <= IDX_TAIL(*queueSong); i++) {
-        if (ctr == id-1) {
+        if (ctr == id) {
             Song foundSong = queueSong->buffer[i];
             for (int j = i; j < IDX_TAIL(*queueSong); j++) {
                 queueSong->buffer[j] = queueSong->buffer[j+1];
@@ -756,11 +756,11 @@ F.S.: Lagu (id) dihapus dari queue apabila id terdefinisi
 
             printf("\nLagu ");
             printf("\"");
-            DisplayKata(queueSong->buffer[id].Lagu);
+            DisplayKata(foundSong.Lagu);
             printf("\" ");
             printf("oleh ");
-            printf("\" ");
-            DisplayKata(queueSong->buffer[id].Penyanyi);
+            printf("\"");
+            DisplayKata(foundSong.Penyanyi);
             printf("\" telah dihapus dari queue!\n");
             return;
         }
