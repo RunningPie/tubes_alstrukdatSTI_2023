@@ -33,6 +33,7 @@ void STARTWAYANGWAVE(List *daftarPenyanyi, Map *penyanyiAlbum, Map *albumLagu) {
                 lagu = currentWord;
                 SetInsert(&Slagu, lagu);
             }
+            
             MapInsert(albumLagu, album, Slagu);
             CreateEmptySet(&Slagu);
         }
@@ -647,7 +648,7 @@ F.S.: Queue berisi satu lagu atau queue telah ditambahkan dengan masukan lagu ya
         if(IsSetMember(MapValue(*penyanyiAlbum, penyanyi), album))
         {
             printf("Daftar Lagu Album ");DisplayKata(album);printf(" oleh ");DisplayKata(penyanyi);printf(" :\n");
-            DisplayVMap(*penyanyiAlbum, album);printf("\n");
+            DisplaySet(MapValue(*albumLagu, album));printf("\n");
 
             printf("Masukkan ID Lagu yang dipilih : ");
             STARTWORD();
@@ -717,17 +718,17 @@ F.S.: Posisi lagu dengan id x berada di posisi lagu dengan id y, serta posisi la
     }
     // Begin the swap
     Song temp;
-    temp = queueSong->buffer[x];
-    queueSong->buffer[x] = queueSong->buffer[y];
-    queueSong->buffer[y] = temp;
+    temp = queueSong->buffer[x-1];
+    queueSong->buffer[x-1] = queueSong->buffer[y-1];
+    queueSong->buffer[y-1] = temp;
 
     printf("\nLagu ");
     printf("\"");
-    DisplayKata(queueSong->buffer[x].Lagu);
+    DisplayKata(queueSong->buffer[y-1].Lagu);
     printf("\" ");
     printf("berhasil ditukar dengan ");
     printf("\" ");
-    DisplayKata(queueSong->buffer[y].Lagu);
+    DisplayKata(queueSong->buffer[x-1].Lagu);
     printf("\"\n");
     return;
 }
@@ -742,9 +743,9 @@ F.S.: Lagu (id) dihapus dari queue apabila id terdefinisi
         printf("\nLagu dengan urutan ke %d tidak ada\n", id);
     }
 
-    int ctr = 1;
+    int ctr = 0;
     for (int i = IDX_HEAD(*queueSong); i <= IDX_TAIL(*queueSong); i++) {
-        if (ctr == id) {
+        if (ctr == id-1) {
             Song foundSong = queueSong->buffer[i];
             for (int j = i; j < IDX_TAIL(*queueSong); j++) {
                 queueSong->buffer[j] = queueSong->buffer[j+1];
