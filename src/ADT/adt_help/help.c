@@ -1,17 +1,17 @@
 #include "help.h"
 
-int help1(){
+void help1(){
 // Fungsi mengeluarkan COMMAND yang dapat diakses sebelum memasuki sesi
 
-printf("=====[ Menu Help WayangWave ]=====");
-printf("1. START -> Untuk masuk sesi baru");
-printf("2. LOAD -> Untuk memulai sesi berdasarkan file konfigurasi");
+printf("\n=====[ Menu Help WayangWave ]=====\n");
+printf("1. START -> Untuk masuk sesi baru\n");
+printf("2. LOAD -> Untuk memulai sesi berdasarkan file konfigurasi\n");
 }
-int help2(){
+void help2(){
 // Fungsi mengeluarkan COMMAND yang dapat diakses setelah memasuki sesi
 
-printf("=====[ Menu Help WayangWave ]=====");
-printf("1. LIST -> Untuk menampilkan daftar lagu, playlist, album, penyanyi");
+printf("\n=====[ Menu Help WayangWave ]=====\n");
+printf("1. LIST -> Untuk menampilkan daftar lagu, playlist, album, penyanyi\n");
 char help22[500] = "2. PLAY -> Untuk memulai suatu lagu baru atau lagu dari playlist yang dipilih. Terdapat dua pilihan, yaitu memainkan lagu (PLAY SONG) dan memainkan lagu berdasarkan id playlist (QUEUE PLAYLIST)";
 printf("%s\n", help22);
 char help23[500] = "3. QUEUE -> Untuk memanipulasi queue lagu. Terdapat lima pilihan, yaitu menambahkan lagu (QUEUE SONG), menambahkan playlist (QUEUE PLAYLIST), menukar lagu pada urutan ke x dan juga urutan ke y (QUEUE SWAP <x><y>), menghapus lagu dari QUEUE (QUEUE REMOVE), dan mengosongkan queue (QUEUE CLEAR)";

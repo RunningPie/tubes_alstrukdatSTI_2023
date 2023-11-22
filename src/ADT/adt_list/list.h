@@ -7,6 +7,7 @@
 
 #include "../boolean.h"
 #include "../adt_mesinkata/mesinkata.h"
+#include "../struct.h"
 
 /* Kamus Umum */
 #define MaxEl 100

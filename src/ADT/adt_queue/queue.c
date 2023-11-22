@@ -94,7 +94,7 @@ void displayQueue(Queue q)
         printf("[]\n");
     } else {
         for (i = IDX_HEAD(q); i < (IDX_HEAD(q)+Qlength(q))-1; i++) {
-            displaySongInfo(q.buffer[i]);
+            DisplaySong(q.buffer[i]);
             printf("\n");
         }
     }

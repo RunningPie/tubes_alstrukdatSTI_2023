@@ -35,6 +35,21 @@ void STARTWORD()
     IgnoreBlanks();
 }
 
+void STARTSENTENCE() {
+    START();
+    IgnoreBlanks();
+    if (currentChar == MARK)
+    {
+        endWord = true;
+    }
+    else
+    {
+        endWord = false;
+        CopySentence();
+    }
+    IgnoreBlanks();
+}
+
 void STARTWORDFILE(char* filename) {
     STARTFILE(filename);
     IgnoreBlanks();
@@ -163,16 +178,48 @@ int WordToInt(Word Kata) {
     return hasil;
 }
 
+Word SenToWord(Word sentence, int idxKata) {
+    int count = 0; 
+    Word Kata; Kata.Length = 0;
+
+    int i = 0;
+    while (i < sentence.Length && count <= idxKata) {
+        Kata.TabWord[Kata.Length] = sentence.TabWord[i];
+        if (sentence.TabWord[i] == ' ') {
+            if (count < idxKata) {
+                Kata.Length = 0;
+            } count++;
+        }
+        if (sentence.TabWord[i] != ' ') {
+            Kata.Length++;
+        }
+        i++;
+    }
+    Kata.TabWord[Kata.Length] = '\0';
+    return Kata;    
+}
+
 void SalinKata(Word Kata1, Word* Kata2) {
     Kata2->Length = Kata1.Length;
     for (int i = 0; i < Kata2->Length; i++) {
         Kata2->TabWord[i] = Kata1.TabWord[i];
     }
+    Kata2->TabWord[Kata2->Length] = '\0';
 }
 
 void DisplayKata(Word Kata) {
     for (int i = 0; i < Kata.Length; i++) {
         printf("%c", Kata.TabWord[i]);
     }
-    printf("\n");
+}
+
+String WordToString(Word Kata) {
+    String str;
+    str.length = Kata.Length;
+
+    int i;
+    for (i=0; i<Kata.Length; i++){
+        str.content[i] = Kata.TabWord[i];
+    }
+    return str;
 }

@@ -7,13 +7,14 @@
 
 #include "../boolean.h"
 #include "../adt_mesinkata/mesinkata.h"
-#include "../adt_song/song.h"
+#include "../adt_lagu/lagu.h"
+#include "../struct.h"
 
 #define Undef -1
 #define MaxEl 100
 /* Nil adalah stack dengan elemen kosong . */
 
-typedef Word infotypeS;
+// typedef Word infotypeS;
 typedef int address;   /* indeks tabel */
 
 /* Contoh deklarasi variabel bertype stack dengan ciri TOP : */

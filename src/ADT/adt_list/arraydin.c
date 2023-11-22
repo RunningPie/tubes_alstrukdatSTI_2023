@@ -86,13 +86,13 @@ void DeleteFirstArrDin(ArrayDin *array)
 
 void PrintArrayDin(ArrayDin array)
 {
-    printf("[");
-    for(int i = 0; i < array.Neff-1; i++)
+    int j = 1;
+    for(int i = 0; i <= array.Neff-1; i++)
     {
-        printf("%d, ", array.A[i]);
+        printf("\n%d ", j);
+        DisplayKata(array.A[i]);
+        j++;
     }
-    if(array.Neff) printf("%d]\n", array.A[array.Neff-1]);
-    else printf("]\n");
 }
 
 void ReverseArrayDin(ArrayDin *array)

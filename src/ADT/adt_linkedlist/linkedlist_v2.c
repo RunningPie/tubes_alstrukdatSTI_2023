@@ -2,7 +2,7 @@
 #include <stdio.h>
 // #include "node.h"
 
-Desc DescKosong = {{{'\0'}, 0}, {{'\0'}, 0}, {{'\0'}, 0}};
+Song SongKosong = {{{'\0'}, 0}, {{'\0'}, 0}, {{'\0'}, 0}};
 
 Address newNode(LinkedListEl val) {
     Address p = (Address)
@@ -17,12 +17,6 @@ Address newNode(LinkedListEl val) {
     }
     return p;
 }
-
-/* Selektor */
-#define INFO(P) (P)->info
-#define NEXT(P) (P)->next
-#define FIRST(L) ((L).first)
-#define LAST(L) ((L).last)
 
 /* PROTOTYPE */
 /************** TEST LIST KOSONG **************/

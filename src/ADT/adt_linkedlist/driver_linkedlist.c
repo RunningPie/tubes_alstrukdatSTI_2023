@@ -7,43 +7,43 @@ int main() {
     CreateLinkedList(&list);
 
     // Menambahkan elemen ke dalam list
-    Desc desc1, desc2, desc3;
-    desc1.Penyanyi = ToKata("Adele");
-    desc1.Album = ToKata("25");
-    desc1.Lagu = ToKata("Hello");
+    Song Song1, Song2, Song3;
+    Song1.Penyanyi = ToKata("Adele");
+    Song1.Album = ToKata("25");
+    Song1.Lagu = ToKata("Hello");
 
-    desc2.Penyanyi = ToKata("Ed Sheeran");
-    desc2.Album = ToKata("Divide");
-    desc2.Lagu = ToKata("Shape of You");
+    Song2.Penyanyi = ToKata("Ed Sheeran");
+    Song2.Album = ToKata("Divide");
+    Song2.Lagu = ToKata("Shape of You");
 
-    // CreateDesc(&desc2, ToKata("Ed Sheeran"), ToKata("Divide"), ToKata("Shape of You"));
+    // CreateSong(&Song2, ToKata("Ed Sheeran"), ToKata("Divide"), ToKata("Shape of You"));
 
-    desc3.Penyanyi = ToKata("Justin Bieber");
-    desc3.Album = ToKata("My World");
-    desc3.Lagu = ToKata("One Time");
+    Song3.Penyanyi = ToKata("Justin Bieber");
+    Song3.Album = ToKata("My World");
+    Song3.Lagu = ToKata("One Time");
 
-    // printf("panjang album: %d\n", desc2.Album.Length);
-    // printf("test album: "); DisplayKata(desc2.Album);
+    // printf("panjang album: %d\n", Song2.Album.Length);
+    // printf("test album: "); DisplayKata(Song2.Album);
 
-    LinkedListInsertFirst(&list, desc1);
-    LinkedListInsertLast(&list, desc2);
-    LinkedListInsertAt(&list, desc3, 1);
+    LinkedListInsertFirst(&list, Song1);
+    LinkedListInsertLast(&list, Song2);
+    LinkedListInsertAt(&list, Song3, 1);
 
     // Menampilkan elemen-elemen list
     printf("Elemen-elemen list:\n");
     for (int i = 0; i < LinkedListLength(list); i++) {
         // printf("Loop jalan29\n");
-        Desc currentDesc = getElmt(list, i);
+        Song currentSong = getElmt(list, i);
         // printf("Loop jalan31\n");
-        printf("Penyanyi: %s, Album: %s, Lagu: %s\n", currentDesc.Penyanyi.TabWord, currentDesc.Album.TabWord, currentDesc.Lagu.TabWord);
+        printf("Penyanyi: %s, Album: %s, Lagu: %s\n", currentSong.Penyanyi.TabWord, currentSong.Album.TabWord, currentSong.Lagu.TabWord);
         // printf("Loop jalan32\n");
     }
 
     // Menghapus elemen terakhir
-    Desc deletedDesc;
-    LinkedListDeleteLast(&list, &deletedDesc);
+    Song deletedSong;
+    LinkedListDeleteLast(&list, &deletedSong);
     printf("\nElemen terakhir dihapus:\n");
-    printf("Penyanyi: %s, Album: %s, Lagu: %s\n", deletedDesc.Penyanyi.TabWord, deletedDesc.Album.TabWord, deletedDesc.Lagu.TabWord);
+    printf("Penyanyi: %s, Album: %s, Lagu: %s\n", deletedSong.Penyanyi.TabWord, deletedSong.Album.TabWord, deletedSong.Lagu.TabWord);
 
 }
 

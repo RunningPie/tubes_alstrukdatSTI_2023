@@ -2,30 +2,30 @@
 #include "lagu.h"
 
 int main() {
-    Desc lagu1, lagu2, lagu3;
+    Song lagu1, lagu2, lagu3;
 
     Word penyanyi1 = ToKata("Adele");
     Word album1 = ToKata("25");
     Word judul1 = ToKata("Hello");
-    CreateDesc(&lagu1, penyanyi1, album1, judul1);
+    CreateSong(&lagu1, penyanyi1, album1, judul1);
 
     Word penyanyi2 = ToKata("Ed Sheeran");
     Word album2 = ToKata("Divide");
     Word judul2 = ToKata("Shape of You");
-    CreateDesc(&lagu2, penyanyi2, album2, judul2);
+    CreateSong(&lagu2, penyanyi2, album2, judul2);
 
     printf("Lagu 1:\n");
-    DisplayDesc(lagu1);
+    DisplaySong(lagu1);
     printf("\n");
 
     printf("Lagu 2:\n");
-    DisplayDesc(lagu2);
+    DisplaySong(lagu2);
     printf("\n");
 
-    PasteDesc(lagu2, &lagu3);
+    PasteSong(lagu2, &lagu3);
 
     printf("Menyalin Lagu 2:\n");
-    DisplayDesc(lagu3);
+    DisplaySong(lagu3);
 
     return 0;
 }
