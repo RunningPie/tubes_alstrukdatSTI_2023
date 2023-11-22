@@ -158,13 +158,15 @@ int main() {
         } else if (isWordEq(SenToWord(currentWord, 0), ToKata("SAVE"))) {
             if (state) {
                 // SAVE
-                SAVE(SenToWord(currentWord, 1), daftarPenyanyi, penyanyiAlbum, albumLagu);
+                SAVE(SenToWord(currentWord, 1), daftarPenyanyi,
+                penyanyiAlbum, albumLagu, currentSong, queue, history);
             } else {
                 InvalidSession();
             }
         } else if (isWordEq(SenToWord(currentWord, 0), ToKata("QUIT"))) {
             if (state) {
-                QUIT(daftarPenyanyi, penyanyiAlbum, albumLagu);
+                QUIT(daftarPenyanyi, penyanyiAlbum, albumLagu,
+                currentSong, queue, history);
                 end = false; state = false;
             } else {
                 InvalidSession();

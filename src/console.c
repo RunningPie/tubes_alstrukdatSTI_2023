@@ -175,23 +175,26 @@ void PLAYSONG(List daftarPenyanyi, Map *penyanyiAlbum, Map *albumLagu, Queue *Qu
                 SalinKata(MapValue(*albumLagu, album).Elements[idLagu], &lagu);
                 
                 // Memutar lagu
-                SalinKata(penyanyi, &currentSong->Penyanyi);
-                SalinKata(album, &currentSong->Album);
-                SalinKata(lagu, &currentSong->Lagu);
+                // SalinKata(penyanyi, &currentSong->Penyanyi);
+                // SalinKata(album, &currentSong->Album);
+                // SalinKata(lagu, &currentSong->Lagu);
 
                 // Memasukkan lagu ke queue
                 // enqueue(QueueL, currentSong);
-
+// /N /R/N
                 // Menambahkan lagu ke dalam history (stack)
                 // PushStack(historyL, currentSong);
-                CreateQueue(QueueL);
-                CreateEmptyStack(historyL);
+                // CreateQueue(QueueL);
+                // CreateEmptyStack(historyL);
 
-                printf("Memutar lagu “");
-                DisplayKata(currentSong->Lagu);
-                printf("” oleh “");
-                DisplayKata(currentSong->Penyanyi);
-                printf("”.\n");
+                printf("Memutar lagu \"");
+                DisplayKata(lagu);
+                printf("\" oleh \"");
+                DisplayKata(penyanyi);
+                printf("\".\n");
+                SalinKata(penyanyi, &(*currentSong).Penyanyi);
+                SalinKata(album, &(*currentSong).Album);
+                SalinKata(lagu, &(*currentSong).Lagu);
 
             } else {
                 printf("ID Lagu %d tidak ada dalam daftar. Silakan coba lagi.\n", idLagu + 1);
@@ -206,6 +209,7 @@ void PLAYSONG(List daftarPenyanyi, Map *penyanyiAlbum, Map *albumLagu, Queue *Qu
         DisplayKata(penyanyi);
         printf(" tidak ada dalam daftar. Silakan coba lagi.\n");
     }
+
 }
 
 void PLAYPLAYLIST(ArrayDin daftarPlaylist, Map *playlistSongs, Queue *QueueL, Stack *historyL, Song *onPlaySong) {
@@ -550,8 +554,8 @@ I.S.: queueSong berisi Song yang telah di-Queue
 F.S.: Head dari queueSong dimainkan, Heed berganti ke lagu yang diantrikan selanjutnya pada queueSong
 */
     if ((Qlength(*queueSong)) >= 1){ // Isi queueSong 1 atau lebih lagu yang telah di-Queue
-        dequeue(queueSong, onPlaySong);
         PushStack(previousSong, *onPlaySong);
+        dequeue(queueSong, onPlaySong);
         
         printf("\nMemutar lagu selanjutnya\n");
         printf("\"");
@@ -754,11 +758,11 @@ F.S.: Lagu (id) dihapus dari queue apabila id terdefinisi
 
             printf("\nLagu ");
             printf("\"");
-            DisplayKata(queueSong->buffer[id].Lagu);
+            DisplayKata((queueSong->buffer[id]).Lagu);
             printf("\" ");
             printf("oleh ");
             printf("\" ");
-            DisplayKata(queueSong->buffer[id].Penyanyi);
+            DisplayKata((queueSong->buffer[id]).Penyanyi);
             printf("\" telah dihapus dari queue!\n");
             return;
         }
@@ -779,7 +783,8 @@ F.S.: Queue kosong atau tidak berisi lagu
     printf("\nQueue berhasil dikosongkan.\n");
 }
 
-void SAVE(Word filename, List daftarPenyanyi, Map penyanyiAlbum, Map albumLagu)
+void SAVE(Word filename, List daftarPenyanyi, Map penyanyiAlbum,
+Map albumLagu, Song currentSong, Queue currentQ, Stack currentHist)
 /*
 SAVE merupakan command yang digunakan untuk menyimpan state aplikasi terbaru ke dalam suatu file.
 Command SAVE memiliki satu argumen yang merepresentasikan nama file yang akan disimpan.
@@ -823,7 +828,41 @@ Penyimpanan dilakukan pada folder tertentu, misal folder save.
                 SalinKata(laguCurrentAlbum.Elements[k], &currentLagu);
                 fprintf(fp, "%s\n", currentLagu.TabWord);
             }
-            // printf("ini oke, i:%d\n", i);
+        }
+    }
+    // === batas default ===
+    Word cSongPenyanyi, cSongAlbum, cSongLagu;
+    SalinKata(currentSong.Penyanyi, &cSongPenyanyi);
+    SalinKata(currentSong.Album, &cSongAlbum);
+    SalinKata(currentSong.Lagu, &cSongLagu);
+    if (currentSong.Penyanyi.Length > 0){
+        fprintf(fp, "%s;%s;%s\n", cSongPenyanyi.TabWord, cSongAlbum.TabWord, cSongLagu.TabWord);
+    } else {
+        fprintf(fp, "-;-;-\n");
+    }
+    // printf("ini oke, ");
+    fprintf(fp, "%d\n", Qlength(currentQ));
+
+    if (!QisEmpty(currentQ)) {
+        i = IDX_HEAD(currentQ);
+        while (i <= IDX_TAIL(currentQ)){
+            SalinKata(currentQ.buffer[i].Penyanyi, &cSongPenyanyi);
+            SalinKata(currentQ.buffer[i].Album, &cSongAlbum);
+            SalinKata(currentQ.buffer[i].Lagu, &cSongLagu);
+            fprintf(fp, "%s;%s;%s\n", cSongPenyanyi.TabWord, cSongAlbum.TabWord, cSongLagu.TabWord);
+            i++;
+        }
+    }
+
+    fprintf(fp, "%d\n", LengthStack(currentHist));
+    i = Top(currentHist);
+    if (Top(currentHist) != -1){
+        while (i > -1){
+            SalinKata(currentHist.T[i].Penyanyi, &cSongPenyanyi);
+            SalinKata(currentHist.T[i].Album, &cSongAlbum);
+            SalinKata(currentHist.T[i].Lagu, &cSongLagu);
+            fprintf(fp, "%s;%s;%s\n", cSongPenyanyi.TabWord, cSongAlbum.TabWord, cSongLagu.TabWord);
+            i--;
         }
     }
 
@@ -833,7 +872,8 @@ Penyimpanan dilakukan pada folder tertentu, misal folder save.
     return;
 }
 
-void QUIT(List daftarPenyanyi, Map penyanyiAlbum, Map albumLagu)
+void QUIT(List daftarPenyanyi, Map penyanyiAlbum, Map albumLagu,
+Song currentSong, Queue currentQ, Stack currentHist)
 // QUIT merupakan command yang digunakan untuk keluar dari sesi aplikasi WayangWave.
 // I.S. Sembarang dalam sesi
 // F.S. Keluar dari sesi. Jika data sesi disimpan maka terbentuk suatu file bernama <filename> di folder save.
@@ -845,7 +885,8 @@ void QUIT(List daftarPenyanyi, Map penyanyiAlbum, Map albumLagu)
         printf("Masukkan nama file untuk penyimpanan: ");
         ADVWORD();
 
-        SAVE(currentWord, daftarPenyanyi, penyanyiAlbum, albumLagu);
+        SAVE(currentWord, daftarPenyanyi, penyanyiAlbum, albumLagu,
+        currentSong, currentQ, currentHist);
     } else {
         printf("Kamu keluar dari WayangWave.\n");
         printf("Dadah ^_^/\n");
