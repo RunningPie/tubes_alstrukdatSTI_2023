@@ -34,24 +34,32 @@ int main(){
     char* singerChar = "singer";
     Word singerSong = ToKata(singerChar);
 
-    Song firstSong = createSong(titleSong, albumSong, singerSong);
+    Song firstSong;
+    CreateSong(&firstSong, titleSong, albumSong, singerSong);
 
     enqueue(&q, firstSong);
 
     printf("Display info for the head of the queue...\n\n");
-    displaySongInfo(HEAD(q));
+    DisplaySong(HEAD(q));
     printf("\n");
 
     printf("Queuing more songs to the queue...\n\n");
-    enqueue(&q, createSong(ToKata("Second Song"), ToKata("Second Album"), ToKata("Second Singer")));
-    enqueue(&q, createSong(ToKata("Third Song"), ToKata("Third Album"), ToKata("Third Singer")));
-    enqueue(&q, createSong(ToKata("Fourth Song"), ToKata("Fourth Album"), ToKata("Fourth Singer")));
+    Song s1, s2, s3;
+    CreateSong(&s1, ToKata("Second Song"), ToKata("Second Album"), ToKata("Second Singer"));
+    CreateSong(&s2, ToKata("Third Song"), ToKata("Third Album"), ToKata("Third Singer"));
+    CreateSong(&s3, ToKata("Fourth Song"), ToKata("Fourth Album"), ToKata("Fourth Singer"));
+    enqueue(&q, s1);
+    enqueue(&q, s2);
+    enqueue(&q, s3);
+    
     printf("Displaying all element infos...\n\n");
     displayQueue(q);
 
     printf("Preemptive enqueue...\n\n");
-    enqueueFirst(&q, createSong(ToKata("This Should be First"), ToKata("New Album"), ToKata("New Singer")));
-    displaySongInfo(HEAD(q));
+    Song s4;
+    CreateSong(&s4, ToKata("This Should be First"), ToKata("New Album"), ToKata("New Singer"));
+    enqueueFirst(&q, s4);
+    DisplaySong(HEAD(q));
     printf("\n");
     printf("Displaying all queue elements...\n\n");
     displayQueue(q);

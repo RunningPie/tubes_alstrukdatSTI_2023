@@ -64,13 +64,13 @@ void displayCCQueue (CQueue Q) {
         int i = CQIDX_HEAD(Q);
         printf("[");
         while (i != CQIDX_TAIL(Q)) {
-            printf("%d,", Q.Tab[i]);
+            printf("%s,", Q.Tab[i].TabWord);
             if (i == IDX_MAX) {
                 i = 0;
             } else {
                 i++;
             }
         }
-        printf("%d]\n", Q.Tab[i]);
+        printf("%s]\n", Q.Tab[i].TabWord);
     }
 }

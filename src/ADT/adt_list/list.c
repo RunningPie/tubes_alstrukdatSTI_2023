@@ -181,6 +181,7 @@ void DisplayList(List L) {
     } else {
         for (int i = ListFirstIdx(L); i <= ListLastIdx(L); i++) {
             printf("%d. ", j); DisplayKata(L.A[i]);
+            printf("\n");
             j++;
         }
     }

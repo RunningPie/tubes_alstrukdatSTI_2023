@@ -5,15 +5,25 @@
 
 #include "../boolean.h"
 #include "../struct.h"
+#include "../adt_mesinkata/mesinkata.h"
 #include <stdlib.h>
+
+extern Song SongKosong;
+
+// Word kataKosong = {{'\0'}, 0};
+// // Song SongKosong;
+// // CreateSong(&SongKosong, kataKosong, kataKosong, kataKosong);
 
 #define NIL NULL
 #define IDX_UNDEF -1
-#define UNDEF_VAL -1
+#define UNDEF_VAL SongKosong;
 
-typedef Desc LinkedListEl;
+typedef Song LinkedListEl;
 typedef struct node* Address;
-typedef struct node { LinkedListEl info; Address next; } Node;
+typedef struct node { 
+    LinkedListEl info; 
+    Address next; 
+} Node;
 
 Address newNode(LinkedListEl val);
 
@@ -75,7 +85,7 @@ void LinkedListDeleteFirst(LinkedList *l, LinkedListEl *x);
 /* Elemen list berkurang satu (mungkin menjadi kosong) */
 /* First element yg baru adalah suksesor elemen pertama yang lama */
 
-void LinkedListDeleteAt(LinkedList *l, int idx, LinkedListEl *x);
+void LinkedListDeleteAt(LinkedList *l, LinkedListEl *x, int idx);
 /* I.S. l terdefinisi tidak kosong */
 /* F.S. x diset dengan elemen l pada indeks ke-idx.
         Elemen l pada indeks ke-idx dihapus dari l. */
@@ -86,7 +96,5 @@ void LinkedListDeleteLast(LinkedList *l, LinkedListEl *x);
 /* Elemen list berkurang satu (mungkin menjadi kosong) */
 
 void LinkedListInsertAt(LinkedList *l, LinkedListEl x, int i);
-
-void LinkedListGet(LinkedList *l,LinkedListEl *x,int i);
 
 #endif

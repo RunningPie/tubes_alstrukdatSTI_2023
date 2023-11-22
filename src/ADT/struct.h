@@ -12,6 +12,7 @@ Struct.h adalah header untuk semua custom structure yang dibutuhkan tiap ADT
 // Untuk ADT MesinKata
 #define NMax 50
 #define BLANK ' '
+#define WORDLENGTH(w) (w).Length
 typedef struct
 {
    char TabWord[NMax]; /* container penyimpan kata, indeks yang dipakai [0..NMax-1] */
@@ -19,13 +20,13 @@ typedef struct
 } Word;
 
 // ADT SET
-#define Nil 0
-#define MaxEl 100
+#define SetNil 0
+#define SetMaxEl 100
 
 typedef Word infotype;
 typedef struct
 {
-    infotype Elements[MaxEl];
+    infotype Elements[SetMaxEl];
     int Count;
 } Set;
 
@@ -38,6 +39,28 @@ typedef struct {
     Word Penyanyi;
     Word Album;
     Word Lagu;
-} Desc;
+} Song;
+
+// HashMap
+#define HashNil 0
+#define HashMaxEl 16
+#define HashUndefined -9999
+
+typedef int hashkeytype;
+typedef int hashvaluetype;
+typedef int hashaddress;
+
+typedef struct
+{
+	hashkeytype Key;
+	hashvaluetype Value;
+} HashInfotype;
+
+typedef struct
+{
+    HashInfotype Elements[HashMaxEl];
+	hashaddress Count;
+} HashMap;
+
 
 #endif

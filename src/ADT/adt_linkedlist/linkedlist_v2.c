@@ -1,5 +1,8 @@
 #include "linkedlist_v2.h"
+#include <stdio.h>
 // #include "node.h"
+
+Song SongKosong = {{{'\0'}, 0}, {{'\0'}, 0}, {{'\0'}, 0}};
 
 Address newNode(LinkedListEl val) {
     Address p = (Address)
@@ -7,17 +10,13 @@ Address newNode(LinkedListEl val) {
     malloc(sizeof(Node));
 
     if (p!=NULL) {
-    INFO(p) = val;
+    INFO(p).Penyanyi = val.Penyanyi;
+    INFO(p).Album = val.Album;
+    INFO(p).Lagu = val.Lagu;
     NEXT(p) = NULL;
     }
     return p;
 }
-
-/* Selektor */
-#define INFO(P) (P)->info
-#define NEXT(P) (P)->next
-#define FIRST(L) ((L).first)
-#define LAST(L) ((L).last)
 
 /* PROTOTYPE */
 /************** TEST LIST KOSONG **************/
@@ -49,7 +48,7 @@ int indexOf(LinkedList l, LinkedListEl x)
     idx = 0;
 
     while (p != NULL && !found){
-        if (INFO(p) == x){
+        if (isWordEq(INFO(p).Lagu, x.Lagu)){
             found = true;
         } else {
             idx++;
@@ -87,10 +86,12 @@ LinkedListEl getElmt(LinkedList l, int idx)
     if (idx < 0 || idx > (LinkedListLength(l)-1)){
         return UNDEF_VAL;
     } else {
+        // printf("Masuk get94\n");
         while (count < idx) {
             count++;
             p = NEXT(p);
         }
+        // printf("Keluar loop get 100\n");
 
         return INFO(p);
     }
@@ -167,7 +168,7 @@ void LinkedListDeleteAt(LinkedList *l, LinkedListEl *x, int idx)
 
     if (!(idx < 0 || idx > LinkedListLength(*l)-1)) {
         if (idx = 0) {
-            LinkedListDeleteFirst(l, *x);
+            LinkedListDeleteFirst(l, x);
         } else {
             count = 0;
             prev = FIRST(*l);
@@ -208,11 +209,11 @@ void LinkedListInsertAt(LinkedList *l, LinkedListEl x, int i)
 {
     Address p;
     p=newNode(x);
-    if(p!=null)
+    if(p!=NULL)
     {
         if(i==0)
         {
-            NEXT(P)=FIRST(*l);
+            NEXT(p)=FIRST(*l);
             FIRST(*l)=p;
         }
         else
@@ -230,20 +231,3 @@ void LinkedListInsertAt(LinkedList *l, LinkedListEl x, int i)
     }
 }
 
-void GetLinkedList(LinkedList *l,LinkedListEl *x,int i)
-{
-    int idx;
-    Address p;
-    idx=0;
-    p=FIRST(*s);
-
-    while (p!=NIL && idx !=i)
-    {
-        idx++;
-        p=NEXT(p);
-    }
-    if(i==idx)
-    {
-        InsertWord(info(p),x);
-    }
-}

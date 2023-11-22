@@ -24,6 +24,9 @@ void STARTWORD();
           atau EndWord = false, currentWord adalah kata yang sudah diakuisisi,
           currentChar karakter pertama sesudah karakter terakhir kata */
 
+void STARTSENTENCE();
+/* Start sentence */
+
 void STARTWORDFILE(char* filename);
 /* I.S. : currentChar sembarang
    F.S. : EndWord = true, dan currentChar = MARK;
@@ -78,6 +81,11 @@ int WordToInt(Word Kata);
    I.S. : word.TabWord merupakan digit
    F.S. : mengembalikan dalam bentuk integer */
 
+Word SenToWord(Word sentence, int idxKata);
+/* Mengambil word dalam sentence dari ADVSENTENCE
+   I.S. : currentWord dari ADVSENTENCE
+   F.S. : mengembalikan kata sesuai urutan yang diinginkan */
+
 void SalinKata(Word Kata1, Word* Kata2 );
 /* Menyalin Kata1 ke Kata2
    I.S. : Kata1 sembarang, Kata2 kosong
@@ -85,5 +93,8 @@ void SalinKata(Word Kata1, Word* Kata2 );
 
 void DisplayKata(Word Kata);
 /* Menuliskan word kata */
+
+String WordToString(Word Kata);
+// Mengubah Word menjadi bentukan string
 
 #endif

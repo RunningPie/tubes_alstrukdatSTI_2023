@@ -3,6 +3,7 @@
 
 #include "../boolean.h"
 #include "../adt_mesinkata/mesinkata.h"
+#include "../struct.h"
 
 #define InitialSize 10
 
