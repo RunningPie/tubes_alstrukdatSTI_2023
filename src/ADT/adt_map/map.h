@@ -13,7 +13,7 @@ Deklarasi stack yang dengan implementasi array eksplisit-statik rata kiri
 // #define false 0
 // #define true 1
 #define Nil 0
-#define MaxEl 100
+#define MapMaxEl 10
 #define Undefined -999
 
 // typedef int bool;
@@ -26,7 +26,7 @@ typedef struct {
 } MapEntry;
 
 typedef struct {
-	MapEntry Elements[MaxEl];
+	MapEntry Elements[MapMaxEl];
 	int Count;
 } Map;
 

@@ -50,6 +50,9 @@ boolean IsIdxValidSet(Set s,int i);
 boolean IsSetMember(Set S, infotype Elmt);
 /* Mengembalikan true jika Elmt adalah member dari S */
 
+void SalinSet(Set S1, Set *S2);
+/* MEnyalin S1 ke S2 */
+
 void DisplaySet(Set S);
 /* Menuliskan Set S */
 

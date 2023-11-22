@@ -11,7 +11,8 @@ int main() {
     Map penyanyiAlbum, albumLagu; MapCreateEmpty(&penyanyiAlbum); MapCreateEmpty(&albumLagu);
     Song currentSong;
 
-    while(end) {
+    while (end) {
+        printf("\n>> ");
         STARTSENTENCE();
         if (isWordEq(SenToWord(currentWord, 0), ToKata("START"))) {
             if (!state) {
@@ -108,49 +109,49 @@ int main() {
         } else if (isWordEq(SenToWord(currentWord, 0), ToKata("PLAYLIST")) && isWordEq(SenToWord(currentWord, 1), ToKata("CREATE"))) {
             if (state) {
                 // PLAYLIST CREATE
-                PLAYLISTCREATE(daftarPlaylist);
+                PLAYLISTCREATE(&daftarPlaylist);
             } else {
                 InvalidSession();
             }
         } else if (isWordEq(SenToWord(currentWord, 0), ToKata("PLAYLIST")) && isWordEq(SenToWord(currentWord, 1), ToKata("ADD")) && isWordEq(SenToWord(currentWord, 2), ToKata("SONG"))) {
             if (state) {
                 // PLAYLIST ADD SONG
-                PLAYLISTADDSONG(daftarPenyanyi, daftarPlaylist, &penyanyiAlbum, &albumLagu);
+                PLAYLISTADDSONG(daftarPenyanyi, &daftarPlaylist, penyanyiAlbum, albumLagu);
             } else {
                 InvalidSession();
             }
         } else if (isWordEq(SenToWord(currentWord, 0), ToKata("PLAYLIST")) && isWordEq(SenToWord(currentWord, 1), ToKata("ADD")) && isWordEq(SenToWord(currentWord, 2), ToKata("ALBUM"))) {
             if (state) {
                 // PLAYLIST ADD ALBUM
-                PLAYLISTADDALBUM(daftarPenyanyi, &penyanyiAlbum, daftarPlaylist, &albumLagu);
+                PLAYLISTADDALBUM(daftarPenyanyi, &daftarPlaylist, penyanyiAlbum, albumLagu);
             } else {
                 InvalidSession();
             }
         } else if (isWordEq(SenToWord(currentWord, 0), ToKata("PLAYLIST")) && isWordEq(SenToWord(currentWord, 1), ToKata("SWAP"))) {
             if (state) {
                 // PLAYLIST SWAP
-                PLAYLISTSWAP(daftarPenyanyi, &penyanyiAlbum, daftarPlaylist, &albumLagu, WordToInt(SenToWord(currentWord, 2)), WordToInt(SenToWord(currentWord, 3)), WordToInt(SenToWord(currentWord, 4)));
+                PLAYLISTSWAP(daftarPenyanyi, &daftarPlaylist, penyanyiAlbum, albumLagu, WordToInt(SenToWord(currentWord, 2)), WordToInt(SenToWord(currentWord, 3)), WordToInt(SenToWord(currentWord, 4)));
             } else {
                 InvalidSession();
             }
         } else if (isWordEq(SenToWord(currentWord, 0), ToKata("PLAYLIST")) && isWordEq(SenToWord(currentWord, 1), ToKata("REMOVE"))) {
             if (state) {
                 // PLAYLIST REMOVE
-                PLAYLISTREMOVE(daftarPenyanyi, &penyanyiAlbum, daftarPlaylist, &albumLagu);
+                PLAYLISTREMOVE(daftarPenyanyi, &daftarPlaylist, penyanyiAlbum, albumLagu, WordToInt(SenToWord(currentWord, 2)), WordToInt(SenToWord(currentWord, 3)));
             } else {
                 InvalidSession();
             }
         } else if (isWordEq(SenToWord(currentWord, 0), ToKata("PLAYLIST")) && isWordEq(SenToWord(currentWord, 1), ToKata("DELETE"))) {
             if (state) {
                 // PLAYLIST DELETE
-                PLAYLISTDELETE(daftarPenyanyi, &penyanyiAlbum, daftarPlaylist, &albumLagu);
+                PLAYLISTDELETE(daftarPenyanyi, &daftarPlaylist, penyanyiAlbum, albumLagu);
             } else {
                 InvalidSession();
             }
         } else if (isWordEq(SenToWord(currentWord, 0), ToKata("STATUS"))) {
             if (state) {
                 // STATUS
-                STATUS();
+                STATUS(currentSong, queue);
             } else {
                 InvalidSession();
             }

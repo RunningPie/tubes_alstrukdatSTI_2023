@@ -67,7 +67,7 @@ PLAYPLAYLIST merupakan command yang digunakan untuk memainkan lagu berdasarkan i
 yang akan dimainkan dan isi riwayat lagu sama dengan queue, tetapi dengan urutan yang di-reverse.
 */
 
-void PLAYLISTCREATE(ArrayDin daftarPlaylist);
+void PLAYLISTCREATE(ArrayDin *daftarPlaylist);
 /*
 Command PLAYLISTCREATE digunakan untuk membuat playlist baru dan ditambahkan pada 
 daftar playlist pengguna. Keadaan awal playlist adalah kosong. Nama playlist dapat 
@@ -76,7 +76,7 @@ sama dengan playlist yang sudah ada
 // I.S. Playlist belum ada
 // F.S. Playlist berhasil dibuat jika input pengguna valid
 
-void PLAYLISTADDSONG(List daftarPenyanyi,ArrayDin daftarPlaylist, Map *penyanyiAlbum, Map *albumLagu);
+void PLAYLISTADDSONG(List daftarPenyanyi, ArrayDin *daftarPlaylist, Map penyanyiAlbum, Map albumLagu);
 /*
 Command PLAYLISTADDSONG digunakan untuk menambahkan lagu pada suatu playlist yang telah 
 ada sebelumnya pada daftar playlist pengguna.Pada defaultnya,command ini hanya dapat
@@ -86,7 +86,7 @@ suatu playlist pengguna, maka lagu-lagu yang ditambahkan adalah yang belum ada d
 // I.S. Lagu di playlist terdefinisi
 // F.S. Lagu baru berhasil ditambahkan ke playlist jika input user valid
 
-void PLAYLISTADDALBUM(List daftarPenyanyi, Map *penyanyiAlbum, ArrayDin daftarPlaylist, Map *albumLagu);
+void PLAYLISTADDALBUM(List daftarPenyanyi, ArrayDin *daftarPlaylist, Map penyanyiAlbum, Map albumLagu);
 /*
 Command PLAYLISTADDALBUM digunakan untuk menambahkan album pada suatu playlist yang telah 
 ada sebelumnya pada daftar playlist pengguna.Pada defaultnya,command ini hanya dapat
@@ -95,7 +95,7 @@ menambahkan semua lagu yang ada pada album kepada suatu playlist.
 // I.S. Lagu di playlist terdefinisi
 // F.S. Album baru berhasil ditambahkan ke playlist jika input user valid
 
-void PLAYLISTSWAP(List daftarPenyanyi, Map *penyanyiAlbum, ArrayDin daftarPlaylist, Map *albumLagu, int id, int x, int y);
+void PLAYLISTSWAP(List daftarPenyanyi, ArrayDin *daftarPlaylist, Map penyanyiAlbum, Map albumLagu, int id, int x, int y);
 /*
 Command PLAYLISTSWAP digunakan untuk menukar lagu pada urutan ke x dan juga urutan ke y 
 di playlist dengan urutan ke id
@@ -103,7 +103,7 @@ di playlist dengan urutan ke id
 // I.S. Lagu di playlist terdefinisi
 // F.S. Lagu dengan urutan x dan urutan y berhasil ditukar jika input user valid
 
-void PLAYLISTREMOVE(List daftarPenyanyi, Map *penyanyiAlbum, ArrayDin daftarPlaylist, Map *albumLagu);
+void PLAYLISTREMOVE(List daftarPenyanyi, ArrayDin *daftarPlaylist, Map penyanyiAlbum, Map albumLagu, int id, int n);
 /*
 Command PLAYLISTREMOVE digunakan untuk menghapus lagu dengan urutan n pada playlist
 dengan index id.
@@ -111,7 +111,7 @@ dengan index id.
 // I.S. Lagu di playlist terdefinisi
 // F.S. Lagu pada urutan n berhasil dihapus jika input user valid
 
-void PLAYLISTDELETE(List daftarPenyanyi, Map *penyanyiAlbum, ArrayDin daftarPlaylist, Map *albumLagu);
+void PLAYLISTDELETE(List daftarPenyanyi, ArrayDin *daftarPlaylist, Map penyanyiAlbum, Map albumLagu);
 /*
 Command PLAYLISTDELETE digunakan untuk melakukan penghapusan suatu existing playlist 
 dalam daftar playlist pengguna.Tampilkan pesan error apabila masukkan pengguna
@@ -120,7 +120,7 @@ tidak valid pada setiap permintaan masukkan.
 // I.S. Lagu di playlist terdefinisi
 // F.S. Playlist berhasil dihapus jika input user valid
 
-void STATUS();
+void STATUS(Song currentL, Queue QueueL);
 /*
 STATUS merupakan command yang digunakan untuk menampilkan lagu yang sedang dimainkan 
 beserta Queue song yang ada dan dari playlist mana lagu itu diputar
