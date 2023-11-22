@@ -116,7 +116,7 @@ int main() {
         } else if (isWordEq(SenToWord(currentWord, 0), ToKata("PLAYLIST")) && isWordEq(SenToWord(currentWord, 1), ToKata("ADD")) && isWordEq(SenToWord(currentWord, 2), ToKata("SONG"))) {
             if (state) {
                 // PLAYLIST ADD SONG
-                PLAYLISTADDSONG(daftarPenyanyi, &daftarPlaylist, penyanyiAlbum, albumLagu);
+                PLAYLISTADDSONG(daftarPenyanyi, &daftarPlaylist, &penyanyiAlbum, &albumLagu);
             } else {
                 InvalidSession();
             }

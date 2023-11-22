@@ -76,7 +76,7 @@ sama dengan playlist yang sudah ada
 // I.S. Playlist belum ada
 // F.S. Playlist berhasil dibuat jika input pengguna valid
 
-void PLAYLISTADDSONG(List daftarPenyanyi, ArrayDin *daftarPlaylist, Map penyanyiAlbum, Map albumLagu);
+void PLAYLISTADDSONG(List daftarPenyanyi, ArrayDin *daftarPlaylist, Map *penyanyiAlbum, Map *albumLagu);
 /*
 Command PLAYLISTADDSONG digunakan untuk menambahkan lagu pada suatu playlist yang telah 
 ada sebelumnya pada daftar playlist pengguna.Pada defaultnya,command ini hanya dapat
