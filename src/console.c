@@ -658,7 +658,7 @@ F.S.: Queue berisi satu lagu atau queue telah ditambahkan dengan masukan lagu ya
             if (IsIdxValidSet(MapValue(*albumLagu, album), idLagu))
             {
                 Word namaLagu = MapValue(*albumLagu, album).Elements[idLagu];
-                Song lagu; CreateSong(&lagu, namaLagu, album, penyanyi);
+                Song lagu; CreateSong(&lagu, penyanyi, album, namaLagu);
                 enqueue(queueSong, lagu);
 
                 printf("Berhasil menambahkan lagu \"");
@@ -706,7 +706,7 @@ Proses: Procedure yang digunakan untuk menukar lagu pada urutan ke-x dan urutan 
 I.S.: Posisi lagu dengan id x dan posisi lagu dengan id y tetap berdasarkan urutan queue sebelumnya atau salah satu dari x atau y tidak terdefinisi 
 F.S.: Posisi lagu dengan id x berada di posisi lagu dengan id y, serta posisi lagu dengan id y berada di posisi lagu dengan id x (Swapping telah dilakukan) apabila x dan y terdefinisi 
 */
-    // Cek  if x or y is out of bounds
+    // Cek if x or y is out of bounds
     if (x + IDX_HEAD(*queueSong) > IDX_TAIL(*queueSong) || y + IDX_HEAD(*queueSong) > IDX_TAIL(*queueSong) || x < 0 || y < 0) {
         if  (x + IDX_HEAD(*queueSong) > IDX_TAIL(*queueSong) || x < 0){
             printf("\nLagu dengan urutan ke %d tidak terdapat dalam queue!\n", x);
@@ -716,19 +716,20 @@ F.S.: Posisi lagu dengan id x berada di posisi lagu dengan id y, serta posisi la
         }
         return;
     }
+
     // Begin the swap
     Song temp;
-    temp = queueSong->buffer[x-1];
-    queueSong->buffer[x-1] = queueSong->buffer[y-1];
-    queueSong->buffer[y-1] = temp;
+    temp = queueSong->buffer[x];
+    queueSong->buffer[x] = queueSong->buffer[y];
+    queueSong->buffer[y] = temp;
 
     printf("\nLagu ");
     printf("\"");
-    DisplayKata(queueSong->buffer[y-1].Lagu);
+    DisplayKata(queueSong->buffer[y].Lagu);
     printf("\" ");
     printf("berhasil ditukar dengan ");
-    printf("\" ");
-    DisplayKata(queueSong->buffer[x-1].Lagu);
+    printf("\"");
+    DisplayKata(queueSong->buffer[x].Lagu);
     printf("\"\n");
     return;
 }
