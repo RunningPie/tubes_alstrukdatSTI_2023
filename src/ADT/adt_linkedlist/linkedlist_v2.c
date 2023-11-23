@@ -119,7 +119,7 @@ void LinkedListInsertFirst(LinkedList *l, LinkedListEl x)
 {
     Address new = newNode(x);
     if (LinkedListIsEmpty(*l)){
-        NEXT(new) = FIRST(*l);
+        // NEXT(new) = FIRST(*l);
         FIRST(*l) = new;
         LAST(*l) = new;
     } else {
@@ -134,11 +134,13 @@ void LinkedListInsertLast(LinkedList *l, LinkedListEl x)
 /* yaitu menjadi elemen yang ditunjuk oleh LAST(L) */
 {
     if (LinkedListIsEmpty(*l)){
+        // printf("Insert ok\n");
         LinkedListInsertFirst(l, x);
     } else {
         Address p = newNode(x);
         if (p != NULL){
             NEXT(LAST(*l)) = p;
+            LAST(*l) = p;
         }
     }
 }
@@ -228,6 +230,15 @@ void LinkedListInsertAt(LinkedList *l, LinkedListEl x, int i)
             NEXT(p)=NEXT(loc);
             NEXT(loc)=p;
         }
+    }
+}
+
+void LinkedListDisplay(LinkedList l){
+    Address p = FIRST(l);
+    printf("Display list:\n");
+    while (p != NULL){
+        printf("%s\n", INFO(p).Penyanyi.TabWord);
+        p = NEXT(p);
     }
 }
 

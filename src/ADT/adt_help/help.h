@@ -7,8 +7,8 @@
 #include <stdlib.h>
 
 void help1();
-// Fungsi mengeluarkan COMMAND yang dapat diakses sebelum memasuki sesi
+// Procedure mengeluarkan COMMAND yang dapat diakses sebelum memasuki sesi
 
 void help2();
-// Fungsi mengeluarkan COMMAND yang dapat diakses setelah memasuki sesi
+// Procedure mengeluarkan COMMAND yang dapat diakses setelah memasuki sesi
 #endif
