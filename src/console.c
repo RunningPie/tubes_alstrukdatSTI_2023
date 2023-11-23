@@ -135,7 +135,7 @@ void LISTPLAYLIST(ArrayDin daftarPlaylist) {
     }
 }
 
-void PLAYSONG(List daftarPenyanyi, Map *penyanyiAlbum, Map *albumLagu, Queue *QueueL, Stack *historyL, Song *currentSong){
+void PLAYSONG(List daftarPenyanyi, Map *penyanyiAlbum, Map *albumLagu, Queue *queueSong, Stack *historySong, Song *currentSong) {
     printf("Daftar Penyanyi :\n");
     DisplayList(daftarPenyanyi);
     printf("\n");
@@ -156,7 +156,6 @@ void PLAYSONG(List daftarPenyanyi, Map *penyanyiAlbum, Map *albumLagu, Queue *Qu
         STARTSENTENCE();
         printf("\n");
         Word album = currentWord;
-
         if (IsSetMember(MapValue(*penyanyiAlbum, penyanyi), album)) {
             printf("Daftar Lagu Album ");
             DisplayKata(album);
@@ -172,32 +171,20 @@ void PLAYSONG(List daftarPenyanyi, Map *penyanyiAlbum, Map *albumLagu, Queue *Qu
 
             int idLagu = WordToInt(currentWord) - 1;
             if (IsIdxValidSet(MapValue(*albumLagu, album), idLagu)) {
-                Word lagu;
-                SalinKata(MapValue(*albumLagu, album).Elements[idLagu], &lagu);
-                
-                // Memutar lagu
-                // SalinKata(penyanyi, &currentSong->Penyanyi);
-                // SalinKata(album, &currentSong->Album);
-                // SalinKata(lagu, &currentSong->Lagu);
+                Song lagu; CreateSong(&lagu, penyanyi, album, MapValue(*albumLagu, album).Elements[idLagu]);
 
-                // Memasukkan lagu ke queue
-                // enqueue(QueueL, currentSong);
-// /N /R/N
-                // Menambahkan lagu ke dalam history (stack)
-                // PushStack(historyL, currentSong);
-                // CreateQueue(QueueL);
-                // CreateEmptyStack(historyL);
+                // Clear queue dan history
+                queueClear(queueSong);
+                clearStack(historySong);
+                // nanti benerin lagi
 
                 printf("Memutar lagu \"");
-
-                DisplayKata(lagu);
+                DisplayKata(lagu.Lagu);
                 printf("\" oleh \"");
-                DisplayKata(penyanyi);
+                DisplayKata(lagu.Penyanyi);
                 printf("\".\n");
-                SalinKata(penyanyi, &(*currentSong).Penyanyi);
-                SalinKata(album, &(*currentSong).Album);
-                SalinKata(lagu, &(*currentSong).Lagu);
 
+                PasteSong(lagu, currentSong);
             } else {
                 printf("ID Lagu %d tidak ada dalam daftar. Silakan coba lagi.\n", idLagu + 1);
             }
@@ -211,7 +198,6 @@ void PLAYSONG(List daftarPenyanyi, Map *penyanyiAlbum, Map *albumLagu, Queue *Qu
         DisplayKata(penyanyi);
         printf(" tidak ada dalam daftar. Silakan coba lagi.\n");
     }
-
 }
 
 void PLAYPLAYLIST(ArrayDin daftarPlaylist, Map *playlistSongs, Queue *QueueL, Stack *historyL, Song *onPlaySong) {
@@ -226,32 +212,35 @@ void PLAYPLAYLIST(ArrayDin daftarPlaylist, Map *playlistSongs, Queue *QueueL, St
     int idPlaylist = WordToInt(currentWord) - 1;
     if (IsIdxValidArrDin(daftarPlaylist, idPlaylist)) {
         LinkedList playlist;
-
+        CreateLinkedList(&playlist);
+        CreateQueue(QueueL);
+        CreateEmptyStack(historyL);
         // LinkedList = daftarPlaylist.TabWord[idPlaylist]
+        playlist = daftarPlaylist.A[idPlaylist].pLinkedList;
+        // Clear queue dan history
+       
 
+        // Enqueue semua lagu dari playlist yang dipilih
+        *onPlaySong = playlist.first->info;
+        Address currentSong = playlist.first;
+        while (currentSong != NULL){
+            enqueue(QueueL, currentSong->info);
+            PushStack(historyL, currentSong->info);
+            currentSong = currentSong->next;
+        }
         if (!LinkedListIsEmpty(playlist)) {
-            // Clear queue dan history
-            CreateQueue(QueueL);
-            CreateEmptyStack(historyL);
-
-            // Enqueue semua lagu dari playlist yang dipilih
-            *onPlaySong = playlist.first->info;
-            Address currentSong = playlist.first;
-            while (currentSong != NULL) {
-                enqueue(QueueL, currentSong->info);
-                PushStack(historyL, currentSong->info);
-                currentSong = currentSong->next;
-            }
-
             printf("Memutar playlist \"");
             DisplayKata(daftarPlaylist.A[idPlaylist].namaPlaylist);
             printf("\".\n");
-        } else {
+        } 
+        else {
             printf("Playlist kosong. Tidak ada lagu yang dapat diputar.\n");
         }
-    } else {
+    }
+    else {
         printf("ID Playlist %d tidak ada dalam daftar. Silakan coba lagi.\n", idPlaylist + 1);
     }
+
 }
 
 
@@ -610,7 +599,7 @@ Contoh: Kondisi Riwayat Kosong
 Riwayat kosong, memutar kembali lagu
 “Mirror” oleh “Yasuda Rei”
 */
-    Song tempSong;
+    // Song tempSong;
     if (IsEmptyStack(*previousSong)){
         printf("\nRiwayat lagu kosong, memutar kembali lagu\n");
         printf("\"");
@@ -624,11 +613,11 @@ Riwayat kosong, memutar kembali lagu
             printf("\nDaftar lagu pada Queue sudah penuh!\n");
         }
         else{
-            PopStack(previousSong, &tempSong); // Menyimpan Song Previous di posisi temporary
-            *onPlaySong = InfoTop(*previousSong);
             enqueueFirst(queueSong, *onPlaySong); // Menyimpan Song yang sedang dimainkan menjadi HEAD DARI QUEUE SONG
+            PopStack(previousSong, onPlaySong); // Menyimpan Song Previous di current song
+            // *onPlaySong = InfoTop(*previousSong);
             // Mengubah tempSong sebagai onPlaySong
-            *onPlaySong = tempSong;
+            // *onPlaySong = tempSong;
 
             printf("\nMemutar lagu sebelumnya\n");
             printf("\"");
@@ -714,7 +703,24 @@ F.S.: Queue berisi satu atau lebih lagu yang di queue dari suatu playlist yang d
         printf("\nQueue penuh! Lagu dapat di-queue ketika tidak melalui maksimal queue.\n");
         return;
     }
+
+    printf("Daftar Playlist Pengguna :\n");
+    PrintArrayDin(daftarPlaylist);
+    printf("\n");
+
+    int idPlaylist;
+    printf("Masukkan ID Playlist: "); STARTWORD();
+    idPlaylist = WordToInt(currentWord)-1;
+    // printf("%d\n", idPlaylist);
+    LinkedList playlist = daftarPlaylist.A[idPlaylist].pLinkedList;
+    Address currentSong = playlist.first;
+    while (currentSong != NULL){
+        enqueue(queueSong, INFO(currentSong));
+        // PushStack(historyL, currentSong->info);
+        currentSong = currentSong->next;
+    }
     
+    printf("Berhasil menambahkan playlist \"%s\" ke queue.\n", daftarPlaylist.A[idPlaylist].namaPlaylist.TabWord);
     // for (int i = 0; i < LengthArrDin(daftarPlaylist); i++) {
     //     enqueue(daftarPlaylist.A[i]);
     // }
@@ -769,11 +775,16 @@ F.S.: Lagu (id) dihapus dari queue apabila id terdefinisi
     for (int i = IDX_HEAD(*queueSong); i <= IDX_TAIL(*queueSong); i++) {
         if (ctr == id) {
             Song foundSong = queueSong->buffer[i];
-            for (int j = i; j < IDX_TAIL(*queueSong); j++) {
-                queueSong->buffer[j] = queueSong->buffer[j+1];
-            }
+            if (IDX_HEAD(*queueSong) == IDX_TAIL(*queueSong)) {
+                IDX_HEAD(*queueSong) = -1;
+                IDX_TAIL(*queueSong) = -1;
+            } else {
+                for (int j = i; j < IDX_TAIL(*queueSong); j++) {
+                    queueSong->buffer[j] = queueSong->buffer[j+1];
+                }
 
-            queueSong->idxTail = queueSong->idxTail - 1;
+                queueSong->idxTail = queueSong->idxTail - 1;
+            }
 
             printf("\nLagu ");
             printf("\"");

@@ -62,5 +62,7 @@ void PopStack(Stack * S, infotypeS* X);
 
 int LengthStack(Stack S);
 
+void clearStack(Stack *S);
+
 
 #endif

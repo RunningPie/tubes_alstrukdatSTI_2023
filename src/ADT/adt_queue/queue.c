@@ -125,6 +125,7 @@ void displayQueue(Queue q)
 /*F.S.: Queue telah ditambahkan dengan lagu yang ingin dimasukkan pada posisi HEAD */
 void enqueueFirst(Queue *q, Song val){
     int i;
+    IDX_TAIL(*q)++;
     for (i = IDX_TAIL(*q); i > IDX_HEAD(*q); i--) {
         (*q).buffer[i] = (*q).buffer[i-1];
     }

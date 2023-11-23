@@ -55,3 +55,10 @@ int LengthStack(Stack S) {
 
     return length;
 }
+
+void clearStack(Stack *S) {
+    infotypeS trash;
+    while (Top(*S) != Undef) {
+        PopStack(S, &trash);
+    }
+}
