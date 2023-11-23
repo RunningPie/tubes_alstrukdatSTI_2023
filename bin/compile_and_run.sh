@@ -1,12 +1,3 @@
-#!/bin/bash
-echo "Shell Script Runningg...."
-# Get the list of all C source code files in the repo
-C_SOURCE_FILES=$(find -name "*.c" ! -name "driver*" -printf "%P ")
-echo $C_SOURCE_FILES
-# Compile all sources
-gcc -o main.exe $C_SOURCE_FILES
-echo "Compiling finished..."
-echo "Starting main.exe..."
-echo " "
-# Run exe
-src/main.exe
+gcc -o main.exe ../src/adt/adt_mesinkarakter/mesinkarakter.c ../src/adt/adt_mesinkata/mesinkata.c ../src/adt/adt_queue/queue.c ../src/adt/adt_queue/circular_queue.c ../src/adt/adt_stack/stack.c ../src/adt/adt_set/set.c ../src/adt/adt_map/map.c ../src/adt/adt_map/hashmap.c ../src/adt/adt_list/list.c ../src/adt/adt_list/arraydin.c ../src/adt/adt_linkedlist/linkedlist_v2.c ../src/adt/adt_lagu/lagu.c ../src/adt/adt_help/help.c ../src/console.c ../src/main.c
+cd ..
+./bin/main.exe

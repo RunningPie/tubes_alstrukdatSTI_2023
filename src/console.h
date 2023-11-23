@@ -58,7 +58,7 @@ PLAYSONG merupakan command yang digunakan untuk memainkan lagu berdasarkan masuk
 // I.S. Daftar penyanyi, daftar album, daftar lagu dalam album sudah terdefinisi
 // F.S. queue dan riwayat lagu akan menjadi kosong.
 
-void PLAYPLAYLIST(ArrayDin daftarPlaylist, Map *playlistSongs, Queue *QueueL, Stack *historyL, Song *onPlaySong);
+void PLAYPLAYLIST(ArrayDin daftarPlaylist, Queue *QueueL, Stack *historyL, Song *onPlaySong);
 /*
 PLAYPLAYLIST merupakan command yang digunakan untuk memainkan lagu berdasarkan id playlist
 
@@ -128,7 +128,9 @@ beserta Queue song yang ada dan dari playlist mana lagu itu diputar
 // I.S.
 // F.S.
 
-void LOAD(Word filename);
+void LOAD(Word filename, List *daftarPenyanyi, Map *penyanyiAlbum, Map *albumLagu,
+boolean * state,  Song *currentSong, Queue *currentQ, Stack *currentHist,
+ArrayDin *daftarPlaylist);
 /*
 LOAD merupakan salah satu command yang dimasukkan pertama kali dalam WayangWave.
 Command ini memiliki satu argumen yaitu filename yang merepresentasikan suatu
@@ -221,7 +223,7 @@ F.S.: Queue kosong atau tidak berisi lagu
 */
 
 void SAVE(Word filename, List daftarPenyanyi, Map penyanyiAlbum,
-Map albumLagu, Song currentSong, Queue currentQ, Stack currentHist);
+Map albumLagu, Song currentSong, Queue currentQ, Stack currentHist, ArrayDin daftarPlaylist);
 /*
 SAVE merupakan command yang digunakan untuk menyimpan state aplikasi terbaru ke dalam suatu file.
 Command SAVE memiliki satu argumen yang merepresentasikan nama file yang akan disimpan.
@@ -231,7 +233,7 @@ Penyimpanan dilakukan pada folder tertentu, misal folder save.
 // F.S. Terbentuk suatu file bernama <filename> di folder save.
 
 void QUIT(List daftarPenyanyi, Map penyanyiAlbum, Map albumLagu,
-Song currentSong, Queue currentQ, Stack currentHist);
+Song currentSong, Queue currentQ, Stack currentHist, ArrayDin daftarPlaylist);
 // QUIT merupakan command yang digunakan untuk keluar dari sesi aplikasi WayangWave.
 // I.S. Sembarang dalam sesi
 // F.S. Keluar dari sesi. Jika data sesi disimpan maka terbentuk suatu file bernama <filename> di folder save.
