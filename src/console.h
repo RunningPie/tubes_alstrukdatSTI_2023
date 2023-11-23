@@ -76,7 +76,7 @@ sama dengan playlist yang sudah ada
 // I.S. Playlist belum ada
 // F.S. Playlist berhasil dibuat jika input pengguna valid
 
-void PLAYLISTADDSONG(List daftarPenyanyi, ArrayDin *daftarPlaylist, Map penyanyiAlbum, Map albumLagu);
+void PLAYLISTADDSONG(List daftarPenyanyi, ArrayDin *daftarPlaylist, Map *penyanyiAlbum, Map *albumLagu);
 /*
 Command PLAYLISTADDSONG digunakan untuk menambahkan lagu pada suatu playlist yang telah 
 ada sebelumnya pada daftar playlist pengguna.Pada defaultnya,command ini hanya dapat
@@ -220,7 +220,8 @@ I.S.: Queue berisi lagu yang telah di-queue sebelumnya
 F.S.: Queue kosong atau tidak berisi lagu 
 */
 
-void SAVE(Word filename, List daftarPenyanyi, Map penyanyiAlbum, Map albumLagu);
+void SAVE(Word filename, List daftarPenyanyi, Map penyanyiAlbum,
+Map albumLagu, Song currentSong, Queue currentQ, Stack currentHist);
 /*
 SAVE merupakan command yang digunakan untuk menyimpan state aplikasi terbaru ke dalam suatu file.
 Command SAVE memiliki satu argumen yang merepresentasikan nama file yang akan disimpan.
@@ -229,7 +230,8 @@ Penyimpanan dilakukan pada folder tertentu, misal folder save.
 // I.S. Sembarang dalam sesi
 // F.S. Terbentuk suatu file bernama <filename> di folder save.
 
-void QUIT(List daftarPenyanyi, Map penyanyiAlbum, Map albumLagu);
+void QUIT(List daftarPenyanyi, Map penyanyiAlbum, Map albumLagu,
+Song currentSong, Queue currentQ, Stack currentHist);
 // QUIT merupakan command yang digunakan untuk keluar dari sesi aplikasi WayangWave.
 // I.S. Sembarang dalam sesi
 // F.S. Keluar dari sesi. Jika data sesi disimpan maka terbentuk suatu file bernama <filename> di folder save.
