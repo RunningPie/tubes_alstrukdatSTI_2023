@@ -26,7 +26,7 @@ bash compile_and_run.sh
 ```
 
 ## Windows OS
-Program WayangWave ini bisa dijalankan dengan menggunakan shell script [compile_and_run.sh](https://github.com/RunningPie/tubes_alstrukdatSTI_2023/blob/main/bin/compile_and_run.bat) yang terdapat di folder bin. Cukup clone atau download zip dari repositori ini. Kemudian buka terminal di folder bin dan ketikkan:
+Program WayangWave ini bisa dijalankan dengan menggunakan shell script [compile_and_run.bat](https://github.com/RunningPie/tubes_alstrukdatSTI_2023/blob/main/bin/compile_and_run.bat) yang terdapat di folder bin. Cukup clone atau download zip dari repositori ini. Kemudian buka terminal di folder bin dan ketikkan:
 ```
 compile_and_run.bat
 ```
