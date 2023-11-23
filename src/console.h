@@ -51,14 +51,14 @@ LISTPLAYLIST merupakan command yang digunakan untuk menampilkan daftar playlist 
 // I.S. Daftar playlist terdefinisi
 // F.S. Menampilkan daftar playlist ke layar
 
-void PLAYSONG(List daftarPenyanyi, Map *penyanyiAlbum, Map *albumLagu, Queue *queueSong, Stack *historySong);
+void PLAYSONG(List daftarPenyanyi, Map *penyanyiAlbum, Map *albumLagu, Queue *QueueL, Stack *historyL, Song *currentSong);
 /*
 PLAYSONG merupakan command yang digunakan untuk memainkan lagu berdasarkan masukan nama penyanyi, nama album, dan id lagu.
 */
 // I.S. Daftar penyanyi, daftar album, daftar lagu dalam album sudah terdefinisi
 // F.S. queue dan riwayat lagu akan menjadi kosong.
 
-void PLAYPLAYLIST(ArrayDin daftarPlaylist, Queue *queueSong, Stack *historySong);
+void PLAYPLAYLIST(ArrayDin daftarPlaylist, Map *playlistSongs, Queue *QueueL, Stack *historyL, Song *onPlaySong);
 /*
 PLAYPLAYLIST merupakan command yang digunakan untuk memainkan lagu berdasarkan id playlist
 
