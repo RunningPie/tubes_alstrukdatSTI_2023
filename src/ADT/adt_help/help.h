@@ -6,9 +6,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int help1();
-// Fungsi mengeluarkan COMMAND yang dapat diakses sebelum memasuki sesi
+void help1();
+// Procedure mengeluarkan COMMAND yang dapat diakses sebelum memasuki sesi
 
-int help2();
-// Fungsi mengeluarkan COMMAND yang dapat diakses setelah memasuki sesi
+void help2();
+// Procedure mengeluarkan COMMAND yang dapat diakses setelah memasuki sesi
 #endif

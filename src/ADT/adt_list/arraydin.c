@@ -6,10 +6,19 @@
 ArrayDin MakeArrayDin()
 {
     ArrayDin array;
-    array.A         = (ElType*)(malloc(InitialSize*(sizeof(ElType))));
+    array.A         = (ArrDinEl*)(malloc(InitialSize*(sizeof(ArrDinEl))));
     array.Capacity  = InitialSize;
     array.Neff      = 0;
     return array;
+}
+
+ArrDinEl CreateArrDinEl(Word namaPlaylist){
+    ArrDinEl temp;
+    SalinKata(namaPlaylist, &(temp.namaPlaylist));
+    CreateLinkedList(&(temp.pLinkedList));
+    // temp.pLinkedList = ;
+
+    return temp;
 }
 
 void DeallocateArrayDin(ArrayDin *array)
@@ -29,7 +38,7 @@ int LengthArrDin(ArrayDin array)
     return (array.Neff);
 }
 
-ElType GetArrDin(ArrayDin array, IdxType i)
+ArrDinEl GetArrDin(ArrayDin array, IdxType i)
 {
     return ((array.A)[i]);
 }
@@ -39,11 +48,11 @@ int GetCapacityArrDin(ArrayDin array)
     return array.Capacity;
 }
 
-void InsertAtArrDin(ArrayDin *array, ElType el, IdxType i)
+void InsertAtArrDin(ArrayDin *array, ArrDinEl el, IdxType i)
 {
     if((*array).Neff == (*array).Capacity)
     {
-        (*array).A         = realloc((*array).A, 2*((*array).Capacity)*sizeof(ElType));
+        (*array).A         = realloc((*array).A, 2*((*array).Capacity)*sizeof(ArrDinEl));
         (*array).Capacity *= 2;
     }
     
@@ -55,12 +64,12 @@ void InsertAtArrDin(ArrayDin *array, ElType el, IdxType i)
     (*array).Neff++;
 }
 
-void InsertLastArrDin(ArrayDin *array, ElType el)
+void InsertLastArrDin(ArrayDin *array, ArrDinEl el)
 {
     InsertAtArrDin(array, el, (*array).Neff);
 }
 
-void InsertFirstArrDin(ArrayDin *array, ElType el)
+void InsertFirstArrDin(ArrayDin *array, ArrDinEl el)
 {
     InsertAtArrDin(array, el, 0);
 }
@@ -86,20 +95,20 @@ void DeleteFirstArrDin(ArrayDin *array)
 
 void PrintArrayDin(ArrayDin array)
 {
-    printf("[");
-    for(int i = 0; i < array.Neff-1; i++)
+    int j = 1;
+    for(int i = 0; i <= array.Neff-1; i++)
     {
-        printf("%d, ", array.A[i]);
+        printf("\n%d ", j);
+        DisplayKata(array.A[i].namaPlaylist);
+        j++;
     }
-    if(array.Neff) printf("%d]\n", array.A[array.Neff-1]);
-    else printf("]\n");
 }
 
 void ReverseArrayDin(ArrayDin *array)
 {
     for(int i = 0; i < (*array).Neff/2; i++)
     {
-        ElType temp = (*array).A[i];
+        ArrDinEl temp = (*array).A[i];
         (*array).A[i] = (*array).A[(*array).Neff-i-1];
         (*array).A[(*array).Neff-i-1] = temp; 
     }
@@ -110,11 +119,11 @@ ArrayDin CopyArrayDin(ArrayDin array)
     return array;
 }
 
-IdxType SearchArrayDin(ArrayDin array, ElType el)
+IdxType SearchArrayDin(ArrayDin array, ArrDinEl el)
 {
     for(int i = 0; i < array.Neff; i++)
     {
-        if(isWordEq(array.A[i], el)) return i;
+        if(isWordEq(array.A[i].namaPlaylist, el.namaPlaylist)) return i;
     }
     return -1;
 }
