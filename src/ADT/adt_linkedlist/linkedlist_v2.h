@@ -4,16 +4,28 @@
 // Linked list dengan penunjuk ke elemen pertama dan terakhir
 
 #include "../boolean.h"
-#include "node.h"
+#include "../struct.h"
+#include "../adt_mesinkata/mesinkata.h"
 #include <stdlib.h>
+
+extern Song SongKosong;
+
+// Word kataKosong = {{'\0'}, 0};
+// // Song SongKosong;
+// // CreateSong(&SongKosong, kataKosong, kataKosong, kataKosong);
 
 #define NIL NULL
 #define IDX_UNDEF -1
-#define UNDEF_VAL -1
+#define UNDEF_VAL SongKosong;
 
-typedef int ElType;
+typedef Song LinkedListEl;
 typedef struct node* Address;
-typedef struct node { ElType info; Address next; } Node;
+typedef struct node { 
+    LinkedListEl info; 
+    Address next; 
+} Node;
+
+Address newNode(LinkedListEl val);
 
 /* Definisi list: */
 /* List kosong: First(L) = Last(L) = NIL */
@@ -43,44 +55,48 @@ void CreateLinkedList(LinkedList *l);
 /* Jika gagal maka FIRST(l) = LAST(l) = NIL dan list gagal terbentuk */
 
 /****************** SEARCHING ******************/
-int indexOf(LinkedList l, ElType x);
+int indexOf(LinkedList l, LinkedListEl x);
 /* Mengembalikan indeks node list dengan nilai X, atau IDX_UNDEF jika tidak ada */
 
 /****************** OPERASI PRIMITIF ******************/
 int LinkedListLength(LinkedList l);
 /* Mengembalikan banyaknya elemen pada list l, 0 jika list kosong. */
 
-ElType getElmt(LinkedList l, int idx);
+LinkedListEl getElmt(LinkedList l, int idx);
 /* Prekondisi: l terdefinisi */
 /* Mengirimkan nilai elemen l pada indeks idx. */
 
-void setElmt(LinkedList *l, int idx, ElType x);
+void setElmt(LinkedList *l, LinkedListEl x, int idx);
 /* I.S. List l terdefinisi */
 /* F.S. Elemen l pada indeks ke-idx diganti nilainya menjadi val */
 
-void LinkedListInsertFirst(LinkedList *l, ElType x);
+void LinkedListInsertFirst(LinkedList *l, LinkedListEl x);
 /* I.S. List l terdefinisi */
 /* F.S. Menambahkan elemen x sebagai elemen pertama List l */
 
-void LinkedListInsertLast(LinkedList *l, ElType x);
+void LinkedListInsertLast(LinkedList *l, LinkedListEl x);
 /* I.S. List l terdefinisi */
 /* F.S. x ditambahkan sebagai elemen terakhir l yang baru, */
 /* yaitu menjadi elemen yang ditunjuk oleh LAST(L) */
 
-void LinkedListDeleteFirst(LinkedList *l, ElType *x);
+void LinkedListDeleteFirst(LinkedList *l, LinkedListEl *x);
 /* I.S. List l tidak kosong */
 /* F.S. x adalah nilai elemen pertama list l sebelum penghapusan */
 /* Elemen list berkurang satu (mungkin menjadi kosong) */
 /* First element yg baru adalah suksesor elemen pertama yang lama */
 
-void LinkedListDeleteAt(LinkedList *l, int idx, ElType *x);
+void LinkedListDeleteAt(LinkedList *l, LinkedListEl *x, int idx);
 /* I.S. l terdefinisi tidak kosong */
 /* F.S. x diset dengan elemen l pada indeks ke-idx.
         Elemen l pada indeks ke-idx dihapus dari l. */
 
-void LinkedListDeleteLast(LinkedList *l, ElType *x);
+void LinkedListDeleteLast(LinkedList *l, LinkedListEl *x);
 /* I.S. List l tidak kosong */
 /* F.S. x adalah terakhir sebelum dummy pada list sebelum penghapusan */
 /* Elemen list berkurang satu (mungkin menjadi kosong) */
+
+void LinkedListInsertAt(LinkedList *l, LinkedListEl x, int i);
+
+void LinkedListDisplay(LinkedList l);
 
 #endif

@@ -3,13 +3,19 @@
 
 #include "../boolean.h"
 #include "../adt_mesinkata/mesinkata.h"
+#include "../adt_linkedlist/linkedlist_v2.h"
+#include "../struct.h"
 
 #define InitialSize 10
 
 typedef int IdxType;
-typedef Word ElType;
 typedef struct {
-    ElType *A;
+    Word namaPlaylist;
+    LinkedList pLinkedList;
+} ArrDinEl;
+// typedef Word ArrDinEl;
+typedef struct {
+    ArrDinEl * A;
     int Capacity;
     int Neff;
 } ArrayDin;
@@ -20,6 +26,8 @@ typedef struct {
  * F.S. Terbentuk ArrayDin kosong dengan ukuran InitialSize
  */
 ArrayDin MakeArrayDin();
+
+ArrDinEl CreateArrDinEl(Word namaPlaylist);
 
 /**
  * Destruktor
@@ -44,7 +52,7 @@ int LengthArrDin(ArrayDin array);
  * Mengembalikan elemen array L yang ke-I (indeks lojik).
  * Prekondisi: array tidak kosong, i di antara 0..Length(array).
  */
-ElType GetArrDin(ArrayDin array, IdxType i);
+ArrDinEl GetArrDin(ArrayDin array, IdxType i);
 
 /**
  * Fungsi untuk mendapatkan kapasitas yang tersedia.
@@ -56,19 +64,19 @@ int GetCapacityArrDin(ArrayDin array);
  * Fungsi untuk menambahkan elemen baru di index ke-i
  * Prekondisi: array terdefinisi, i di antara 0..Length(array).
  */
-void InsertAtArrDin(ArrayDin *array, ElType el, IdxType i);
+void InsertAtArrDin(ArrayDin *array, ArrDinEl el, IdxType i);
 
 /**
  * Fungsi untuk menambahkan elemen baru di akhir array.
  * Prekondisi: array terdefinisi
  */
-void InsertLastArrDin(ArrayDin *array, ElType el);
+void InsertLastArrDin(ArrayDin *array, ArrDinEl el);
 
 /**
  * Fungsi untuk menambahkan elemen baru di awal array.
  * Prekondisi: array terdefinisi
  */
-void InsertFirstArrDin(ArrayDin *array, ElType el);
+void InsertFirstArrDin(ArrayDin *array, ArrDinEl el);
 
 /**
  * Fungsi untuk menghapus elemen di index ke-i ArrayDin
@@ -114,6 +122,8 @@ ArrayDin CopyArrayDin(ArrayDin array);
  * Jika tidak ditemukan, akan mengembalikan -1.
  * Prekondisi: array terdefinisi
  */
-IdxType SearchArrayDin(ArrayDin array, ElType el);
+IdxType SearchArrayDin(ArrayDin array, ArrDinEl el);
+
+boolean IsIdxValidArrDin(ArrayDin array,IdxType i);
 
 #endif

@@ -5,9 +5,12 @@
 #define __MESIN_KAR_H_
 
 #include "../boolean.h"
+#include "../struct.h"
+#include <stdio.h>
 
 #define MARK ';'
 /* State Mesin */
+extern FILE *pita;
 extern char currentChar;
 extern boolean EOP;
 

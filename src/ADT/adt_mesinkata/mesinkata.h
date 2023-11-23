@@ -9,18 +9,10 @@
 #include "../adt_mesinkarakter/mesinkarakter.h"
 #include "../struct.h"
 
-#define NMax 50
-#define BLANK ' '
-
-typedef struct
-{
-   char TabWord[NMax]; /* container penyimpan kata, indeks yang dipakai [0..NMax-1] */
-   int Length;
-} Word;
-
 /* State Mesin Kata */
 extern boolean EndWord;
 extern Word currentWord;
+extern int currSenWordCount;
 
 void IgnoreBlanks();
 /* Mengabaikan satu atau beberapa BLANK
@@ -32,6 +24,9 @@ void STARTWORD();
    F.S. : EndWord = true, dan currentChar = MARK;
           atau EndWord = false, currentWord adalah kata yang sudah diakuisisi,
           currentChar karakter pertama sesudah karakter terakhir kata */
+
+void STARTSENTENCE();
+/* Start sentence */
 
 void STARTWORDFILE(char* filename);
 /* I.S. : currentChar sembarang
@@ -87,6 +82,11 @@ int WordToInt(Word Kata);
    I.S. : word.TabWord merupakan digit
    F.S. : mengembalikan dalam bentuk integer */
 
+Word SenToWord(Word sentence, int idxKata);
+/* Mengambil word dalam sentence dari ADVSENTENCE
+   I.S. : currentWord dari ADVSENTENCE
+   F.S. : mengembalikan kata sesuai urutan yang diinginkan */
+
 void SalinKata(Word Kata1, Word* Kata2 );
 /* Menyalin Kata1 ke Kata2
    I.S. : Kata1 sembarang, Kata2 kosong
@@ -94,5 +94,10 @@ void SalinKata(Word Kata1, Word* Kata2 );
 
 void DisplayKata(Word Kata);
 /* Menuliskan word kata */
+
+String WordToString(Word Kata);
+// Mengubah Word menjadi bentukan string
+
+void ConcatKata(Word Kata1, Word Kata2, Word *temp);
 
 #endif
