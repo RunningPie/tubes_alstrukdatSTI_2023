@@ -188,11 +188,11 @@ void PLAYSONG(List daftarPenyanyi, Map *penyanyiAlbum, Map *albumLagu, Queue *Qu
                 CreateQueue(QueueL);
                 CreateEmptyStack(historyL);
 
-                printf("Memutar lagu “");
+                printf("Memutar lagu \"");
                 DisplayKata(currentSong->Lagu);
-                printf("” oleh “");
+                printf("\" oleh \"");
                 DisplayKata(currentSong->Penyanyi);
-                printf("”.\n");
+                printf("\".\n");
 
             } else {
                 printf("ID Lagu %d tidak ada dalam daftar. Silakan coba lagi.\n", idLagu + 1);
@@ -604,6 +604,7 @@ Riwayat kosong, memutar kembali lagu
         }
         else{
             PopStack(previousSong, &tempSong); // Menyimpan Song Previous di posisi temporary
+            *onPlaySong = InfoTop(*previousSong);
             enqueueFirst(queueSong, *onPlaySong); // Menyimpan Song yang sedang dimainkan menjadi HEAD DARI QUEUE SONG
             // Mengubah tempSong sebagai onPlaySong
             *onPlaySong = tempSong;
@@ -614,7 +615,6 @@ Riwayat kosong, memutar kembali lagu
             printf("\" oleh \"");
             DisplayKata(onPlaySong->Penyanyi);
             printf("\"\n");
-
         }
     }
 }
