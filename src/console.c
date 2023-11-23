@@ -168,7 +168,7 @@ void PLAYSONG(List daftarPenyanyi, Map *penyanyiAlbum, Map *albumLagu, Queue *qu
     }
 }
 
-void PLAYPLAYLIST(ArrayDin daftarPlaylist, Queue *queueSong, Stack *historySong) {
+void PLAYPLAYLIST(ArrayDin daftarPlaylist, Map *playlistSongs, Queue *QueueL, Stack *historyL, Song *onPlaySong) {
     printf("Daftar Playlist Pengguna :\n");
     PrintArrayDin(daftarPlaylist);
     printf("\n");
@@ -180,31 +180,36 @@ void PLAYPLAYLIST(ArrayDin daftarPlaylist, Queue *queueSong, Stack *historySong)
     int idPlaylist = WordToInt(currentWord) - 1;
     if (IsIdxValidArrDin(daftarPlaylist, idPlaylist)) {
         LinkedList playlist;
-
+        CreateLinkedList(&playlist);
+        CreateQueue(QueueL);
+        CreateEmptyStack(historyL);
         // LinkedList = daftarPlaylist.TabWord[idPlaylist]
+        playlist = daftarPlaylist.A[idPlaylist].pLinkedList;
+        // Clear queue dan history
+       
 
-        if (!LinkedListIsEmpty(playlist)) {
-            // Clear queue dan history
-            QueueClear(queueSong);
-            StackClear(historySong);
-
-            // Enqueue semua lagu dari playlist yang dipilih
-            LinkedListEl currentSong = playlist.First;
-            while (currentSong != NULL) {
-                enqueue(queueSong, currentSong.Value);
-                PushStack(historySong, currentSong.Value);
-                currentSong = currentSong.Next;
+        // Enqueue semua lagu dari playlist yang dipilih
+        *onPlaySong = playlist.first->info;
+        Address currentSong = playlist.first;
+        while (currentSong != NULL){
+            enqueue(QueueL, currentSong->info);
+            PushStack(historyL, currentSong->info);
+            currentSong = currentSong->next;
+            if (!LinkedListIsEmpty(playlist)) {
+            
+                printf("Memutar playlist \"");
+                DisplayKata(daftarPlaylist.A[idPlaylist].namaPlaylist);
+                printf("\".\n");
+            } 
+            else {
+                printf("Playlist kosong. Tidak ada lagu yang dapat diputar.\n");
             }
-
-            printf("Memutar playlist \"");
-            DisplayKata(daftarPlaylist.A[idPlaylist]);
-            printf("\".\n");
-        } else {
-            printf("Playlist kosong. Tidak ada lagu yang dapat diputar.\n");
         }
-    } else {
+    }
+    else {
         printf("ID Playlist %d tidak ada dalam daftar. Silakan coba lagi.\n", idPlaylist + 1);
     }
+
 }
 
 
