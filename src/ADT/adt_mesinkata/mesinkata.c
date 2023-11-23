@@ -3,6 +3,7 @@
 
 boolean endWord;
 Word currentWord;
+int currSenWordCount;
 
 void IgnoreBlanks()
 {
@@ -52,17 +53,19 @@ void STARTSENTENCE() {
 
 void STARTWORDFILE(char* filename) {
     STARTFILE(filename);
-    IgnoreBlanks();
-    if (currentChar == '\n')
-    {
-        endWord = true;
+    if (currentChar != '\0') {
+        IgnoreBlanks();
+        if (currentChar == '\n')
+        {
+            endWord = true;
+        }
+        else
+        {
+            endWord = false;
+            CopySentence();
+        }
+        IgnoreBlanks();
     }
-    else
-    {
-        endWord = false;
-        CopySentence();
-    }
-    IgnoreBlanks();
 }
 
 void ADVWORD()
@@ -88,6 +91,8 @@ void ADVWORD()
 void ADVSENTENCE()
 {
     IgnoreBlanks();
+    // printf("currentChar: %c\n", currentChar);
+    // DisplayKata(currentWord); printf("\n");
     if (currentChar == '\n')
     {
         endWord = true;
@@ -98,6 +103,8 @@ void ADVSENTENCE()
         CopySentence();
     }
     IgnoreBlanks();
+    // printf("currentChar: %c\n", currentChar);
+    // DisplayKata(currentWord); printf("\n");
 }
 
 void CopyWord()
@@ -124,12 +131,17 @@ void CopyWord()
 void CopySentence()
 {
     currentWord.Length = 0;
+    currSenWordCount = 0;
     while (currentChar != MARK && currentChar != '\n' && !isEOP()) 
     {
         if (currentWord.Length < NMax)
         { // jika lebih akan terpotong
+            if (currentChar == BLANK){
+                currSenWordCount++;
+            }
             currentWord.TabWord[currentWord.Length++] = currentChar;
             ADV();
+            // printf("currentChar Update: %c\n", currentChar);
         }
         else
             break;
@@ -222,4 +234,18 @@ String WordToString(Word Kata) {
         str.content[i] = Kata.TabWord[i];
     }
     return str;
+}
+
+void ConcatKata(Word Kata1, Word Kata2, Word *temp){
+    // Word (*temp);
+    (*temp).Length = Kata1.Length;
+    int i;
+    for (i = 0; i < Kata1.Length; i++){
+        (*temp).TabWord[i] = Kata1.TabWord[i];
+    }
+    for (i = (*temp).Length; i < ((*temp).Length+Kata2.Length); i++){
+        (*temp).TabWord[i] = Kata2.TabWord[i-(*temp).Length];
+    }
+    (*temp).Length += Kata2.Length;
+
 }

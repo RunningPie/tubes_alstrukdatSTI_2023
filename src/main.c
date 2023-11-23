@@ -1,4 +1,4 @@
-#include "src/console.h"
+#include "console.h"
 #include <stdio.h>
 
 int main() {
@@ -24,8 +24,8 @@ int main() {
         } else if (isWordEq(SenToWord(currentWord, 0), ToKata("LOAD"))) {
             if (!state) {
                 // LOAD
-                LOAD(SenToWord(currentWord, 1));
-                state = true;
+                LOAD(SenToWord(currentWord, 1), &daftarPenyanyi, &penyanyiAlbum,
+                &albumLagu, &state, &currentSong, &queue, &history, &daftarPlaylist);
             } else {
                 InvalidSession();
             }
@@ -53,7 +53,7 @@ int main() {
         } else if (isWordEq(SenToWord(currentWord, 0), ToKata("PLAY")) && isWordEq(SenToWord(currentWord, 1), ToKata("PLAYLIST"))) {
             if (state) {
                 // PLAY PLAYLIST
-                PLAYPLAYLIST(daftarPlaylist, &albumLagu, &queue, &history, &currentSong);
+                PLAYPLAYLIST(daftarPlaylist, &queue, &history, &currentSong);
             } else {
                 InvalidSession();
             }
@@ -159,14 +159,14 @@ int main() {
             if (state) {
                 // SAVE
                 SAVE(SenToWord(currentWord, 1), daftarPenyanyi,
-                penyanyiAlbum, albumLagu, currentSong, queue, history);
+                penyanyiAlbum, albumLagu, currentSong, queue, history, daftarPlaylist);
             } else {
                 InvalidSession();
             }
         } else if (isWordEq(SenToWord(currentWord, 0), ToKata("QUIT"))) {
             if (state) {
                 QUIT(daftarPenyanyi, penyanyiAlbum, albumLagu,
-                currentSong, queue, history);
+                currentSong, queue, history, daftarPlaylist);
                 end = false; state = false;
             } else {
                 InvalidSession();

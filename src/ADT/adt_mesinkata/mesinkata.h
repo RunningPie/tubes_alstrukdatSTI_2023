@@ -12,6 +12,7 @@
 /* State Mesin Kata */
 extern boolean EndWord;
 extern Word currentWord;
+extern int currSenWordCount;
 
 void IgnoreBlanks();
 /* Mengabaikan satu atau beberapa BLANK
@@ -96,5 +97,7 @@ void DisplayKata(Word Kata);
 
 String WordToString(Word Kata);
 // Mengubah Word menjadi bentukan string
+
+void ConcatKata(Word Kata1, Word Kata2, Word *temp);
 
 #endif

@@ -1,5 +1,11 @@
 #include "lagu.h"
 
+void CreateEmptySong(Song *d){
+    (*d).Penyanyi.Length = 0;
+    (*d).Album.Length = 0;
+    (*d).Lagu.Length = 0;
+}
+
 void CreateSong(Song *d, Word penyanyi, Word album, Word lagu) {
     SalinKata(penyanyi, &(*d).Penyanyi);
     SalinKata(album, &(*d).Album);

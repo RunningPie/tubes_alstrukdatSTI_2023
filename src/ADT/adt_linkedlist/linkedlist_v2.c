@@ -237,7 +237,7 @@ void LinkedListDisplay(LinkedList l){
     Address p = FIRST(l);
     printf("Display list:\n");
     while (p != NULL){
-        printf("%s\n", INFO(p).Penyanyi.TabWord);
+        printf("%s-%s\n", INFO(p).Penyanyi.TabWord, INFO(p).Lagu.TabWord);
         p = NEXT(p);
     }
 }
