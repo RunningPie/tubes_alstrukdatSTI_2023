@@ -92,12 +92,10 @@ void DisplaySet(Set S) {
     if (IsEmptySet(S)) {
         printf("Kosong\n");
     } else {
-        int j = 1;
         for (int i = 0; i < S.Count; i++) {
-            printf("%d. ", j);
+            printf("%d. ", i+1);
             DisplayKata(S.Elements[i]);
             printf("\n");
-            j++;
         }
     }
 }

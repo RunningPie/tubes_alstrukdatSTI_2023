@@ -33,6 +33,7 @@ void STARTWAYANGWAVE(List *daftarPenyanyi, Map *penyanyiAlbum, Map *albumLagu) {
                 lagu = currentWord;
                 SetInsert(&Slagu, lagu);
             }
+            
             MapInsert(albumLagu, album, Slagu);
             CreateEmptySet(&Slagu);
         }
@@ -188,6 +189,7 @@ void PLAYSONG(List daftarPenyanyi, Map *penyanyiAlbum, Map *albumLagu, Queue *Qu
                 // CreateEmptyStack(historyL);
 
                 printf("Memutar lagu \"");
+
                 DisplayKata(lagu);
                 printf("\" oleh \"");
                 DisplayKata(penyanyi);
@@ -623,6 +625,7 @@ Riwayat kosong, memutar kembali lagu
         }
         else{
             PopStack(previousSong, &tempSong); // Menyimpan Song Previous di posisi temporary
+            *onPlaySong = InfoTop(*previousSong);
             enqueueFirst(queueSong, *onPlaySong); // Menyimpan Song yang sedang dimainkan menjadi HEAD DARI QUEUE SONG
             // Mengubah tempSong sebagai onPlaySong
             *onPlaySong = tempSong;
@@ -633,7 +636,6 @@ Riwayat kosong, memutar kembali lagu
             printf("\" oleh \"");
             DisplayKata(onPlaySong->Penyanyi);
             printf("\"\n");
-
         }
     }
 }
@@ -667,7 +669,7 @@ F.S.: Queue berisi satu lagu atau queue telah ditambahkan dengan masukan lagu ya
         if(IsSetMember(MapValue(*penyanyiAlbum, penyanyi), album))
         {
             printf("Daftar Lagu Album ");DisplayKata(album);printf(" oleh ");DisplayKata(penyanyi);printf(" :\n");
-            DisplayVMap(*penyanyiAlbum, album);printf("\n");
+            DisplaySet(MapValue(*albumLagu, album));printf("\n");
 
             printf("Masukkan ID Lagu yang dipilih : ");
             STARTWORD();
@@ -677,7 +679,7 @@ F.S.: Queue berisi satu lagu atau queue telah ditambahkan dengan masukan lagu ya
             if (IsIdxValidSet(MapValue(*albumLagu, album), idLagu))
             {
                 Word namaLagu = MapValue(*albumLagu, album).Elements[idLagu];
-                Song lagu; CreateSong(&lagu, namaLagu, album, penyanyi);
+                Song lagu; CreateSong(&lagu, penyanyi, album, namaLagu);
                 enqueue(queueSong, lagu);
 
                 printf("Berhasil menambahkan lagu \"");
@@ -725,7 +727,7 @@ Proses: Procedure yang digunakan untuk menukar lagu pada urutan ke-x dan urutan 
 I.S.: Posisi lagu dengan id x dan posisi lagu dengan id y tetap berdasarkan urutan queue sebelumnya atau salah satu dari x atau y tidak terdefinisi 
 F.S.: Posisi lagu dengan id x berada di posisi lagu dengan id y, serta posisi lagu dengan id y berada di posisi lagu dengan id x (Swapping telah dilakukan) apabila x dan y terdefinisi 
 */
-    // Cek  if x or y is out of bounds
+    // Cek if x or y is out of bounds
     if (x + IDX_HEAD(*queueSong) > IDX_TAIL(*queueSong) || y + IDX_HEAD(*queueSong) > IDX_TAIL(*queueSong) || x < 0 || y < 0) {
         if  (x + IDX_HEAD(*queueSong) > IDX_TAIL(*queueSong) || x < 0){
             printf("\nLagu dengan urutan ke %d tidak terdapat dalam queue!\n", x);
@@ -735,6 +737,7 @@ F.S.: Posisi lagu dengan id x berada di posisi lagu dengan id y, serta posisi la
         }
         return;
     }
+
     // Begin the swap
     Song temp;
     temp = queueSong->buffer[x];
@@ -743,11 +746,11 @@ F.S.: Posisi lagu dengan id x berada di posisi lagu dengan id y, serta posisi la
 
     printf("\nLagu ");
     printf("\"");
-    DisplayKata(queueSong->buffer[x].Lagu);
+    DisplayKata(queueSong->buffer[y].Lagu);
     printf("\" ");
     printf("berhasil ditukar dengan ");
-    printf("\" ");
-    DisplayKata(queueSong->buffer[y].Lagu);
+    printf("\"");
+    DisplayKata(queueSong->buffer[x].Lagu);
     printf("\"\n");
     return;
 }
@@ -762,7 +765,7 @@ F.S.: Lagu (id) dihapus dari queue apabila id terdefinisi
         printf("\nLagu dengan urutan ke %d tidak ada\n", id);
     }
 
-    int ctr = 1;
+    int ctr = 0;
     for (int i = IDX_HEAD(*queueSong); i <= IDX_TAIL(*queueSong); i++) {
         if (ctr == id) {
             Song foundSong = queueSong->buffer[i];
@@ -774,11 +777,12 @@ F.S.: Lagu (id) dihapus dari queue apabila id terdefinisi
 
             printf("\nLagu ");
             printf("\"");
-            DisplayKata((queueSong->buffer[id]).Lagu);
+            DisplayKata(foundSong.Lagu);
             printf("\" ");
             printf("oleh ");
-            printf("\" ");
-            DisplayKata((queueSong->buffer[id]).Penyanyi);
+            printf("\"");
+            DisplayKata(foundSong.Penyanyi);
+
             printf("\" telah dihapus dari queue!\n");
             return;
         }

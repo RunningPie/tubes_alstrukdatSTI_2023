@@ -74,14 +74,14 @@ int main() {
         } else if (isWordEq(SenToWord(currentWord, 0), ToKata("QUEUE")) && isWordEq(SenToWord(currentWord, 1), ToKata("SWAP"))) {
             if (state) {
                 // QUEUE SWAP
-                queueSwap(&queue, WordToInt(SenToWord(currentWord, 2)), WordToInt(SenToWord(currentWord, 3)));
+                queueSwap(&queue, (WordToInt(SenToWord(currentWord, 2))-1), (WordToInt(SenToWord(currentWord, 3))-1));
             } else {
                 InvalidSession();
             }
         } else if (isWordEq(SenToWord(currentWord, 0), ToKata("QUEUE")) && isWordEq(SenToWord(currentWord, 1), ToKata("REMOVE"))) {
             if (state) {
                 // QUEUE REMOVE
-                queueRemove(&queue, WordToInt(SenToWord(currentWord, 2)));
+                queueRemove(&queue, (WordToInt(SenToWord(currentWord, 2))-1));
             } else {
                 InvalidSession();
             }
