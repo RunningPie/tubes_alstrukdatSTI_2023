@@ -1,6 +1,6 @@
 #include "console.h"
 
-boolean CheckValidSaveName(Word filename){
+boolean CheckValidFile(Word filename){
     if ((filename.TabWord[filename.Length-3] != 'T') && (filename.TabWord[filename.Length-3] != 't')){
         // printf("%c == T\n", filename.TabWord[filename.Length-3]);
         return false;
@@ -84,6 +84,11 @@ bisa dilihat pada Konfigurasi Aplikasi.
     CreateEmptySet(&Salbum);
     CreateEmptySet(&Slagu);
 
+    if (!CheckValidFile(filename)){ //handling filename yang belakangnya bukan .txt
+        // printf("CheckValidFile: %d\n", CheckValidFile(filename));
+        ConcatKata(filename, ToKata(".txt"), &filename);
+    }
+
     // STARTSENTENCE();
     // SalinKata(currentWord, &filename);
 
@@ -123,13 +128,15 @@ bisa dilihat pada Konfigurasi Aplikasi.
         }
         // CURRENT SONG
         ADVSENTENCE();
-        SalinKata(currentWord, &((*currentSong).Penyanyi));
-        currentChar = BLANK;
-        ADVSENTENCE();
-        SalinKata(currentWord, &((*currentSong).Album));
-        currentChar = BLANK;
-        ADVSENTENCE();
-        SalinKata(currentWord, &((*currentSong).Lagu));
+        if (currentWord.TabWord[0] != '-'){
+            SalinKata(currentWord, &((*currentSong).Penyanyi));
+            currentChar = BLANK;
+            ADVSENTENCE();
+            SalinKata(currentWord, &((*currentSong).Album));
+            currentChar = BLANK;
+            ADVSENTENCE();
+            SalinKata(currentWord, &((*currentSong).Lagu));
+        }
 
         // QUEUE
         ADVSENTENCE();
@@ -993,8 +1000,8 @@ Penyimpanan dilakukan pada folder tertentu, misal folder save.
 // F.S. Terbentuk suatu file bernama <filename> di folder save.
 {
     FILE *fp;
-    if (!CheckValidSaveName(filename)){ //handling filename yang belakangnya bukan .txt
-        // printf("CheckValidSaveName: %d\n", CheckValidSaveName(filename));
+    if (!CheckValidFile(filename)){ //handling filename yang belakangnya bukan .txt
+        // printf("CheckValidFile: %d\n", CheckValidFile(filename));
         ConcatKata(filename, ToKata(".txt"), &filename);
     }
     Word saveDir;
