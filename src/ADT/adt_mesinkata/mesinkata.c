@@ -132,7 +132,7 @@ void CopySentence()
 {
     currentWord.Length = 0;
     currSenWordCount = 0;
-    while (currentChar != MARK && currentChar != '\n' && !isEOP()) 
+    while (currentChar != MARK && currentChar != '\n' && currentChar != '\r' && !isEOP()) 
     {
         if (currentWord.Length < NMax)
         { // jika lebih akan terpotong

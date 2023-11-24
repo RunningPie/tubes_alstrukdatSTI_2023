@@ -11,8 +11,8 @@
 
 int main() {
     if (OS_TYPE == "Windows") {
-        system("cls");
         system("chcp 65001");
+        system("cls");
     } else {
         system("clear");
     }
