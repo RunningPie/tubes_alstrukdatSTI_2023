@@ -1,5 +1,20 @@
 #include "console.h"
 
+boolean CheckValidFile(Word filename){
+    if ((filename.TabWord[filename.Length-3] != 'T') && (filename.TabWord[filename.Length-3] != 't')){
+        // printf("%c == T\n", filename.TabWord[filename.Length-3]);
+        return false;
+    }
+    if ((filename.TabWord[filename.Length-2] != 'X') && (filename.TabWord[filename.Length-2] != 'x')){
+        // printf("%c == X\n", filename.TabWord[filename.Length-2]);
+        return false;
+    }
+    if ((filename.TabWord[filename.Length-1] != 'T') && (filename.TabWord[filename.Length-1] != 't')){
+        return false;
+    }
+    return true;
+}
+
 void STARTWAYANGWAVE(List *daftarPenyanyi, Map *penyanyiAlbum, Map *albumLagu) {
 
     int Npenyanyi, Nalbum, Nlagu;
@@ -69,6 +84,11 @@ bisa dilihat pada Konfigurasi Aplikasi.
     CreateEmptySet(&Salbum);
     CreateEmptySet(&Slagu);
 
+    if (!CheckValidFile(filename)){ //handling filename yang belakangnya bukan .txt
+        // printf("CheckValidFile: %d\n", CheckValidFile(filename));
+        ConcatKata(filename, ToKata(".txt"), &filename);
+    }
+
     // STARTSENTENCE();
     // SalinKata(currentWord, &filename);
 
@@ -108,13 +128,15 @@ bisa dilihat pada Konfigurasi Aplikasi.
         }
         // CURRENT SONG
         ADVSENTENCE();
-        SalinKata(currentWord, &((*currentSong).Penyanyi));
-        currentChar = BLANK;
-        ADVSENTENCE();
-        SalinKata(currentWord, &((*currentSong).Album));
-        currentChar = BLANK;
-        ADVSENTENCE();
-        SalinKata(currentWord, &((*currentSong).Lagu));
+        if (currentWord.TabWord[0] != '-'){
+            SalinKata(currentWord, &((*currentSong).Penyanyi));
+            currentChar = BLANK;
+            ADVSENTENCE();
+            SalinKata(currentWord, &((*currentSong).Album));
+            currentChar = BLANK;
+            ADVSENTENCE();
+            SalinKata(currentWord, &((*currentSong).Lagu));
+        }
 
         // QUEUE
         ADVSENTENCE();
@@ -978,8 +1000,12 @@ Penyimpanan dilakukan pada folder tertentu, misal folder save.
 // F.S. Terbentuk suatu file bernama <filename> di folder save.
 {
     FILE *fp;
-    // printf("filename: %s\n", filename.TabWord);
+    if (!CheckValidFile(filename)){ //handling filename yang belakangnya bukan .txt
+        // printf("CheckValidFile: %d\n", CheckValidFile(filename));
+        ConcatKata(filename, ToKata(".txt"), &filename);
+    }
     Word saveDir;
+    // printf("OK\n");
     ConcatKata(ToKata("save/"), filename, &saveDir);
     // printf("sAVING AT: %s\n", saveDir.TabWord);
     fp = fopen(saveDir.TabWord, "w");
@@ -989,7 +1015,6 @@ Penyimpanan dilakukan pada folder tertentu, misal folder save.
     } 
 
     // fprintf(fp, "%s\n", filename.TabWord);
-
     fprintf(fp, "%d\n", ListLength(daftarPenyanyi));
 
 
@@ -1092,17 +1117,14 @@ Song currentSong, Queue currentQ, Stack currentHist, ArrayDin daftarPlaylist)
 // F.S. Keluar dari sesi. Jika data sesi disimpan maka terbentuk suatu file bernama <filename> di folder save.
 {
     char shouldSave = '0';
-    printf("Apakah kamu ingin menyimpan data sesi sekarang? ");
+    printf("Apakah kamu ingin menyimpan data sesi sekarang? (Y/N) ");
     STARTWORD();
     if (currentWord.TabWord[0] == 'Y') {
         printf("Masukkan nama file untuk penyimpanan: ");
-        ADVWORD();
+        STARTWORD();
 
         SAVE(currentWord, daftarPenyanyi, penyanyiAlbum, albumLagu,
         currentSong, currentQ, currentHist, daftarPlaylist);
-    } else {
-        printf("Kamu keluar dari WayangWave.\n");
-        printf("Dadah ^_^/\n");
     }
 }
 

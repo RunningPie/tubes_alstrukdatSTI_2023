@@ -132,7 +132,7 @@ void CopySentence()
 {
     currentWord.Length = 0;
     currSenWordCount = 0;
-    while (currentChar != MARK && currentChar != '\n' && !isEOP()) 
+    while (currentChar != MARK && currentChar != '\n' && currentChar != '\r' && !isEOP()) 
     {
         if (currentWord.Length < NMax)
         { // jika lebih akan terpotong
@@ -247,5 +247,6 @@ void ConcatKata(Word Kata1, Word Kata2, Word *temp){
         (*temp).TabWord[i] = Kata2.TabWord[i-(*temp).Length];
     }
     (*temp).Length += Kata2.Length;
+    (*temp).TabWord[(*temp).Length] = '\0';
 
 }
