@@ -49,6 +49,9 @@ void ADV()
 
        /* Algoritma */
        retval = fscanf(pita, "%c", &currentChar);
+       if (currentChar == '\r'){
+              retval = fscanf(pita, "%c", &currentChar);
+       }
        EOP = feof(pita);
 }
 

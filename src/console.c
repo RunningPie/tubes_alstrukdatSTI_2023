@@ -93,8 +93,10 @@ bisa dilihat pada Konfigurasi Aplikasi.
     // SalinKata(currentWord, &filename);
 
     ConcatKata(ToKata("save/"), filename, &loadDir);
+    // printf("loading: %s\n", loadDir.TabWord);
 
     STARTWORDFILE(loadDir.TabWord);
+    // printf("ok\n");
     if (currentChar != '\0'){
         Npenyanyi = WordToInt(currentWord);
 

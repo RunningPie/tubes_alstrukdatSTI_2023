@@ -132,8 +132,9 @@ void CopySentence()
 {
     currentWord.Length = 0;
     currSenWordCount = 0;
-    while (currentChar != MARK && currentChar != '\n' && currentChar != '\r' && !isEOP()) 
+    while (currentChar != MARK && currentChar != '\n'  && !isEOP()) 
     {
+        // printf("currentChar: %c\n", currentChar);
         if (currentWord.Length < NMax)
         { // jika lebih akan terpotong
             if (currentChar == BLANK){
