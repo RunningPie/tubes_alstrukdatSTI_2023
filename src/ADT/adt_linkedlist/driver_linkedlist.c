@@ -16,14 +16,9 @@ int main() {
     Song2.Album = ToKata("Divide");
     Song2.Lagu = ToKata("Shape of You");
 
-    // CreateSong(&Song2, ToKata("Ed Sheeran"), ToKata("Divide"), ToKata("Shape of You"));
-
     Song3.Penyanyi = ToKata("Justin Bieber");
     Song3.Album = ToKata("My World");
     Song3.Lagu = ToKata("One Time");
-
-    // printf("panjang album: %d\n", Song2.Album.Length);
-    // printf("test album: "); DisplayKata(Song2.Album);
 
     LinkedListInsertFirst(&list, Song1);
     LinkedListInsertLast(&list, Song2);
@@ -32,11 +27,8 @@ int main() {
     // Menampilkan elemen-elemen list
     printf("Elemen-elemen list:\n");
     for (int i = 0; i < LinkedListLength(list); i++) {
-        // printf("Loop jalan29\n");
         Song currentSong = getElmt(list, i);
-        // printf("Loop jalan31\n");
         printf("Penyanyi: %s, Album: %s, Lagu: %s\n", currentSong.Penyanyi.TabWord, currentSong.Album.TabWord, currentSong.Lagu.TabWord);
-        // printf("Loop jalan32\n");
     }
 
     // Menghapus elemen terakhir

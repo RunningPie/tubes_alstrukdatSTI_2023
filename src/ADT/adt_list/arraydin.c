@@ -100,9 +100,10 @@ void PrintArrayDin(ArrayDin array)
     {
         printf("\n%d. ", j);
         DisplayKata(array.A[i].namaPlaylist);
-        printf("\n");
         j++;
+        // printf("\n");
     }
+    printf("\n");
 }
 
 void ReverseArrayDin(ArrayDin *array)
