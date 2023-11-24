@@ -739,23 +739,34 @@ F.S.: Head dari queueSong dimainkan, Heed berganti ke lagu yang diantrikan selan
     if ((Qlength(*queueSong)) >= 1){ // Isi queueSong 1 atau lebih lagu yang telah di-Queue
         PushStack(previousSong, *onPlaySong);
         dequeue(queueSong, onPlaySong);
-        
-        printf("\nMemutar lagu selanjutnya\n");
-        printf("\"");
-        DisplayKata(onPlaySong->Lagu);
-        printf("\" oleh \"");
-        DisplayKata(onPlaySong->Penyanyi);
-        printf("\"\n");
+        if (onPlaySong->Penyanyi.TabWord[0] != '\0'){
+            printf("\nMemutar lagu selanjutnya\n");
+            printf("\"");
+            DisplayKata(onPlaySong->Lagu);
+            printf("\" oleh \"");
+            DisplayKata(onPlaySong->Penyanyi);
+            printf("\"\n");
+        } else {
+            printf("\nTidak ada lagu yang dimainkan.\n");
+            PasteSong(SongKosong, onPlaySong);
+        }
     }
     else {
         PushStack(previousSong, *onPlaySong);
         *onPlaySong = InfoTop(*previousSong);
-        printf("\nQueue kosong, memutar kembali lagu\n");
-        printf("\"");
-        DisplayKata(onPlaySong->Lagu);
-        printf("\" oleh \"");
-        DisplayKata(onPlaySong->Penyanyi);
-        printf("\"\n");
+        printf("\nQueue kosong. ");
+        if (onPlaySong->Penyanyi.TabWord[0] != '\0'){
+            printf("Memutar kembali lagu\n");
+            printf("\"");
+            DisplayKata(onPlaySong->Lagu);
+            printf("\" oleh \"");
+            DisplayKata(onPlaySong->Penyanyi);
+            printf("\"\n");
+        } else {
+            printf("Tidak ada lagu yang dimainkan.\n");
+            PasteSong(SongKosong, onPlaySong);
+        }
+
     }
 }
 
@@ -777,12 +788,19 @@ Riwayat kosong, memutar kembali lagu
 */
     // Song tempSong;
     if (IsEmptyStack(*previousSong)){
-        printf("\nRiwayat lagu kosong, memutar kembali lagu\n");
-        printf("\"");
-        DisplayKata(onPlaySong->Lagu);
-        printf("\" oleh \"");
-        DisplayKata(onPlaySong->Penyanyi);
-        printf("\"\n");
+        printf("\nRiwayat lagu kosong. ");
+        if (onPlaySong->Penyanyi.TabWord[0] != '\0'){
+            printf("Memutar kembali lagu\n");
+            printf("\"");
+            DisplayKata(onPlaySong->Lagu);
+            printf("\" oleh \"");
+            DisplayKata(onPlaySong->Penyanyi);
+            printf("\"\n");
+        } else {
+            printf("Tidak ada lagu yang dimainkan\n");
+            PasteSong(SongKosong, onPlaySong);
+        }
+
     }
     else{
         if(QisFull(*queueSong)){
@@ -795,12 +813,17 @@ Riwayat kosong, memutar kembali lagu
             // Mengubah tempSong sebagai onPlaySong
             // *onPlaySong = tempSong;
 
-            printf("\nMemutar lagu sebelumnya\n");
-            printf("\"");
-            DisplayKata(onPlaySong->Lagu);
-            printf("\" oleh \"");
-            DisplayKata(onPlaySong->Penyanyi);
-            printf("\"\n");
+            if (onPlaySong->Penyanyi.TabWord[0] != '\0'){
+                printf("Memutar lagu sebelumnya\n");
+                printf("\"");
+                DisplayKata(onPlaySong->Lagu);
+                printf("\" oleh \"");
+                DisplayKata(onPlaySong->Penyanyi);
+                printf("\"\n");
+            } else {
+                printf("\nTidak ada lagu yang dimainkan\n");
+                PasteSong(SongKosong, onPlaySong);
+            }
         }
     }
 }
@@ -888,18 +911,22 @@ F.S.: Queue berisi satu atau lebih lagu yang di queue dari suatu playlist yang d
     printf("Masukkan ID Playlist: "); STARTWORD();
     idPlaylist = WordToInt(currentWord)-1;
     // printf("%d\n", idPlaylist);
-    LinkedList playlist = daftarPlaylist.A[idPlaylist].pLinkedList;
-    Address currentSong = playlist.first;
-    while (currentSong != NULL){
-        enqueue(queueSong, INFO(currentSong));
-        // PushStack(historyL, currentSong->info);
-        currentSong = currentSong->next;
+    if (idPlaylist < 0 || idPlaylist > LengthArrDin(daftarPlaylist)){
+        LinkedList playlist = daftarPlaylist.A[idPlaylist].pLinkedList;
+        Address currentSong = playlist.first;
+        while (currentSong != NULL){
+            enqueue(queueSong, INFO(currentSong));
+            // PushStack(historyL, currentSong->info);
+            currentSong = currentSong->next;
+        }
+        
+        printf("Berhasil menambahkan playlist \"%s\" ke queue.\n", daftarPlaylist.A[idPlaylist].namaPlaylist.TabWord);
+        // for (int i = 0; i < LengthArrDin(daftarPlaylist); i++) {
+        //     enqueue(daftarPlaylist.A[i]);
+        // }
+    } else {
+        printf("Tidak ada playlist dengan ID tersebut\n");
     }
-    
-    printf("Berhasil menambahkan playlist \"%s\" ke queue.\n", daftarPlaylist.A[idPlaylist].namaPlaylist.TabWord);
-    // for (int i = 0; i < LengthArrDin(daftarPlaylist); i++) {
-    //     enqueue(daftarPlaylist.A[i]);
-    // }
 
 }
 
@@ -909,32 +936,46 @@ Proses: Procedure yang digunakan untuk menukar lagu pada urutan ke-x dan urutan 
 I.S.: Posisi lagu dengan id x dan posisi lagu dengan id y tetap berdasarkan urutan queue sebelumnya atau salah satu dari x atau y tidak terdefinisi 
 F.S.: Posisi lagu dengan id x berada di posisi lagu dengan id y, serta posisi lagu dengan id y berada di posisi lagu dengan id x (Swapping telah dilakukan) apabila x dan y terdefinisi 
 */
-    // Cek if x or y is out of bounds
-    if (x + IDX_HEAD(*queueSong) > IDX_TAIL(*queueSong) || y + IDX_HEAD(*queueSong) > IDX_TAIL(*queueSong) || x < 0 || y < 0) {
-        if  (x + IDX_HEAD(*queueSong) > IDX_TAIL(*queueSong) || x < 0){
-            printf("\nLagu dengan urutan ke %d tidak terdapat dalam queue!\n", x);
+    // printf("x: %d\n", x);
+    // printf("swap: %d\n", WordToInt(ToKata("SWAP")));
+    if (x+1 == WordToInt(ToKata("SWAP"))){
+        printf("\nArgumen input kurang, tidak melakukan swap.\n");
+    } else if (x==y){
+        printf("\nArgumen x dan y sama... Tidak melakukan perubahan pada queue.\n");
+    } else {
+        if (Qlength(*queueSong) > 1) {
+            // Cek if x or y is out of bounds
+            if (x + IDX_HEAD(*queueSong) > IDX_TAIL(*queueSong) || y + IDX_HEAD(*queueSong) > IDX_TAIL(*queueSong) || x < 0 || y < 0) {
+                if  (x + IDX_HEAD(*queueSong) > IDX_TAIL(*queueSong) || x < 0){
+                    printf("\nLagu dengan urutan ke %d tidak terdapat dalam queue!\n", x);
+                }
+                else{
+                    printf("\nLagu dengan urutan ke %d tidak terdapat dalam queue!\n", y);
+                }
+                return;
+            }
+
+            // Begin the swap
+            Song temp;
+            temp = queueSong->buffer[x];
+            queueSong->buffer[x] = queueSong->buffer[y];
+            queueSong->buffer[y] = temp;
+
+            printf("\nLagu ");
+            printf("\"");
+            DisplayKata(queueSong->buffer[y].Lagu);
+            printf("\" ");
+            printf("berhasil ditukar dengan ");
+            printf("\"");
+            DisplayKata(queueSong->buffer[x].Lagu);
+            printf("\"\n");
+            return;
+        } else if (Qlength(*queueSong) == 1){
+            printf("\nHanya ada 1 lagu dalam queue... Tidak bisa melakukan swap.\n");
+        } else {
+            printf("\nQueue kosong. Tidak bisa melakukan swap.\n");
         }
-        else{
-            printf("\nLagu dengan urutan ke %d tidak terdapat dalam queue!\n", y);
-        }
-        return;
     }
-
-    // Begin the swap
-    Song temp;
-    temp = queueSong->buffer[x];
-    queueSong->buffer[x] = queueSong->buffer[y];
-    queueSong->buffer[y] = temp;
-
-    printf("\nLagu ");
-    printf("\"");
-    DisplayKata(queueSong->buffer[y].Lagu);
-    printf("\" ");
-    printf("berhasil ditukar dengan ");
-    printf("\"");
-    DisplayKata(queueSong->buffer[x].Lagu);
-    printf("\"\n");
-    return;
 }
 
 void queueRemove(Queue *queueSong, int id) {
@@ -943,37 +984,48 @@ Proses: Procedure yang digunakan untuk menghapus lagu dari queue berdasarkan id 
 I.S.: Terdapat lagu (berdasarkan id yang dimasukkan) pada queue atau id yang dimasukkan tidak terdefinisi 
 F.S.: Lagu (id) dihapus dari queue apabila id terdefinisi   
 */
-    if (id > Qlength(*queueSong) || id < 0) {
-        printf("\nLagu dengan urutan ke %d tidak ada\n", id+1);
-    }
-
-    int ctr = 0;
-    for (int i = IDX_HEAD(*queueSong); i <= IDX_TAIL(*queueSong); i++) {
-        if (ctr == id) {
-            Song foundSong = queueSong->buffer[i];
-            if (IDX_HEAD(*queueSong) == IDX_TAIL(*queueSong)) {
-                IDX_HEAD(*queueSong) = -1;
-                IDX_TAIL(*queueSong) = -1;
-            } else {
-                for (int j = i; j < IDX_TAIL(*queueSong); j++) {
-                    queueSong->buffer[j] = queueSong->buffer[j+1];
-                }
-
-                queueSong->idxTail = queueSong->idxTail - 1;
-            }
-
-            printf("\nLagu ");
-            printf("\"");
-            DisplayKata(foundSong.Lagu);
-            printf("\" ");
-            printf("oleh ");
-            printf("\"");
-            DisplayKata(foundSong.Penyanyi);
-
-            printf("\" telah dihapus dari queue!\n");
-            return;
+    if (id+1 == WordToInt(ToKata("REMOVE"))) {
+        printf("\nArgumen 'id' belum diberikan!\n");
+    } else {
+        if (!QisEmpty(*queueSong)){
+        if (id > Qlength(*queueSong) || id < 0) {
+            printf("\nLagu dengan urutan ke %d tidak ada\n", id+1);
         }
-        ctr++;
+
+        int ctr = 0;
+        for (int i = IDX_HEAD(*queueSong); i <= IDX_TAIL(*queueSong); i++) {
+            if (ctr == id) {
+                Song foundSong = queueSong->buffer[i];
+                if (IDX_HEAD(*queueSong) == IDX_TAIL(*queueSong)) {
+                    IDX_HEAD(*queueSong) = -1;
+                    IDX_TAIL(*queueSong) = -1;
+                } else {
+                    for (int j = i; j < IDX_TAIL(*queueSong); j++) {
+                        queueSong->buffer[j] = queueSong->buffer[j+1];
+                    }
+
+                    queueSong->idxTail = queueSong->idxTail - 1;
+                }
+                if (foundSong.Lagu.TabWord[0] != '\0'){
+                    printf("\nLagu ");
+                    printf("\"");
+                    DisplayKata(foundSong.Lagu);
+                    printf("\" ");
+                    printf("oleh ");
+                    printf("\"");
+                    DisplayKata(foundSong.Penyanyi);
+
+                    printf("\" telah dihapus dari queue!\n");
+                    return;
+                } else {
+                    printf("\nTidak ada lagu pada id tersebut!\n");
+                }
+            }
+            ctr++;
+    }
+    } else {
+        printf("\nQueue kosong. Tidak bisa melakukan remove\n");
+    }
     }
 }
 
@@ -1005,6 +1057,11 @@ Penyimpanan dilakukan pada folder tertentu, misal folder save.
     if (!CheckValidFile(filename)){ //handling filename yang belakangnya bukan .txt
         // printf("CheckValidFile: %d\n", CheckValidFile(filename));
         ConcatKata(filename, ToKata(".txt"), &filename);
+    }
+    if (isWordEq(filename, ToKata("SAVE.txt"))){
+        printf("\nArgumen filename belum diberikan!\n");
+        printf("Autosaving dengan nama auto_save.txt...\n");
+        SalinKata(ToKata("auto_save.txt"), &filename);
     }
     Word saveDir;
     // printf("OK\n");
@@ -1108,7 +1165,7 @@ Penyimpanan dilakukan pada folder tertentu, misal folder save.
 
 
     fclose(fp);
-    printf("Save file berhasil disimpan.\n");
+    printf("\nSave file berhasil disimpan.\n");
     return;
 }
 

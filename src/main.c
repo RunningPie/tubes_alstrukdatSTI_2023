@@ -48,6 +48,7 @@ int main() {
     Stack history; CreateEmptyStack(&history);
     Map penyanyiAlbum, albumLagu; MapCreateEmpty(&penyanyiAlbum); MapCreateEmpty(&albumLagu);
     Song currentSong;
+    PasteSong(SongKosong, &currentSong);
 
     while (end) {
         printf("\n>> ");
