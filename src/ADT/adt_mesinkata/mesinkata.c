@@ -247,5 +247,6 @@ void ConcatKata(Word Kata1, Word Kata2, Word *temp){
         (*temp).TabWord[i] = Kata2.TabWord[i-(*temp).Length];
     }
     (*temp).Length += Kata2.Length;
+    (*temp).TabWord[(*temp).Length] = '\0';
 
 }
