@@ -98,10 +98,12 @@ void PrintArrayDin(ArrayDin array)
     int j = 1;
     for(int i = 0; i <= array.Neff-1; i++)
     {
-        printf("\n%d ", j);
+        printf("\n%d. ", j);
         DisplayKata(array.A[i].namaPlaylist);
         j++;
+        // printf("\n");
     }
+    printf("\n");
 }
 
 void ReverseArrayDin(ArrayDin *array)

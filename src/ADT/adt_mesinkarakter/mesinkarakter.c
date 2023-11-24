@@ -7,7 +7,7 @@
 char currentChar;
 boolean EOP;
 
-static FILE *pita;
+FILE *pita;
 static int retval;
 
 void START()
@@ -31,6 +31,10 @@ void START()
 
 void STARTFILE(char* filename) {
        pita = fopen(filename, "r");
+       if (pita == NULL){
+              currentChar = '\0';
+              return;
+       }
        ADV();
 }
 

@@ -19,7 +19,14 @@ WayangWave merupakan sebuah aplikasi simulasi berbasis CLI (command-line interfa
 5. Menampilkan status dari aplikasi
 
 # Cara kompilasi dan menjalankan
-Program WayangWave ini bisa dijalankan dengan menggunakan shell script [compile_and_run.sh](https://github.com/RunningPie/tubes_alstrukdatSTI_2023/blob/main/bin/compile_and_run.sh) yang terdapat di folder bin. Cukup clone atau download zip dari repositori ini. Kemudian buka terminal di folder bin dan ketikkan:
+## Linux / Unix OS
+Program WayangWave ini bisa dijalankan dengan menggunakan shell script [cnr.sh](https://github.com/RunningPie/tubes_alstrukdatSTI_2023/blob/main/bin/cnr.sh) yang terdapat di folder bin. Cukup clone atau download zip dari repositori ini. Kemudian buka terminal di folder bin dan ketikkan:
 ```
-bash compile_and_run.sh
+bash cnr.sh
+```
+
+## Windows OS
+Program WayangWave ini bisa dijalankan dengan menggunakan shell script [cnr.bat](https://github.com/RunningPie/tubes_alstrukdatSTI_2023/blob/main/bin/cnr.bat) yang terdapat di folder bin. Cukup clone atau download zip dari repositori ini. Kemudian buka terminal di folder bin dan ketikkan:
+```
+cnr.bat
 ```

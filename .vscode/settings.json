@@ -8,7 +8,13 @@
     "mesinkata.h": "c",
     "arraydin.h": "c",
     "boolean.h": "c",
-    "mesinkarakter.h": "c"
+    "mesinkarakter.h": "c",
+    "array": "c",
+    "deque": "c",
+    "string": "c",
+    "unordered_map": "c",
+    "vector": "c",
+    "initializer_list": "c"
   },
   "C_Cpp.errorSquiggles": "disabled",
   "C_Cpp_Runner.cCompilerPath": "gcc",

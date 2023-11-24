@@ -1,7 +1,45 @@
-#include "src/console.h"
+#include "console.h"
 #include <stdio.h>
 
+#if defined(_WIN32) || defined(_WIN64)
+    #define OS_TYPE "Windows"
+#elif defined(__unix__) || defined(__unix) || defined(__linux__) || defined(__APPLE__) || defined(__MACH__)
+    #define OS_TYPE "Unix-like"
+#else
+    #define OS_TYPE "Unknown"
+#endif
+
 int main() {
+    if (OS_TYPE == "Windows") {
+        system("chcp 65001");
+        system("cls");
+    } else {
+        system("clear");
+    }
+    // printf("            _                         _         _       _                           _    \n");
+    // printf("           (_ )                      ( )_      ( )     ( )_                        ( )_  \n");
+    // printf("  ___   __  | |   _ _  ___ ___    _ _|  _)    _| |  _ _|  _)  _ _  ___    __      _| |_) \n");
+    // printf("/  __)/ __ \\| | / _  )  _   _  \\/ _  ) |    / _  |/ _  ) |  / _  )  _  \\/ _  \\  / _  | | \n");
+    // printf("\\__  \\  ___/| |( (_| | ( ) ( ) | (_| | |_  ( (_| | (_| | |_( (_| | ( ) | (_) | ( (_| | | \n");
+    // printf("(____/\\____)___)\\__ _)_) (_) (_)\\__ _)\\__)  \\__ _)\\__ _)\\__)\\__ _)_) (_)\\__  |  \\__ _)_) \n");
+    // printf("                                                                       ( )_) |           \n");
+    // printf("                                                                        \\___/            \n");
+
+    printf("\n============================================= Selamat Datang di =============================================\n");    
+        // printf("\n\033[1m                                                Wayang Wave                                                   \033[0m\n");
+    printf("\n __   __   __  ______  __    __  ______  _______   ______       __   __   __  ______  __     __  ______  \n");
+    printf("|  \\ |  \\ |  \\|      \\|  \\  |  \\|      \\|       \\ /      \\     |  \\ |  \\ |  \\|      \\|  \\   /  \\/      \\ \n");
+    printf("| ▓▓ | ▓▓ | ▓▓ \\▓▓▓▓▓▓\\ ▓▓  | ▓▓ \\▓▓▓▓▓▓\\ ▓▓▓▓▓▓▓\\  ▓▓▓▓▓▓\\    | ▓▓ | ▓▓ | ▓▓ \\▓▓▓▓▓▓\\\\▓▓\\ /  ▓▓  ▓▓▓▓▓▓\\ \n");
+    printf("| ▓▓ | ▓▓ | ▓▓/      ▓▓ ▓▓  | ▓▓/      ▓▓ ▓▓  | ▓▓ ▓▓  | ▓▓    | ▓▓ | ▓▓ | ▓▓/      ▓▓ \\▓▓\\  ▓▓| ▓▓    ▓▓ \n");
+    printf("| ▓▓_/ ▓▓_/ ▓▓  ▓▓▓▓▓▓▓ ▓▓__/ ▓▓  ▓▓▓▓▓▓▓ ▓▓  | ▓▓ ▓▓__| ▓▓    | ▓▓_/ ▓▓_/ ▓▓  ▓▓▓▓▓▓▓  \\▓▓ ▓▓ | ▓▓▓▓▓▓▓▓ \n");
+    printf(" \\▓▓   ▓▓   ▓▓\\▓▓    ▓▓\\▓▓    ▓▓\\▓▓    ▓▓ ▓▓  | ▓▓\\▓▓    ▓▓     \\▓▓   ▓▓   ▓▓\\▓▓    ▓▓   \\▓▓▓   \\▓▓     \\ \n");
+    printf("  \\▓▓▓▓▓\\▓▓▓▓  \\▓▓▓▓▓▓▓_\\▓▓▓▓▓▓▓ \\▓▓▓▓▓▓▓\\▓▓   \\▓▓_\\▓▓▓▓▓▓▓      \\▓▓▓▓▓\\▓▓▓▓  \\▓▓▓▓▓▓▓    \\▓     \\▓▓▓▓▓▓▓ \n");
+    printf("                      |  \\__| ▓▓                 |  \\__| ▓▓                                               \n");
+    printf("                       \\▓▓    ▓▓                  \\▓▓    ▓▓                                              \n");
+    printf("                        \\▓▓▓▓▓▓                    \\▓▓▓▓▓▓           \n");                                                         
+
+
+    printf("\n============================================= ♫ Enjoy The Music ♫ =============================================\n");            
 
     boolean state = false, end = true;
     List daftarPenyanyi = MakeList();
@@ -24,8 +62,8 @@ int main() {
         } else if (isWordEq(SenToWord(currentWord, 0), ToKata("LOAD"))) {
             if (!state) {
                 // LOAD
-                LOAD(SenToWord(currentWord, 1));
-                state = true;
+                LOAD(SenToWord(currentWord, 1), &daftarPenyanyi, &penyanyiAlbum,
+                &albumLagu, &state, &currentSong, &queue, &history, &daftarPlaylist);
             } else {
                 InvalidSession();
             }
@@ -53,7 +91,7 @@ int main() {
         } else if (isWordEq(SenToWord(currentWord, 0), ToKata("PLAY")) && isWordEq(SenToWord(currentWord, 1), ToKata("PLAYLIST"))) {
             if (state) {
                 // PLAY PLAYLIST
-                PLAYPLAYLIST(daftarPlaylist, &albumLagu, &queue, &history, &currentSong);
+                PLAYPLAYLIST(daftarPlaylist, &queue, &history, &currentSong);
             } else {
                 InvalidSession();
             }
@@ -159,14 +197,14 @@ int main() {
             if (state) {
                 // SAVE
                 SAVE(SenToWord(currentWord, 1), daftarPenyanyi,
-                penyanyiAlbum, albumLagu, currentSong, queue, history);
+                penyanyiAlbum, albumLagu, currentSong, queue, history, daftarPlaylist);
             } else {
                 InvalidSession();
             }
         } else if (isWordEq(SenToWord(currentWord, 0), ToKata("QUIT"))) {
             if (state) {
                 QUIT(daftarPenyanyi, penyanyiAlbum, albumLagu,
-                currentSong, queue, history);
+                currentSong, queue, history, daftarPlaylist);
                 end = false; state = false;
             } else {
                 InvalidSession();
@@ -181,4 +219,11 @@ int main() {
             printf("\nCommand tidak diketahui!\n");
         }
     }
+    printf("\n============================================= Kamu Keluar dari Wayang Wave =============================================\n");
+    printf("\n \\\\                  =o)  \n");
+    printf(" (o>                 /\\\\  \n");
+    printf("_(()_Sampai Jumpa 👋_\\_V_ \n");
+    printf(" //                   \\\\  \n");
+    printf("                       \\\\ \n");
+    printf("\n================================================ ♫ Keep Vibing ♫ ================================================\n");
 }

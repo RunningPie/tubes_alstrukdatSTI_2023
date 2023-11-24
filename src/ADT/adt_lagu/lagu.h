@@ -10,6 +10,8 @@ typedef Word ElType;
 typedef int IdxType;
 
 
+void CreateEmptySong(Song *d);
+
 void CreateSong(Song *d, Word penyanyi, Word album, Word lagu);
 /* I.S. : d sembarang. 
           penyanyi, album, dan lagu yang terdefinisi, mungkin kosong. 
